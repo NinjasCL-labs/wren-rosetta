@@ -1,3 +1,11 @@
+// url: https://rosettacode.org/wiki/Category:Wren-upc#Wren
+// source: https://gist.githubusercontent.com/PureFox48/00fad9b48a0b80445d622a1ef18e4285/raw/5536b1d86a762ec8294a4e06111dd4749ba796b3/Wren-upc.md
+// file: upc.wren
+// name: Wren-upc
+// author: PureFox
+// license: MIT
+
+
 /* Module "upc.wren" */
 
 // See https://rosettacode.org/wiki/Category_talk:Wren-upc for description.
@@ -1909,3 +1917,4 @@ Graphemes.init_()
 // Type aliases for classes in case of any name clashes with other modules.
 var Upc_Properties = Properties
 var Upc_Graphemes  = Graphemes
+

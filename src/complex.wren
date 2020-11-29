@@ -1,3 +1,10 @@
+// url: https://rosettacode.org/wiki/Category:Wren-complex#Wren
+// source: https://rosettacode.org/mw/index.php?title=Category_talk:Wren-complex&action=edit&section=2
+// file: complex.wren
+// name: Wren-complex
+// author: PureFox
+// license: MIT
+
 /* Module "complex.wren" */
 
 import "/trait" for Cloneable
@@ -323,7 +330,627 @@ class Complexes {
     static prod(a) { a.reduce(Complex.one)  { |acc, x| acc * x } }
 }
 
+/* CMatrix represents a two dimensional list of complex numbers. Once created the number of
+   rows and columns of the matrix cannot be changed but individual elements can be.
+*/
+class CMatrix {
+    // Returns an instance of the identity matrix for a given number of rows.
+    static identity(numRows) {
+        if (numRows.type != Num || !numRows.isInteger || numRows < 1) {
+            Fiber.abort("Number of rows must be a positive integer.")
+        }
+        var id = new_(numRows, numRows, Complex.zero)
+        for (i in 0...numRows) id.set_(i, i, Complex.one)
+        return id
+    }
+
+    // Constructs a new CMatrix object by passing it the number of rows and
+    // columns and the initial value for each element.
+    construct new(numRows, numCols, filler) {
+        if (numRows.type != Num || !numRows.isInteger || numRows < 1) {
+            Fiber.abort("Number of rows must be a positive integer.")
+        }
+        if (numCols.type != Num || !numCols.isInteger || numCols < 1) {
+            Fiber.abort("Number of columns must be a positive integer.")
+        }
+        if (filler.type != Complex && filler.type != Num) {
+            Fiber.abort("Filler must be a complex or real number.")
+        }
+        if (filler.type == Num) filler = Complex.new_(filler, 0)
+        _a = List.filled(numRows, null)
+        for (i in 0...numRows) _a[i] = List.filled(numCols, filler)
+        _nr = numRows
+        _nc = numCols
+    }
+
+    // Convenience version of the public constructor which uses a filler of zero.
+    static new(numRows, numCols) { new(numRows, numCols, Complex.zero) }
+
+    // Private version of above constructor to avoid type checks.
+    construct new_(numRows, numCols, filler) {
+        _a = List.filled(numRows, null)
+        for (i in 0...numRows) _a[i] = List.filled(numCols, filler)
+        _nr = numRows
+        _nc = numCols
+    }
+
+    // Constructs a new CMatrix object from a two dimensional list of complex numbers.
+    construct new(a) {
+        if (a.type != List || a.count == 0 || a[0].type != List || a[0].count == 0 || a[0][0].type != Complex) {
+            Fiber.abort("Argument must be a non-empty two dimensional list of complex numbers.")
+        }
+        _nr = a.count
+        _nc = a[0].count
+        // copy the list so it can be mutated independently
+        _a = List.filled(_nr, null)
+        for (i in 0..._nr) _a[i] = a[i].toList
+    }
+
+    // Private version of above constructor to avoid type checks and copying.
+    construct new_(a) {
+        _a  = a
+        _nr = a.count
+        _nc = a[0].count
+    }
+
+    // Constructs a new CMatrix object from a two dimensional list of real numbers.
+    static fromReals(a) {
+        if (a.type != List || a.count == 0 || a[0].type != List || a[0].count == 0 || a[0][0].type != Num) {
+            Fiber.abort("Argument must be a non-empty two dimensional list of real numbers.")
+        }
+        var ca = List.filled(a.count, null)
+        for (i in 0...a.count) {
+            ca[i] = List.filled(a[0].count, null)
+            for (j in 0...a[0].count) ca[i][j] = Complex.new(a[i][j])
+        }
+        return new_(ca)
+    }
+
+    // Basic properties.
+    numRows     { _nr }         // returns the number of rows
+    numCols     { _nc }         // returns the number of columns
+    size        { [_nr, _nc] }  // returns both the above in a list
+    numElements { _nr * _nc  }  // returns the number of elements
+    first       { _a[0][0]   }  // returns the first element
+    last        { _a[-1][-1] }  // returns the last element
+
+    // Creates another CMatrix by multiplying all elements of the current instance by -1.
+    - { this * Complex.minusOne }
+
+    // Creates another CMatrix by either:
+    // 1. adding another CMatrix of the same size to the current instance; or
+    // 2. adding a complex or real number to each element of the current instance.
+    +(b) {
+        if (b is Num) b = Complex.new_(b, 0)
+        var c = List.filled(_nr, null)
+        if (b is Complex) {
+            for (i in 0..._nr) {
+                c[i] = List.filled(_nc, null)
+                for (j in 0..._nc) c[i][j] = _a[i][j] + b
+            }
+        } else if (b is CMatrix) {
+            if (!sameSize(b)) Fiber.abort("Matrices must be of the same size.")
+            for (i in 0..._nr) {
+                c[i] = List.filled(_nc, null)
+                for (j in 0..._nc) c[i][j] = _a[i][j] + b.get_(i, j)
+            }
+        } else {
+            Fiber.abort("Argument must be a complex matrix, a complex number or a real number.")
+        }
+        return CMatrix.new_(c)
+    }
+
+    // Creates another CMatrix by either:
+    // 1. subtracting another CMatrix of the same size from the current instance; or
+    // 2. subtracting a complex or real number from each element of the current instance.
+    -(b) { this + (-b) }
+
+    // Creates another CMatrix by either:
+    // 1. multiplying the current instance by another CMatrix of appropriate size; or
+    // 2. multiplying each element of the current instance by a complex or real number.
+    *(b) {
+        if (b is Num) b = Complex.new_(b, 0)
+        var c = List.filled(_nr, null)
+        if (b is Complex) {
+            for (i in 0..._nr) {
+                c[i] = List.filled(_nc, null)
+                for (j in 0..._nc) c[i][j] = _a[i][j] * b
+            }
+        } else if (b is CMatrix) {
+            if (_nc != b.numRows) Fiber.abort("Cannot multiply these matrices.")
+            for (i in 0..._nr) {
+                c[i] = List.filled(b.numCols, Complex.zero)
+                for (j in 0...b.numCols) {
+                    for (k in 0..._nc) c[i][j] = c[i][j] + _a[i][k] * b.get_(k, j)
+                }
+            }
+        } else {
+            Fiber.abort("Argument must be a complex matrix, a complex number or a real number.")
+        }
+        return CMatrix.new_(c)
+    }
+
+    // Creates another CMatrix by dividing each element of the current instance by a complex or real number.
+    /(n) {
+        if (n is Num) n = Complex.new_(n, 0)
+        return this * n.inverse
+    }
+
+    // Synomym for pow(n).
+    ^(n) { pow(n) }
+
+    // Creates another CMatrix by applying the 'abs' method to each element of the
+    // current instance.
+    abs { apply { |e| e.abs } }
+
+    // Creates another CMatrix by multiplying the current instance by itself 'n' times.
+    pow(n) {
+        if (n.type != Num || !n.isInteger || n < 0) {
+            Fiber.abort("Argument must be a non-negative integer.")
+        }
+        if (n == 0) return CMatrix.identity(_nr)
+        if (n == 1) return this.copy()
+        var p = CMatrix.identity(_nr)
+        var base = this.copy()
+        while (n > 0) {
+            if ((n & 1) == 1) p = p * base
+            n = n >> 1
+            base = base * base
+        }
+        return p
+    }
+
+    // Private methods to check that a row or column number are valid.
+    validRowNum_(rn) { rn.type == Num && rn.isInteger && rn >= 0 && rn < _nr }
+    validColNum_(cn) { cn.type == Num && cn.isInteger && cn >= 0 && cn < _nc }
+
+    // Returns a copy of this instance's 'i'th row.
+    row(i) { validRowNum_(i) ? _a[i].toList : Fiber.abort("Invalid row number.") }
+
+    // Returns a copy of this instance's 'i'th column.
+    col(i) {
+        if (!validColNum_(i)) Fiber.abort("Invalid column number.")
+        var t = List.filled(_nc, null)
+        for (r in 0..._nr) t[r] = _a[r][i]
+        return t
+    }
+
+    // Returns a copy of this instance's main diagonal as long as its square.
+    diag {
+        if (!isSquare) Fiber.abort("Matrix must be square.")
+        var d = List.filled(_nr, null)
+        for (i in 0..._nr) d[i] = _a[i][i]
+        return d
+    }
+ 
+    // Returns a copy of this instance's 'i'th row (synonym for row(i)).
+    [i] { row(i) }
+
+    // Returns the element at row 'i' and column 'j' of the current instance.
+    [i, j] { (validRowNum_(i) && validColNum_(j)) ? _a[i][j] : Fiber.abort("Out of range.") }
+
+    // Sets the element at row 'i' and column 'j' of the current instance to value 'v'.
+    [i, j]=(v) {
+        if (!validRowNum_(i) || !validColNum_(j)) Fiber.abort("Out of range.")
+        if (v.type != Complex && v.type != Num) Fiber.abort("Element value must be a complex or real number.")
+        if (v.type == Num) v = Complex.new_(v, 0)
+        _a[i][j] = v
+    }
+
+    // Private methods to get or set the elements at row 'i' and column 'j' of the current
+    // instance without any validity checks.
+    get_(i, j)    { _a[i][j] }
+    set_(i, j, v) { _a[i][j] = v }
+
+    // Returns whether or not this instance is the same size as another CMatrix or Matrix.
+    sameSize(b) { _nr == b.numRows && _nc == b.numCols }
+
+    // Various self-explanatory properties.
+    isSquare        { _nr == _nc }
+    isRowVector     { _nr == 1 }
+    isColVector     { _nc == 1 }
+    isSymmetric     { isSquare && this == this.transpose }
+    isSkewSymmetric { isSquare && this == -this.transpose }
+    isOrthogonal    { isSquare && inverse == transpose }
+    isIdempotent    { isSquare && (this * this == this) }
+    isInvolutory    { isSquare && (this * this == CMatrix.identity(_nr)) }
+    isSingular      { det == Complex.zero }
+
+    isHermitian     { isSquare && this == this.conjTranspose }
+    isSkewHermitian { isSquare && this == -this.conjTranspose }
+    isNormal        { isSquare && this * conjTranspose == conjTranspose * this }
+    isUnitary       { isSquare && this * conjTranspose == CMatrix.identity(_nr) }
+
+    // Returns whether all the elements of the current instance outside the main diagonal
+    // are zero.
+    isDiagonal {
+        if (!isSquare) return false
+        for (i in 0..._nr) {
+            for (j in 0..._nr) {
+                if (i != j && _a[i][j] != Complex.zero) return false
+            }
+        }
+        return true
+    }
+
+    // Returns whether all the current instance's elements above the main diagonal are zero.
+    isLowerTriangular {
+        if (!isSquare) return false
+        for (i in 0..._nr - 1) {
+            for (j in i + 1..._nr) {
+                if (_a[i][j] != Complex.zero) return false
+            }
+        }
+        return true
+    }
+
+    // Returns whether all the current instance's elements below the main diagonal are zero.
+    isUpperTriangular {
+        if (!isSquare) return false
+        for (i in 1..._nr) {
+            for (j in 0...i) {
+                if (_a[i][j] != Complex.zero) return false
+            }
+        }
+        return true
+    }
+
+    // Returns whether the current instance is lower or upper triangular.
+    isTriangular { isLowerTrinagular || isUpperTriangular }
+
+    // Returns the conjugate of the current instance.
+    conj {
+        var c = CMatrix.new_(_nr, _nc, Complex.zero)
+        for (i in 0..._nc) {
+            for (j in 0..._nr) c.set_(i, j, _a[i][j].conj)
+        }
+        return c
+    }
+
+    // Returns the transpose of the current instance.
+    transpose {
+        var t = CMatrix.new_(_nc, _nr, Complex.zero)
+        for (i in 0..._nc) {
+            for (j in 0..._nr) t.set_(i, j, _a[j][i])
+        }
+        return t
+    }
+
+    // Returns the conjugate transpose of the current instance.
+    conjTranspose {
+        var ct = CMatrix.new_(_nc, _nr, Complex.zero)
+        for (i in 0..._nc) {
+            for (j in 0..._nr) ct.set_(i, j, _a[j][i].conj)
+        }
+        return ct
+    }
+
+    // Returns a new CMatrix formed by applying a function ( Complex -> Complex )
+    // to each element of the current instance.
+    apply(f) {
+        var t = CMatrix.new_(_nc, _nr, Complex.zero)
+        for (i in 0..._nr) {
+            for (j in 0..._nc) t.set_(i, j, f.call(_a[i][j]))
+        }
+        return t
+    }
+
+    // Transforms the current instance by applying a function ( Complex -> Complex )
+    // to each of its elements.
+    transform(f) {
+        for (i in 0..._nr) {
+            for (j in 0..._nc) _a[i][j] = f.call(_a[i][j])
+        }
+    }
+
+    // Changes all elements of the current instance by multiplying them by 'm'
+    // and then adding 'a'.
+    changeAll(m, a) {
+        if ((m.type != Complex && m != Num) || (a.type != Complex && a.type != Num)) {
+            Fiber.abort("Multiplier and addend must be complex or real numbers.")
+        }
+        for (i in 0..._nr) {
+            for (j in 0..._nc) _a[i][j] = _a[i][j]*m + a
+        }
+    }
+
+    // Changes all elements of a specified row of the current instance by multiplying
+    // them by 'm' and then adding 'a'.
+    changeRow(rowNum, m, a) {
+        if (!validRowNum_(rowNum)) Fiber.abort("Invalid row number.")
+        if ((m.type != Complex && m != Num) || (a.type != Complex && a.type != Num)) {
+            Fiber.abort("Multiplier and addend must be complex or real numbers.")
+        }
+        for (j in 0..._nc) _a[rowNum][j] = _a[rowNum][j]*m + a
+    }
+
+    // Changes all elements of a specified column of the current instance by multiplying
+    // them by 'm' and then adding 'a'.
+    changeCol(colNum, m, a) {
+        if (!validColNum_(colNum)) Fiber.abort("Invalid column number.")
+        if ((m.type != Complex && m != Num) || (a.type != Complex && a.type != Num)) {
+            Fiber.abort("Multiplier and addend must be complex or real numbers.")
+        }
+        for (i in 0..._nr) _a[i][colNum] = _a[i][colNum]*m + a
+    }
+
+    // Swaps two specified rows of the current instance.
+    swapRows(rowNum1, rowNum2) {
+        if (!validRowNum_(rowNum1) || !validRowNum_(rowNum2)) Fiber.abort("Invalid row number.")
+        swapRows_(rowNum1, rowNum2)
+    }
+
+    // Private method to swap two rows of the current instance without checking validity.
+    swapRows_(rowNum1, rowNum2) {
+        if (rowNum1 == rowNum2) return
+        var t = row(rowNum1)
+        for (j in 0..._nc) {
+            _a[rowNum1][j] = _a[rowNum2][j]
+            _a[rowNum2][j] = t[j]
+        }
+    }
+
+    // Swaps two specified columns of the current instance.
+    swapCols(colNum1, colNum2) {
+        if (!validColNum_(colNum1) || !validColNum_(colNum2)) Fiber.abort("Invalid column number.")
+        if (colNum1 == colNum2) return
+        var t = col(colNum1)
+        for (i in 0..._nr) {
+            _a[i][colNum1] = _a[i][colNum2]
+            _a[i][colNum2] = t[i]
+        }
+    }
+
+    // Copies the elements of the current instance to a 2D list.
+    toList {
+        var l = List.filled(_nr, null)
+        for (i in 0..._nr) l[i] = _a[i].toList
+        return l
+    }
+
+    // Flattens the current instance by transferring all its elements row by row
+    // to a new single dimensional list.
+    flatten() {
+        var t = []
+        for (i in 0..._nr) t.addAll(_a[i])
+        return t
+    }
+
+    // Returns a copy of this instance
+    copy() { CMatrix.new_(this.toList) }
+
+    // Checks whether or not the current instance's elements all have the same
+    // values as the corresponding elements of another CMatrix.
+    ==(b) {
+        if (b.type != CMatrix) Fiber.abort("Argument must be a complex matrix.")
+        if (!sameSize(b)) return false
+        for (i in 0..._nr) {
+            for (j in 0..._nc) if (_a[i][j] != b.get_(i, j)) return false
+        }
+        return true
+    }
+
+    // Checks whether or not all the current instance's elements do not have the same
+    // values as the corresponding elements of another CMatrix.
+    !=(b) { !(this == b) }
+
+    // Checks whether or not the current instance's elements all have the same values
+    // as the corresponding elements of another CMatrix to within a specified tolerance,
+    almostEquals(b, tol) {
+        if (b.type != CMatrix) Fiber.abort("Argument must be a complex matrix.")
+        if (!sameSize(b)) return false
+        if (tol.type != Num || tol <= 0 || tol >= 1e-5) {
+            Fiber.abort("Tolerance must be a positive number <= 1e-5.")
+        }
+        var d = this - b
+        for (i in 0..._nr) {
+            for (j in 0..._nc) if (d.get_(i, j).abs > tol) return false
+        }
+        return true
+    }
+
+    // Convenince version of above method which uses a tolerance of 1e-14.
+    almostEquals(b) { almostEquals(b, 1e-14) }
+
+    // Returns a minor of the current instance after removing a specified row
+    // and a specified column.
+    minor(rowNum, colNum) {
+        if (!isSquare) Fiber.abort("Matrix must be square.")
+        if (!validRowNum_(rowNum)) Fiber.abort("Invalid row number.")
+        if (!validColNum_(colNum)) Fiber.abort("Invalid column number.")
+        return minor_(rowNum, colNum)
+    }
+
+    // Private version of the above method which returns the minor without
+    // validity checks.
+    minor_(x, y) {
+        var len = _nr - 1
+        var result = List.filled(len, null)
+        for (i in 0...len) {
+            result[i] = List.filled(len, null)
+            for (j in 0...len) {
+                if (i < x && j < y) {
+                    result[i][j] = _a[i][j]
+                } else if (i >= x && j < y) {
+                    result[i][j] = _a[i+1][j]
+                } else if (i < x && j >= y) {
+                    result[i][j] = _a[i][j+1]
+                } else {
+                    result[i][j] = _a[i+1][j+1]
+                }
+            }
+        }
+        return CMatrix.new_(result)
+    }
+
+    // Returns the complex matrix of cofactors of the current instance.
+    cofactors {
+        if (!isSquare) Fiber.abort("Matrix must be square.")
+        var cf = List.filled(_nr, null)
+        for (i in 0..._nr) {
+            cf[i] = List.filled(_nc, null)
+            for (j in 0..._nc)  cf[i][j] = minor_(i, j).det * (Complex.minusOne.pow(i + j))
+        }
+        return CMatrix.new_(cf)
+    }
+
+    // Returns the adjugate of the current instance.
+    adjugate { cofactors.transpose }
+
+    // Returns the inverse of this instance if it's square and if it exists
+    // using the Gauss-Jordan method.
+    inverse {
+        if (!isSquare) Fiber.abort("Matrix must be square.")
+        if (det == Complex.zero) Fiber.abort("No inverse as determinant is zero.")
+        var aug = CMatrix.new_(_nr, 2 *_nr, Complex.zero)
+        for (i in 0..._nr) {
+            for (j in 0..._nr) aug.set_(i, j, _a[i][j])
+            aug.set_(i, i + _nr, Complex.one)
+        }
+        aug.toReducedRowEchelonForm
+        var inv = CMatrix.new_(_nr, _nr, Complex.zero)
+        for (i in 0..._nr) {
+            for (j in _nr...2 *_nr) inv.set_(i, j - _nr, aug.get_(i, j))
+        }
+        return inv
+    }
+
+    // Converts the current instance in place to reduced row echelon form.
+    toReducedRowEchelonForm {
+        var lead = 0
+        for (r in 0..._nr) {
+            if (_nc <= lead) return
+            var i = r
+            while (_a[i][lead] == Complex.zero) {
+                i = i + 1
+                if (_nr == i) {
+                    i = r
+                    lead = lead + 1
+                    if (_nc == lead) return
+                }
+            }
+            swapRows_(i, r)
+            if (_a[r][lead] != Complex.zero) {
+                var div = _a[r][lead]
+                for (j in 0..._nc) _a[r][j] = _a[r][j] / div
+            }
+            for (k in 0..._nr) {
+                if (k != r) {
+                    var mult = _a[k][lead]
+                    for (j in 0..._nc) _a[k][j] = _a[k][j] - _a[r][j] * mult
+                }
+            }
+            lead = lead + 1
+        }
+    }
+
+    // Create a new submatrix from rowNum1 to rowNum2 inclusive and from
+    // colNum1 to colNum2 inclusive of the current instance.
+    subMatrix(rowNum1, colNum1, rowNum2, colNum2) {
+        if (!validRowNum_(rowNum1)) Fiber.abort("Invalid first row number.")
+        if (!validColNum_(colNum1)) Fiber.abort("Invalid first column number.")
+        if (!validRowNum_(rowNum2)) Fiber.abort("Invalid second row number.")
+        if (!validColNum_(colNum2)) Fiber.abort("Invalid second column number.")
+        if (rowNum1 > rowNum2) Fiber.abort("First row number cannot be greater than second.")
+        if (colNum1 > colNum2) Fiber.abort("First column number cannot be greater than second.")
+        return subMatrix_(rowNum1, colNum1, rowNum2, colNum2)
+    }
+
+    // Private version of the above method which returns the submatrix without
+    // validity checks.
+    subMatrix_(rowNum1, colNum1, rowNum2, colNum2) {
+        var t = CMatrix.new_(rowNum2 - rowNum1 + 1, colNum2 - colNum1 + 1, Complex.zero)
+        for (i in rowNum1..rowNum2) {
+            for (j in colNum1..colNum2) {
+                t.set_(i - rowNum1, j - colNum1, _a[i][j])
+            }
+        }
+        return t
+    }
+
+    // Returns the trace of the current instance if it's square.
+    trace {
+        if (!isSquare) Fiber.abort("Cannot calculate the trace of a non-square matrix.")
+        var sum = Complex.zero
+        for (i in 0..._nr) sum = sum + _a[i][i]
+        return sum
+    }
+
+    // Returns the determinant of the current instance if it's square using
+    // Laplace expansion.
+    det {
+        if (!isSquare) Fiber.abort("Cannot calculate the determinant of a non-square matrix.")
+        if (_nr == 1) return _a[0][0]
+        if (_nr == 2) return _a[1][1] * _a[0][0] - _a[0][1] * _a[1][0]
+        var sign = Complex.one
+        var sum = Complex.zero
+        for (i in 0..._nr) {
+            var m = minor_(0, i)
+            sum = sum + sign * _a[0][i] * m.det
+            sign = -sign
+        }
+        return sum
+    }
+
+    // Returns the permanent of the current instance if it's square using
+    // Laplace expansion.
+    perm {
+        if (!isSquare) Fiber.abort("Cannot calculate the permanent of a non-square matrix.")
+        if (_nr == 1) return _a[0][0]
+        var sum = Complex.zero
+        for (i in 0..._nr) {
+            var m = minor_(0, i)
+            sum = sum + _a[0][i] * m.perm
+        }
+        return sum
+    }
+
+    // Returns the sum of all elements of the current instance.
+    sum {
+        var sum = Complex.zero
+        for (i in 0..._nr) {
+            for (j in 0..._nc) sum = sum + _a[i][j]
+        }
+        return sum
+    }
+
+    // Returns the norm of all elements of the current instance.
+    norm {
+        var sum = Complex.zero
+        for (i in 0..._nr) {
+            for (j in 0..._nc) sum = sum + _a[i][j] * _a[i][j]
+        }
+        return sum.sqrt
+    }
+
+    // Returns the product of all elements of the current instance.
+    prod {
+        var prd = Complex.one
+        for (i in 0..._nr) {
+            for (j in 0..._nc) {
+                if (_a[i][j] == Complex.zero) return Complex.zero
+                prd = prd * _a[i][j]
+            }
+        }
+        return prd
+    }
+
+    // Prints the current instance's elements as a 2D list with each row on a new line.
+    print() { System.print(_a.join("\n")) }
+
+    // Returns the current instance's elements as a string.
+    toString { _a.toString }
+}
+
+/*  CMatrices contains various routines applicable to lists of CMatrix objects. */
+class CMatrices {
+    static sum(a)  { a.reduce { |acc, x| acc + x } }
+    static prod(a) { a[1..-1].reduce(a[0]) { |acc, x| acc * x } }
+}
+
 // Type aliases for classes in case of any name clashes with other modules.
 var Complex_Complex  = Complex
 var Complex_Complexes = Complexes
+var Complex_CMatrix   = CMatrix
+var Complex_CMatrices = CMatrices
 var Complex_Cloneable = Cloneable // in case imported indirectly

@@ -1,5 +1,12 @@
+// url: https://rosettacode.org/wiki/Category:Wren-str#Wren
+// source: https://rosettacode.org/mw/index.php?title=Category_talk:Wren-str&action=edit&section=1
+// file: str.wren
+// name: Wren-str
+// author: PureFox
+// license: MIT
+
 /* Module "str.wren" */
- 
+
 /*
    Char contains routines to perform various operations on characters.
    A 'character' for this purpose is a single Unicode codepoint.
@@ -12,14 +19,14 @@ class Char {
     // Returns the codepoint of the first character of a string.
     static code(c) { (c is String && !c.isEmpty) ? c.codePoints[0] :
                       Fiber.abort("Argument must be a non-empty string.") }
- 
+
     // Convenience method to return a character from its codepoint.
     static fromCode(c) { String.fromCodePoint(c) }
- 
+
     // Checks if the first character of a string falls into a particular category.
     static isAscii(c)       { code(c) < 128 }
     static isLatin1(c)      { code(c) < 256 }
- 
+
     // ASCII categories.
     static isDigit(c)         { (c = code(c)) && c >= 48 && c <= 57 }
     static isAsciiLower(c)    { (c = code(c)) && c >= 97 && c <= 122 }
@@ -27,46 +34,46 @@ class Char {
     static isAsciiLetter(c)   { isAsciiLower(c) || isAsciiUpper(c) }
     static isAsciiAlphaNum(c) { isAsciiLower(c) || isAsciiUpper(c) || isDigit(c) }
     static isSpace(c)         { (c = code(c)) && (c == 32 || c == 9 || c == 10 || c == 13) }
- 
+
     // Latin-1 categories.
     static isLower(c) {
         var d = code(c)
         return (d >= 97 && d <= 122) || (d == 181) || (d >= 223 && d <= 246) ||
                (d >= 248 && d <= 255)
     }
- 
+
     static isUpper(c) {
         var d = code(c)
         return (d >= 65 && d <= 90) || (d >= 192 && d <= 214) || (d >= 216 && d <= 222)
     }
- 
+
     static isLetter(c)       { isLower(c) || isUpper(c) }
     static isAlphaNumeric(c) { isLower(c) || isUpper(c) || isDigit(c) }
- 
+
     static isControl(c) {
         var d = code(c)
         return d < 32 || (d >= 127 && d < 160)
     }
- 
+
     static isPrintable(c) {
         var d = code(c)
         return (d >= 32 && d < 127) || (d >= 160 && d < 256)
     }
- 
+
     static isGraphic(c) {
         var d = code(c)
         return (d >= 33 && d < 127) || (d >= 161 && d < 256)
     }
- 
+
     static isWhitespace(c) {
         var d = code(c)
         return d == 32 || (d >= 9 && c <= 13) || d == 160
     }
- 
+    
     static isPunctuation(c) { code(c) && "!\"#\%&'()*,-./:;?@[\\]_{}¡§«¶·»¿".contains(c[0]) }
- 
+
     static isSymbol(c) { isGraphic(c) && !isAlpaNumeric(c) && !isPunctuation(c) }
- 
+
     static category(c) {
         var d = code(c)
         return (d  <  32)             ? "control"     :
@@ -84,7 +91,7 @@ class Char {
                (d >= 256)             ? "non-latin1"  :
                isPunctuation(c)       ? "punctuation" : "symbol"
     }
- 
+
     // Returns the first character of a string converted to lower case.
     static lower(c) {
         var d = code(c)
@@ -93,7 +100,7 @@ class Char {
         }
         return c[0]
     }
- 
+
     // Returns the first character of a string converted to upper case.
     static upper(c) {
         var d = code(c)
@@ -102,7 +109,7 @@ class Char {
         }
         return c[0]
     }
- 
+
     // Swaps the case of the first character in a string.
     static swapCase(c) {
         var d = code(c)
@@ -115,16 +122,16 @@ class Char {
         return c[0]
     }
 }
- 
+
 /* Str supplements the String class with various other operations on strings. */
 class Str {
-    // Mimics the comparison operators <, <=, >, >=
+    // Mimics the comparison operators , >=
     // not supported by the String class.
     static lt(s1, s2) { compare(s1, s2) <  0 }
     static le(s1, s2) { compare(s1, s2) <= 0 }
     static gt(s1, s2) { compare(s1, s2) >  0 }
     static ge(s1, s2) { compare(s1, s2) >= 0 }
- 
+
     // Compares two strings lexicographically by codepoint.
     // Returns -1, 0 or +1 depending on whether
     // s1 < s2, s1 == s2 or s1 > s2 respectively.
@@ -139,7 +146,7 @@ class Str {
         }
         return (cp1.count < cp2.count) ? -1 : 1
     }
- 
+
     // Checks if a string falls into a particular category.
     static allAscii(s)         { s.codePoints.all { |c| c < 128             } }
     static allLatin1(s)        { s.codePoints.all { |c| c < 256             } }
@@ -156,12 +163,12 @@ class Str {
     static allPrintable        { s.toList.all { |c| Char.isPrintable(c)     } }
     static allGraphic          { s.toList.all { |c| Char.isGraphic(c)       } }
     static allWhitespace       { s.toList.all { |c| Char.isWhitespace(c)    } }
- 
+
     // Checks whether a string can be parsed to a number, an integer or a non-integer (float).
     static isNumeric(s)  { Num.fromString(s)                  }
     static isIntegral(s) { (s = isNumeric(s)) && s.isInteger  }
     static isFloat(s)    { (s = isNumeric(s)) && !s.isInteger }
- 
+
     // Converts a string to lower case.
     static lower(s) {
         if (!(s is String)) s = "%(s)"
@@ -177,7 +184,7 @@ class Str {
         }
         return (count < 1000) ? Strs.concat_(chars) : Strs.concat(chars, 1000)
     }
- 
+
     // Converts a string to upper case.
     static upper(s) {
         if (!(s is String)) s = "%(s)"
@@ -193,7 +200,7 @@ class Str {
         }
         return (count < 1000) ? Strs.concat_(chars) : Strs.concat(chars, 1000)
     }
- 
+
     // Swaps the case of each character in a string.
     static swapCase(s) {
         if (!(s is String)) s = "%(s)"
@@ -212,7 +219,7 @@ class Str {
         }
         return (count < 1000) ? Strs.concat_(chars) : Strs.concat(chars, 1000)
     }
- 
+
     // Capitalizes the first character of a string.
     static capitalize(s) {
         if (!(s is String)) s = "%(s)"
@@ -226,7 +233,7 @@ class Str {
         }
         return s
     }
- 
+
     // Capitalizes the first character of each word of a string.
     static title(s) {
         if (!(s is String)) s = "%(s)"
@@ -234,13 +241,13 @@ class Str {
         var words = s.split(" ")
         return Strs.join(words.map { |w| capitalize(w) }.toList, " ")
     }
- 
+
     // Reverses the characters (not necessarily single bytes) of a string.
     static reverse(s) {
         if (!(s is String)) s = "%(s)"
         return (s != "") ? s[-1..0] : s
     }
- 
+
     // Performs a circular shift of the characters of 's' one place to the left.
     static lshift(s) {
         if (!(s is String)) s = "%(s)"
@@ -252,7 +259,7 @@ class Str {
         chars[-1] = t
         return (count < 1000) ? Strs.concat_(chars) : Strs.concat(chars, 1000)
     }
- 
+
     // Performs a circular shift of the characters of 's' one place to the right.
     static rshift(s) {
         if (!(s is String)) s = "%(s)"
@@ -264,24 +271,24 @@ class Str {
         chars[0] = t
         return (count < 1000) ? Strs.concat_(chars) : Strs.concat(chars, 1000)
     }
- 
+
     /* The indices (or ranges thereof) for all the following functions are measured in codepoints (not bytes). Negative indices count backwards from the end of the string.
        As with core library methods, the indices must be within bounds or errors will be generated. */
- 
+
     // Extracts the sub-string of 's' over the range 'r'.
     static sub(s, r) {
         if (!(r is Range)) Fiber.abort("Second argument must be a range.")
         if (!(s is String)) s = "%(s)"
         return Strs.concat(s.toList[r])
     }
- 
+
     // Private helper method to check whether an index is valid.
     static checkIndex_(s, index, inc) {
         if (index.type != Num || !index.isInteger) Fiber.abort("Index must be an integer.")
         var c = s.count + inc
         if (index >= c || index < -c) Fiber.abort("Index is out of bounds.")
     }
- 
+
     // Gets the character of 's' at index 'i'. Throws an error if 'i is out of bounds.
     static get(s, i) {
         if (!(s is String)) s = "%(s)"
@@ -289,7 +296,7 @@ class Str {
         if (i < 0) i = s.count + i 
         return s.toList[i]
     }
- 
+
     // Gets the character of 's' at index 'i'. Returns null if 'i is out of bounds.
     static getOrNull(s, i) {
         if (!(s is String)) s = "%(s)"
@@ -297,7 +304,7 @@ class Str {
         if (i < 0) i = s.count + i
         return (i >= 0 && i < s.count) ? s.toList[i] : null
     }
- 
+
     // Returns the codepoint index (not byte index) at which 'search' first occurs in 's'
     // or -1 if 'search' is not found.
     static indexOf(s, search) {
@@ -314,7 +321,7 @@ class Str {
             cpCount = cpCount + 1
         }
     }
- 
+
     // Changes the character of 's' at index 'i' to the string 't'.
     static change(s, i, t) {
         if (!(t is String)) Fiber.abort("Replacement must be a string.")
@@ -325,7 +332,7 @@ class Str {
         chars[i] = t
         return Strs.concat(chars)
     }
- 
+
     // Inserts at index 'i' of 's' the string 't'.
     static insert(s, i, t) {
         if (!(t is String)) Fiber.abort("Insertion must be a string.")
@@ -336,7 +343,7 @@ class Str {
         chars.insert(i, t)
         return Strs.concat(chars)
     }
- 
+
     // Deletes the character of 's' at index 'i'.
     static delete(s, i) {
         if (!(s is String)) s = "%(s)"
@@ -346,7 +353,7 @@ class Str {
         chars.removeAt(i)
         return Strs.concat(chars)
     }
- 
+
     // Exchanges the characters of 's' at indices 'i' and 'j'
     static exchange(s, i, j) {
         if (!(s is String)) s = "%(s)"
@@ -361,14 +368,14 @@ class Str {
         chars[j] = t
         return Strs.concat(chars)
     }
- 
+
      // Private helper method for 'repeat'.
     static repeat_(s, reps) {
         var rs = ""
         for (i in 0...reps) rs = rs + s
         return rs
     }
- 
+
     // Returns 's' repeated 'reps' times.
     // If 'chunkSize' is chosen appropriately, this should be much faster than String's * operator
     // for a large number of repetitions.
@@ -397,10 +404,10 @@ class Str {
         }
         return rs
     }
- 
+
     // Convenience version of the above which uses a 'chunkSize' of 8000. This usually gives a good result.
     static repeat(s, reps) { repeat(s, reps, 8000) }
- 
+
     // Splits a string 's' into chunks of not more than 'size' characters.
     // Returns a list of these chunks, preserving order.
     static chunks(s, size) {
@@ -424,7 +431,7 @@ class Str {
         return res
     }
 }
- 
+
 /*
     Strs contains routines applicable to lists of strings.
 */
@@ -437,7 +444,7 @@ class Strs {
         }
         return s
     }
- 
+
     // Returns the strings in the list 'ls' concatenated together.
     // If 'chunkSize' is chosen appropriately, this should be much faster than Sequence.join()
     // for a large list of strings. For extra speed, only minimal type checks are made.
@@ -464,10 +471,10 @@ class Strs {
         }
         return s
     }
- 
+
     // Convenience version of the above which uses a 'chunkSize' of 1000. This usually gives a good result.
     static concat(ls) { concat(ls, 1000) }
- 
+
     // Private helper method for 'join'.
     static join_(ls, sep) {
         var first = true
@@ -479,7 +486,7 @@ class Strs {
         }
         return s
     }
- 
+
     // Returns the strings in the list 'ls' joined together using the separator 'sep'.
     // If 'chunkSize' is chosen appropriately, this should be much faster than Sequence.join(sep)
     // for a large list of strings. For extra speed, only minimal type checks are made.
@@ -509,7 +516,7 @@ class Strs {
         }
         return s
     }
- 
+
     // Convenience version of the above which uses a 'chunkSize' of 1000. This usually gives a good result.
     static join(ls, sep) { join(ls, sep, 1000) }
 }
@@ -526,10 +533,10 @@ class Utf8 {
         if (cp < 0x10000) return 3
         return 4
     }
- 
+
     // Converts a Unicode codepoint into its constituent UTF-8 bytes.
     static encode(cp) { String.fromCodePoint(cp).bytes.toList }
- 
+
     // Converts a list of UTF-8 encoded bytes into the equivalent Unicode codepoint.
     static decode(b) {
         if (!((b is List) && b.count >= 1 && b.count <= 4 && (b[0] is Num) && b[0].isInteger)) {
@@ -551,7 +558,7 @@ class Utf8 {
         }
     }
 }
- 
+
 // Type aliases for classes in case of any name clashes with other modules.
 var Str_Char = Char
 var Str_Str = Str

@@ -1,8 +1,15 @@
+// url: https://rosettacode.org/wiki/Category:Wren-big#Wren
+// source: https://rosettacode.org/mw/index.php?title=Category_talk:Wren-big&action=edit&section=2
+// file: big.wren
+// name: Wren-big
+// author: PureFox
+// license: MIT
+
 /* Module "big.wren" */
- 
+
 import "/trait" for Comparable
 import "random" for Random
- 
+
 /*
     BigInt represents an arbitrary length integer allowing arithmetic operations on integers of
     unlimited size. Internally, there are two kinds: 'small' (up to a magnitude of 2^53 -1)
@@ -20,41 +27,41 @@ class BigInt is Comparable {
     static four     { BigInt.small_( 4) }
     static five     { BigInt.small_( 5) }
     static ten      { BigInt.small_(10) }
- 
+
     // Private method to initialize static fields.
     static init_() {
         // All possible digits for bases 2 to 36.
         __alphabet = "0123456789abcdefghijklmnopqrstuvwxyz"
- 
+
         // Maximum 'small' integer = 2^53 - 1
         __maxSmall = 9007199254740991
- 
+
         // Random number generator.
         __rand = Random.new()
- 
+
         // Threshold between small and big integers in 'list' format.
         __threshold = smallToList_(9007199254740992)
- 
+
         // List of powers of 2 up to 1e7.
         __powersOfTwo = powersOfTwo_
- 
+
         // Length of __powersOfTwo (pre-computed).
         __powers2Length = 24
- 
+
         // Last element of __powersOfTwo (pre-computed).
         __highestPower2 = 8388608
     }
- 
+
     // Returns the maximum 'small' BigInt = 2^53-1.
     static maxSmall { BigInt.small_(__maxSmall) }
- 
+
     // Private property which returns powers of 2 up to 1e7.
     static powersOfTwo_ {
         var pot = [1]
         while (2 * pot[-1] <= 1e7) pot.add(2 * pot[-1])
         return pot
     }
- 
+
     // Private method which returns the lowest one bit of a BigInt (rough).
     static roughLOB_(n) {
         var lobmask_i = 1 << 30
@@ -69,7 +76,7 @@ class BigInt is Comparable {
         }
         return x & -x
     }
- 
+
     // Private method to return the integer logarithm of 'value' with respect to base 'base'
     // i.e.the number of times 'base' can be multiplied by itself without exceeding 'value'.
     static integerLogarithm_(value, base) {
@@ -85,14 +92,14 @@ class BigInt is Comparable {
  
     // Private method to determine whether a number is a small integer or not.
     static isSmall_(n) { (n is Num) && n.isInteger && n.abs <= __maxSmall }
- 
+
     // Private method to convert a small integer to list format.
     static smallToList_(n) {
         if (n < 1e7) return [n]
         if (n < 1e14) return [n % 1e7, (n/1e7).floor]
         return [n % 1e7, ((n/1e7).floor) % 1e7, (n/1e14).floor]
     }
- 
+
     // Private method to convert a list to a small integer where possible.
     static listToSmall_(a) {
         trim_(a)
@@ -106,10 +113,10 @@ class BigInt is Comparable {
         }
         return a
     }
- 
+
     // Private method to check whether the magnitude of a number n <= 1e7.
     static shiftIsSmall_(n) { n.abs <= 1e7 }
- 
+
     // Private method to remove any trailing zero elements from a list.
     static trim_(a) {
         var i = a.count - 1
@@ -118,7 +125,7 @@ class BigInt is Comparable {
             i = i - 1
         }
     }
- 
+
     // Private method to compare two lists, first by length and then by contents.
     static compareAbs_(a, b) {
         if (a.count != b.count) return (a.count > b.count) ? 1 : -1
@@ -129,7 +136,7 @@ class BigInt is Comparable {
         }
         return 0
     }
- 
+
     // Private method to add two lists where a.count >= b.count.
     static add_(a, b) {
         var la = a.count
@@ -154,10 +161,10 @@ class BigInt is Comparable {
         if (carry > 0) r.add(carry)
         return r
     }
- 
+
     // Private method to add two lists regardless of length.
     static addAny_(a, b) { (a.count >= b.count) ? add_(a, b) : add_(b, a) }
- 
+
     // Private method to add 'carry' (0 <= carry <= maxSmall) to a list 'a'.
     static addSmall_(a, carry) {
         var l = a.count
@@ -176,7 +183,7 @@ class BigInt is Comparable {
         }
         return r
     }
- 
+
     // Private method to subtract two lists where a.count >= b.count.
     static subtract_(a, b) {
         var la = a.count
@@ -214,7 +221,7 @@ class BigInt is Comparable {
         trim_(r)
         return r
     }
- 
+
     // Private method to subtract lists regardless of length.
     static subtractAny_(a, b, signed) {
         var value
@@ -231,7 +238,7 @@ class BigInt is Comparable {
         }
         return BigInt.big_(value, signed)
     }
- 
+
     // Private method to subtract 'b' (0 <= b <= maxSmall) from a list 'a'.
     static subtractSmall_(a, b, signed) {
         var l = a.count
@@ -251,7 +258,7 @@ class BigInt is Comparable {
         }
         return BigInt.big_(r, signed)
     }
- 
+
     // Private method to multiply two lists.
     static multiplyLong_(a, b) {
         var la = a.count
@@ -272,7 +279,7 @@ class BigInt is Comparable {
         trim_(r)
         return r
     }
- 
+
     /// Private method to multiply a list 'a' by 'b' (|b| < 1e7).
     static multiplySmall_(a, b) {
         var l = a.count
@@ -290,7 +297,7 @@ class BigInt is Comparable {
         }
         return r
     }
- 
+
     // Private helper method for multiplyKaratsuba_ method.
     static shiftLeft_(x, n) {
         var r = []
@@ -300,7 +307,7 @@ class BigInt is Comparable {
         }
         return r + x
     }
- 
+
     // Private method to multiply two lists 'x' and 'y' using the Karatsuba algorithm.
     static multiplyKaratsuba_(x, y) {
         var n = (x.count > y.count) ? y.count : x.count
@@ -318,16 +325,16 @@ class BigInt is Comparable {
         trim_(prod)
         return prod
     }
- 
+
     // Private method to determine whether Karatsuba multiplication may be beneficial.
     static useKaratsuba_(l1, l2) { -0.012*l1 - 0.012*l2 + 0.000015*l1*l2 > 0 }
- 
+
     // Private method to multiply a small integer 'a' (a >= 0) by a list 'b'.
     static multiplySmallAndList_(a, b, signed) {
         if (a < 1e7) return BigInt.big_(multiplySmall_(b, a), signed)
         return BigInt.big_(multiplyLong_(b, smallToList_(a)), signed)
     }
- 
+
     // Private method to square a list.
     static square_(a) {
         var l = a.count
@@ -349,7 +356,7 @@ class BigInt is Comparable {
          trim_(r)
          return r
     }
- 
+
     // Private method to 'div/mod' two lists, better for smaller sizes.
     static divMod1_(a, b) {
         var la = a.count
@@ -408,7 +415,7 @@ class BigInt is Comparable {
         remainder = divModSmall_(remainder, lambda)[0]
         return [listToSmall_(result), listToSmall_(remainder)]
     }
- 
+
     // Private method to 'div/mod' two lists, better for larger sizes.
     static divMod2_(a, b) {
         var la = a.count
@@ -442,7 +449,7 @@ class BigInt is Comparable {
         result = result[-1..0]
         return [listToSmall_(result), listToSmall_(part)]
     }
- 
+
     // Private method to 'div/mod' a list 'value' with an integer 'lambda'.
     static divModSmall_(value, lambda) {
         var length = value.count
@@ -459,7 +466,7 @@ class BigInt is Comparable {
         }
         return [quot, remainder | 0]
     }
- 
+
     // Private method to 'div/mod' any two BigInts.
     static divModAny_(self, n) {
          var a = self.value_
@@ -494,7 +501,7 @@ class BigInt is Comparable {
         var comparison = compareAbs_(a, b)
         if (comparison == -1) return [BigInt.zero, self]
         if (comparison == 0) return [(self.signed_ == n.signed_) ? one : minusOne, zero]
- 
+
         // divMod1 is faster on smaller input sizes
         var value = (a.count + b.count <= 200) ? divMod1_(a, b) : divMod2_(a, b)
         quotient = value[0]
@@ -511,7 +518,7 @@ class BigInt is Comparable {
         } else mod = BigInt.big_(mod, mSign)
         return [quotient, mod]
     }
- 
+
     // Private method to determine if a BigInt is a basic prime or not.
     static isBasicPrime_(n) {
         if (!(n is BigInt)) n = BigInt.new(n)
@@ -521,7 +528,7 @@ class BigInt is Comparable {
         if (n < 49) return true
         return null // unknown if prime or not
     }
- 
+
     // Private method to apply the Miller-Rabin test.
     static millerRabinTest_(n, a) {
         var nPrev = n.dec
@@ -553,7 +560,7 @@ class BigInt is Comparable {
         }
         return true
     }
- 
+
     // Private method to perform bitwise operations depending on the 'fn' passed in.
     static bitwise_(x, y, fn) {
         if (!(y is BigInt)) y = BigInt.new(y)
@@ -586,21 +593,21 @@ class BigInt is Comparable {
         }
         return sum
     }
- 
+
     // Returns the greater of two BigInts.
     static max(a, b) {
         if (!(a is BigInt)) a = BigInt.new(a)
         if (!(b is BigInt)) b = BigInt.new(b)
         return (a > b) ? a : b
     }
- 
+
     // Returns the lesser of two BigInts.
     static min(a, b) {
         if (!(a is BigInt)) a = BigInt.new(a)
         if (!(b is BigInt)) b = BigInt.new(b)
         return (a < b) ? a : b
     }
- 
+
     // Returns the greatest common denominator of a and b.
     static gcd(a, b) {
         if (!(a is BigInt)) a = BigInt.new(a)
@@ -630,23 +637,23 @@ class BigInt is Comparable {
         }
         return c.isUnit ? a : a * c
     }
- 
+
     // Returns the least common multiple of a and b.
     static lcm(a, b) {
         if (!(a is BigInt)) a = BigInt.new(a)
         if (!(b is BigInt)) b = BigInt.new(b)
         return a / gcd(a, b) * b
     }
- 
+
     // Returns whether or not 'n' is an instance of BigInt.
     static isInstance(n) { n is BigInt }
- 
+
     // Private helper method for 'randBetween'.
     static fromList_(digits, base, isNegative) {
         var digits2 = digits.map { |d| BigInt.new(d) }.toList
         return parseBaseFromList_(digits2, BigInt.new(base || 10), isNegative)
     }
- 
+
     // Returns a random number between 'a' (inclusive) and 'b' (exclusive).
     static randBetween(a, b) {
         if (!(a is BigInt)) a = BigInt.new(a)
@@ -666,7 +673,7 @@ class BigInt is Comparable {
         }
         return low + fromList_(result, 1e7, false)
     }
- 
+
     // Private method to provide the components for converting a BigInt to a different base.
     static toBase_(n, base) {
         if (!(base is BigInt)) base = BigInt.new(base)
@@ -691,7 +698,7 @@ class BigInt is Comparable {
         out.add(left.toNum)
         return [out[-1..0], neg]
     }
- 
+
     // Private method to parse a list, in a given base, to a BigInt.
     static parseBaseFromList_(digits, base, isNegative) {
         var val = zero
@@ -704,7 +711,7 @@ class BigInt is Comparable {
         }
         return isNegative ? -val : val
     }
- 
+
     // Private method to parse a numeric string, in a given base (2 to 36), to a BigInt.
     static parseBase_(text, base) {
         text = text.trim()
@@ -727,12 +734,12 @@ class BigInt is Comparable {
         }
         return parseBaseFromList_(digits, base, isNegative)
     }
- 
+
     // Private helper function to convert a string to lower case.
     static lower_(s) { s.codePoints.map { |c|
         return String.fromCodePoint((c >= 65 && c <= 90) ? c + 32 : c)
     }.join() }
- 
+
     // Private method to parse a base 10 numeric string 'v' to the components for a BigInt.
     static parseString_(v) {
         v = v.trim()
@@ -781,7 +788,7 @@ class BigInt is Comparable {
         trim_(r)
         return [r, signed]
     }
- 
+
     // Constructs a BigInt object from either a numeric base 10 string or a 'safe' integer.
     construct new(value) {
          if (!(value is String) && !BigInt.isSmall_(value)) {
@@ -796,7 +803,7 @@ class BigInt is Comparable {
              _signed = value < 0
          }
     }
- 
+
     // Creates a BigInt object from an (unprefixed) numeric string in a given base (2 to 36).
     static fromBaseString(s, base) {
         if (!(s is String)) Fiber.abort("Value must be a numeric string in the given base.")
@@ -806,23 +813,23 @@ class BigInt is Comparable {
         if (base == 10) return BigInt.new(s)
         return parseBase_(s, base)
     }
- 
+
     // Private constructor which creates a BigInt object from a list of integers and a bool.
     construct big_(a, signed) {
         _value = a
         _signed = signed
     }
- 
+
     // Private constructor which creates a BigInt object from a 'safe' integer and a bool.
     construct small_(a) {
         _value = a
         _signed = a < 0
     }
- 
+
     // Private properties for internal use.
     value_   { _value  }
     signed_  { _signed }
- 
+
     // Public self-evident properties.
     isSmall    { !(_value is List) }
     isEven     { (this.isSmall) ? (_value & 1) == 0 : (_value[0] & 1) == 0 }
@@ -831,7 +838,7 @@ class BigInt is Comparable {
     isNegative { (this.isSmall) ? (_value < 0) :  _signed }
     isUnit     { (this.isSmall) ? _value.abs == 1 : false }
     isZero     { (this.isSmall) ? _value == 0 : false }
- 
+
     isDivisibleBy(n) {
         if (!(n is BigInt)) n = BigInt.new(n)
         if (n.isZero) return false
@@ -839,7 +846,7 @@ class BigInt is Comparable {
         if (n.compareAbs(BigInt.two) == 0) return this.isEven
         return (this % n).isZero
     }
- 
+
     // Returns true if the current instance is prime, false otherwise.
     // Setting 'strict' to true enforces the GRH-supported lower bound of 2*log(N)^2.
     isPrime(strict) {
@@ -857,7 +864,7 @@ class BigInt is Comparable {
         for (i in 0...t) a.add(BigInt.new(i+2))
         return BigInt.millerRabinTest_(n, a)
     }
- 
+
     // Returns true if the current instance is very likely to be prime, false otherwise.
     // The larger the number of 'iterations', the lower the chance of a false positive.
     isProbablePrime(iterations) {
@@ -871,14 +878,14 @@ class BigInt is Comparable {
         for (i in 0...iterations) a.add(BigInt.randBetween(BigInt.two, n - BigInt.two))
         return BigInt.millerRabinTest_(n, a)
     }
- 
+
     // Convenience versions of the above methods which use default parameter values.
     isPrime         { isPrime(false) }
     isProbablePrime { isProbablePrime(5) }
- 
+
     // Negates a BigInt.
     - { (this.isSmall) ? BigInt.small_(-_value) : BigInt.big_(_value, !_signed) }
- 
+
     // Private method which adds a BigInt to a 'small' current instance.
     smallAdd_(n) {
         var a = _value
@@ -891,7 +898,7 @@ class BigInt is Comparable {
         }
         return BigInt.big_(BigInt.addSmall_(b, a.abs), _signed)
     }
- 
+
     // Adds a BigInt to the current instance.
     + (n) {
         if (!(n is BigInt)) n = BigInt.new(n)
@@ -905,7 +912,7 @@ class BigInt is Comparable {
         }
         return BigInt.big_(BigInt.addAny_(a, b), _signed)
     }
- 
+
     // Private method which subtracts a BigInt from a 'small' current instance.
     smallSubtract_(n) {
         var a = _value
@@ -914,7 +921,7 @@ class BigInt is Comparable {
         if (n.isSmall) return BigInt.small_(a - b)
         return BigInt.subtractSmall_(b, a.abs, !_signed)
     }
- 
+
     // Subtracts a BigInt from the current instance.
     - (n) {
         if (!(n is BigInt)) n = BigInt.new(n)
@@ -926,7 +933,7 @@ class BigInt is Comparable {
         if (n.isSmall) return BigInt.subtractSmall_(a, b.abs, _signed)
         return BigInt.subtractAny_(a, b, _signed)
     }
- 
+
     // Private method which multiplies the current instance by a 'small' BigInt.
     multiplyBySmall_(a) {
         if (this.isSmall) {
@@ -940,7 +947,7 @@ class BigInt is Comparable {
         if (a.value_ == -1) return -this
         return BigInt.multiplySmallAndList_(a.value_.abs, _value, _signed != a.signed_)
     }
- 
+
     // Multiplies the current instance by a BigInt.
     * (n) {
         if (!(n is BigInt)) n = BigInt.new(n)
@@ -961,7 +968,7 @@ class BigInt is Comparable {
         }
         return BigInt.big_(BigInt.multiplyLong_(a, b), signed)
     }
- 
+
     // Square the current instance.
     square {
         if (this.isSmall) {
@@ -971,7 +978,7 @@ class BigInt is Comparable {
         }
         return BigInt.big_(BigInt.square_(_value), false)
     }
- 
+
     // Returns the integer square root of the current instance i.e. the largest integer 'r' such that
     // r.square <= this. Throws an error if the current instance is negative.
     isqrt {
@@ -998,20 +1005,20 @@ class BigInt is Comparable {
         if (!(n is BigInt)) n = BigInt.new(n)
         return BigInt.divModAny_(this, n)
     }
- 
+
     // Divides the current instance by a BigInt.
     /(n) {
         if (!(n is BigInt)) n = BigInt.new(n)
         return BigInt.divModAny_(this, n)[0]
     }
- 
+
     // Returns the remainder after dividing the current instance by a BigInt.
     // The sign of the remainder will match the sign of the dividend.
     %(n) {
         if (!(n is BigInt)) n = BigInt.new(n)
         return BigInt.divModAny_(this, n)[1]
     }
- 
+
     // Returns the current instance raised to the power of a 'small' BigInt.
     // If the exponent is less than 0, returns 0. O.pow(0) returns one.
     pow(n) {
@@ -1041,7 +1048,7 @@ class BigInt is Comparable {
         }
         return y
     }
- 
+
     // Returns the current instance to the power 'exp' modulo 'mod'.
     modPow(exp, mod) {
         if (!(exp is BigInt)) exp = BigInt.new(exp)
@@ -1061,7 +1068,7 @@ class BigInt is Comparable {
         }
         return r
     }
- 
+
     // Returns the multiplicative inverse of the current instance modulo 'r'.
     modInv(n) {
         if (!(n is BigInt)) n = BigInt.new(n)
@@ -1083,10 +1090,10 @@ class BigInt is Comparable {
         if (this.isNegative) return -t
         return t
     }
- 
+
     // Returns the sign of the current instance: 0 if zero, 1 if positive and -1 otherwise.
     sign { (this.isZero) ? 0 : (this.isPositive) ? 1 : -1 }
- 
+
     // Increments the current instance by one.
     inc {
         var value = _value
@@ -1097,7 +1104,7 @@ class BigInt is Comparable {
         if (_signed) return BigInt.subtractSmall_(value, 1, _signed)
         return BigInt.big_(BigInt.addSmall_(value, 1), _signed)
     }
- 
+
     // Decrements the current instance by one.
     dec {
         var value = _value
@@ -1108,19 +1115,15 @@ class BigInt is Comparable {
         if (_signed) return BigInt.big_(BigInt.addSmall_(value, 1), true)
         return BigInt.subtractSmall_(value, 1, _signed)
     }
- 
+
     // Bitwise operators. The operands are treated as if they were represented 
     // using two's complement representation.
     ~     { (-this).dec }
     &(n)  { BigInt.bitwise_(this, n, Fn.new { |a, b| a & b }) }
     |(n)  { BigInt.bitwise_(this, n, Fn.new { |a, b| a | b }) }
     ^(n)  { BigInt.bitwise_(this, n, Fn.new { |a, b| a ^ b }) }
- 
-    <<(n) {
-        if (!(n is BigInt)) n = BigInt.new(n)
-        n = n.toNum
-        if (!BigInt.shiftIsSmall_(n)) Fiber.abort("%(n) is too large for shifting.")
-        if (n < 0) return this >> (-n)
+
+    <> (-n)
         var result = this
         if (result.isZero) return result
         var hp2 = BigInt.small_(__highestPower2)
@@ -1130,7 +1133,7 @@ class BigInt is Comparable {
         }
         return result * __powersOfTwo[n]
     }
- 
+
     >>(n) {
         if (!(n is BigInt)) n = BigInt.new(n)
         n = n.toNum
@@ -1148,10 +1151,10 @@ class BigInt is Comparable {
         remQuo = BigInt.divModAny_(result, __powersOfTwo[n])
         return remQuo[1].isNegative ? remQuo[0].dec : remQuo[0]
     }
- 
+
     // Returns the absolute value of the current instance.
     abs { (this.isSmall) ? BigInt.small_(_value.abs) : BigInt.big_(_value, false) }
- 
+
     // Compares the current instance with a BigInt. If they are equal returns 0.
     // If 'this' is greater, returns 1. Otherwise returns -1.
     // Also allows a comparison with an infinite number.
@@ -1169,7 +1172,7 @@ class BigInt is Comparable {
         if (n.isSmall) return _signed ? -1 : 1
         return BigInt.compareAbs_(a, b) * (_signed ? -1 : 1)
     }
- 
+
     // As 'compare' but compares absolute values.
     compareAbs(n) {
         if ((n is Num) && n.isInfinity) return -n.sign
@@ -1186,7 +1189,7 @@ class BigInt is Comparable {
         if (n.isSmall) return 1
         return BigInt.compareAbs_(_value, n.value_)
     }
- 
+
     // Returns the number of digits required to represent the current instance in binary.
     bitLength {
         var n = this
@@ -1194,25 +1197,25 @@ class BigInt is Comparable {
         if (n.isZero) return BigInt.zero
         return BigInt.new(BigInt.integerLogarithm_(n, BigInt.two)[1]) + BigInt.one
     }
- 
+
      // Returns true if the 'n'th bit of the current instance is set or false otherwise. 
     testBit(n) {
         if (n.type != Num || !n.isInteger || n < 0) Fiber.abort("Argument must be a non-negative integer.")
         return (this >> n) & BigInt.one != BigInt.zero
     }
- 
+
     // The inherited 'clone' method just returns 'this' as BigInt objects are immutable.
     // If you need an actual copy use this method instead.
     copy() { (this.isSmall) ? BigInt.small_(_value) : BigInt.big_(_value, _signed) }
- 
+
     // Converts the current instance to a 'small' integer where possible.
     // Otherwise returns null.
     toSmall { (this.isSmall) ? _value : null }
- 
+
     // Converts the current instance to a Num where possible.
     // Will probably lose accuracy if the current instance is not 'small'.
     toNum { Num.fromString(this.toString) }
- 
+
     // Returns the string representation of the current instance in a given base (2 to 36).
     toBaseString(base) {
         if (!((base is Num) && base.isInteger && base >= 2 && base <= 36)) {
@@ -1222,7 +1225,7 @@ class BigInt is Comparable {
         var lst = BigInt.toBase_(this, base)
         return (lst[1] ? "-" : "") + lst[0].map { |d| __alphabet[d] }.join("")
     }
- 
+
     // Returns the string representation of the current instance in base 10.
     toString {
         var v = (this.isSmall) ? BigInt.smallToList_(_value.abs) : _value
@@ -1240,7 +1243,7 @@ class BigInt is Comparable {
         return sign + str
     }
 }
- 
+
 /*  BigInts contains various routines applicable to lists of big integers. */
 class BigInts {
     static sum(a)  { a.reduce(BigInt.zero) { |acc, x| acc + x } }
@@ -1248,7 +1251,7 @@ class BigInts {
     static max(a)  { a.reduce { |acc, x| (x > acc) ? x : acc } }
     static min(a)  { a.reduce { |acc, x| (x < acc) ? x : acc } }
 }
- 
+
 /* BigRat represents a rational number as a BigInt numerator and (non-zero) denominator
    expressed in their lowest terms. BigRat objects are immutable.
 */
@@ -1264,7 +1267,7 @@ class BigRat is Comparable {
                                  o.contains("/") ? fromRationalString(o) : fromDecimal(o)
         Fiber.abort("Argument must either be a rational number, a number or a numeric string.")
     }
- 
+
     // Constants.
     static minusOne { BigRat.new(BigInt.minusOne, BigInt.one) }
     static zero     { BigRat.new(BigInt.zero,     BigInt.one) }
@@ -1273,7 +1276,7 @@ class BigRat is Comparable {
     static ten      { BigRat.new(BigInt.ten,      BigInt.one) }
     static half     { BigRat.new(BigInt.one,      BigInt.two) }
     static tenth    { BigRat.new(BigInt.one,      BigInt.ten) }
- 
+
     // Constructs a new BigRat object by passing it a numerator and a denominator.
     // These must either be BigInts or Nums/Strings which are capable of creating one
     // when passed to the BigInt.new constructor.
@@ -1295,10 +1298,10 @@ class BigRat is Comparable {
         _n = n
         _d = d
     }
- 
+
     // Convenience method which constructs a new BigRat object by passing it just a numerator.
     static new(n) { BigRat.new(n, BigInt.one) }
- 
+
     // Constructs a BigRat object from a Rat object. To use this method the Rat class needs
     // to be imported from the Wren-rat module as, to minimize dependencies,
     // this module does not do so.
@@ -1306,7 +1309,7 @@ class BigRat is Comparable {
         if (r.type.toString != "Rat") Fiber.abort("Argument must be a rational number.")
         return BigRat.new(r.num, r.den)
     }
- 
+
     // Constructs a BigRat object from a string of the form "n/d".
     // Improper fractions are allowed.
     static fromRationalString(s) {
@@ -1316,7 +1319,7 @@ class BigRat is Comparable {
         var d = BigInt.new(nd[1])
         return BigRat.new(n, d)
     }
- 
+
     // Constructs a BigRat object from a string of the form "i_n/d" where 'i' is an integer.
     // Improper and negative fractional parts are allowed.
     static fromMixedString(s) {
@@ -1327,15 +1330,34 @@ class BigRat is Comparable {
         var neg = i.isNegative || (i.isZero && ind[0][0] == "-")
         return neg ? i - nd : i + nd
     }
- 
+
     // Constructs a BigRat object from a decimal numeric string or value.
     static fromDecimal(s) {
         if (!(s is String)) s = s.toString
         if (s == "") Fiber.abort("Argument cannot be an empty string.")
-        s = s.trim().trim("0")
+        s = BigInt.lower_(s)
+        var parts = s.split("e")
+        if (parts.count > 2) Fiber.abort("Argument is invalid scientific notation.")
+        if (parts.count == 2) {
+            var isPositive = true
+            if (parts[1][0] == "-") {
+                parts[1] = parts[1][1..-1]
+                isPositive = false
+            }
+            if (parts[1][0] == "+") parts[1] = parts[1][1..-1]
+            var significand = fromDecimal(parts[0])
+            var p = BigInt.new(parts[1])
+            var exponent = BigRat.new(BigInt.ten.pow(p), BigInt.one)
+            return (isPositive) ? significand * exponent : significand / exponent
+        }
+        s = s.trim().trimStart("0")
         if (s == "") return BigRat.zero
         if (s.startsWith(".")) s = "0" + s
-        if (!s.contains(".")) return BigRat.new(s)
+        if (!s.contains(".")) {
+            return BigRat.new(s)
+        } else {
+             s = s.trimEnd("0")
+        }
         if (s.endsWith(".")) return BigRat.new(s[0..-2])
         var splits = s.split(".")
         if (splits.count != 2) Fiber.abort("Argument is not a decimal.")
@@ -1356,7 +1378,7 @@ class BigRat is Comparable {
         den = BigInt.ten.pow(den.count)
         return BigRat.new(num, den)
     }
- 
+
     // Constructs a rational number from a floating point number provided the latter is an integer
     // or has a decimal string representation.
     static fromFloat(n) {
@@ -1364,17 +1386,17 @@ class BigRat is Comparable {
         if (n.isInteger) return BigRat.new(n, BigInt.one)
         return fromDecimal(n)
     }
- 
+
     // Returns the greater of two BigRat objects.
     static max(r1, r2) { (r1 < r2) ? r2 : r1 }
- 
+
     // Returns the smaller of two BigRat objects.
     static min(r1, r2) { (r1 < r2) ? r1 : r2 }
- 
+
     // Determines whether a BigRat object is always shown as such or, if integral, as an integer.
     static showAsInt     { __showAsInt }
     static showAsInt=(b) { __showAsInt = b }
- 
+
     // Basic properties.
     num        { _n }                   // numerator
     den        { _d }                   // denominator
@@ -1384,7 +1406,7 @@ class BigRat is Comparable {
     isNegative { _n < BigInt.zero }     // checks if negative
     isUnit     { _n.abs == BigInt.one } // checks if plus or minus one
     isZero     { _n == BigInt.zero }    // checks if zero
- 
+
     // Rounding methods (similar to those in Num class).
     ceil { // higher integer
         if (isInteger) return this
@@ -1392,16 +1414,16 @@ class BigRat is Comparable {
         if (!this.isNegative) div = div.inc
         return BigRat.new(div, BigInt.one)
     }
- 
+
     floor { // lower integer
         if (isInteger) return this
         var div = _n/_d
         if (this.isNegative) div = div.dec
         return BigRat.new(div, BigInt.one)
     }
- 
+
     truncate { this.isNegative ? ceil : floor } // lower integer, towards zero
- 
+
     round { // nearer integer
         if (isInteger) return this
         var div = _n / _d
@@ -1411,25 +1433,25 @@ class BigRat is Comparable {
         }
         return (this + BigRat.half).floor
     }
- 
+
     fraction { this - truncate } // fractional part (same sign as this.num)
- 
+
     // Reciprocal
     inverse  { BigRat.new(_d, _n) }
- 
+
     // Integer division.
     idiv(o)  { (this/o).truncate }
- 
+
     // Negation.
     -{ BigRat.new(-_n, _d) }
- 
+
     // Arithmetic operators (work with numbers and numeric strings as well as other rationals).
     +(o) { (o = BigRat.check_(o)) && BigRat.new(_n * o.den + _d * o.num, _d * o.den) }
     -(o) { (o = BigRat.check_(o)) && (this + (-o)) }
     *(o) { (o = BigRat.check_(o)) && BigRat.new(_n * o.num, _d * o.den) }
     /(o) { (o = BigRat.check_(o)) && BigRat.new(_n * o.den, _d * o.num) }
     %(o) { (o = BigRat.check_(o)) && (this - idiv(o) * o) }
- 
+
     // Computes integral powers.
     pow(i) {
         if (!((i is Num) && i.isInteger)) Fiber.abort("Argument must be an integer.")
@@ -1438,10 +1460,10 @@ class BigRat is Comparable {
         var dp = _d.pow(i)
         return (i > 0) ? BigRat.new(np, dp) : BigRat.new(dp, np)
     }
- 
+
     // Returns the square of the current instance.
     square { BigRat.new(_n * _n , _d *_d) }
- 
+
     // Returns the square root of the current instance to 'digits' decimal places.
     // Five more decimals is used to try to ensure accuracy though this is not guaranteed.
     sqrt(digits) {
@@ -1453,16 +1475,16 @@ class BigRat is Comparable {
         var sqtd = (powd.square * _n / _d).isqrt
         return BigRat.new(sqtd, powd)
     }
- 
+   
     // Convenience version of the above method which uses 14 decimal places.
     sqrt { sqrt(14) }
- 
+
     // Other methods.
     inc  { this + BigRat.one }                  // increment
     dec  { this - BigRat.one }                  // decrement
     abs  { (_n >= BigInt.zero) ? this : -this } // absolute value
     sign { _n.sign }                            // sign
- 
+
     // The inherited 'clone' method just returns 'this' as BigRat objects are immutable.
     // If you need an actual copy use this method instead.
     copy() { BigRat.new(_n, _d) }
@@ -1474,21 +1496,21 @@ class BigRat is Comparable {
         if (_d == other.den) return _n.compare(other.num)
         return (_n * other.den).compare(other.num * _d)
     }
- 
+
     // As above but compares the absolute values of the BigRats.
     compareAbs(other) { this.abs.compare(other.abs) }
- 
+
     // Returns this BigRat expressed as a BigInt with any fractional part truncated.
     toBigInt { _n/_d }
- 
+
     // Converts the current instance to a Num where possible.
     // Will probably lose accuracy if the numerator and/or denominator are not 'small'.
     toFloat { Num.fromString(this.toDecimal(14)) }
- 
+
     // Converts the current instance to an integer where possible with any fractional part truncated.
     // Will probably lose accuracy if the numerator and/or denominator are not 'small'.
     toInt { this.toFloat.truncate }
- 
+
     // Returns the decimal representation of this BigRat object to 'digits' decimal places.
     // If 'rounded' is true, the value is rounded to that number of places with halves 
     // being rounded away from zero. Otherwise the value is truncated to that number of places.
@@ -1524,12 +1546,12 @@ class BigRat is Comparable {
         if (decPart == "") return intPart + (zfill ? "." + ("0" * digits) : "") 
         return intPart + "." + decPart + (zfill ? ("0" * (digits - decPart.count)) : "")
     }
- 
+
     // Convenience versions of the above which use default values for some or all parameters.
     toDecimal(digits, rounded) { toDecimal(digits, rounded, false) } // never trailing zeros
     toDecimal(digits)          { toDecimal(digits, true, false)    } // always rounded, never trailing zeros
     toDecimal                  { toDecimal(14, true, false)        } // 14 digits, always rounded, never trailing zeros
- 
+
     // Returns a string represenation of this instance in the form "i_n/d" where 'i' is an integer.
     toMixedString {
         var q = _n / _d
@@ -1537,11 +1559,11 @@ class BigRat is Comparable {
         if (r.isNegative) r = -r
         return q.toString + "_" + r.toString + "/" + _d.toString
     }
- 
+
     // Returns the string representation of this BigRat object depending on 'showAsInt'.
     toString { (BigRat.showAsInt && _d == BigInt.one) ? "%(_n)" : "%(_n)/%(_d)" }
 }
- 
+
 /*  BigRats contains various routines applicable to lists of big rational numbers */
 class BigRats {
     static sum(a)  { a.reduce(BigRat.zero) { |acc, x| acc + x } }
@@ -1550,13 +1572,13 @@ class BigRats {
     static max(a)  { a.reduce { |acc, x| (x > acc) ? x : acc } }
     static min(a)  { a.reduce { |acc, x| (x < acc) ? x : acc } }
 }
- 
+
 // Type aliases for classes in case of any name clashes with other modules.
 var Big_BigInt  = BigInt
 var Big_BigInts = BigInts
 var Big_BigRat  = BigRat
 var Big_BigRats = BigRats
 var Big_Comparable = Comparable // in case imported indirectly
- 
+
 // Initialize static fields.
 BigInt.init_()

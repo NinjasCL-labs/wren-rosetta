@@ -1,7 +1,14 @@
+// url: https://rosettacode.org/wiki/Category:Wren-date#Wren
+// source: https://rosettacode.org/mw/index.php?title=Category_talk:Wren-date&action=edit&section=1
+// file: date.wren
+// name: Wren-date
+// author: PureFox
+// license: MIT
+
 /* Module "date.wren" */
- 
+
 import "/trait" for Comparable
- 
+
 /*
     Date represents a date (and the time within that date) as the number of milliseconds
     which have elapsed according to the Gregorian Proleptic calendar since midnight on 
@@ -16,26 +23,26 @@ class Date is Comparable {
         __diy  = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365]
         __diy2 = [0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366]
         __days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
- 
+
         __mths = ["January", "February", "March", "April", "May", "June", "July", "August",
                   "September", "October", "November", "December"]
- 
+
         __ords = ["First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth",
                   "Ninth", "Tenth", "Eleventh", "Twelfth", "Thirteenth", "Fourteenth",
                   "Fifteenth", "Sixteenth", "Seventeenth", "Eighteenth", "Nineteenth",
                   "Twentieth", "Twenty-first", "Twenty-second", "Twenty-third", "Twenty-fourth",
                   "Twenty-fifth", "Twenty-sixth", "Twenty-seventh", "Twenty-eighth",
                   "Twenty-ninth", "Thirtieth", "Thirty-first"]
- 
+
         __caps   = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         __caps12 = "ABCDEFGHIKLM" // First 12 excluding 'J'
- 
+
         __digs = "0123456789"
- 
+
         __default = standard
- 
+
         __localZone = "UTC"
- 
+
         // Just North America and Europe.
         __tzs  = { "HST": "-1000", "HDT" : "-0900", "AKST": "-0900", "AKDT": "-0800", "PST": "-0800", 
                    "PDT": "-0700", "MST" : "-0700", "MDT" : "-0600", "CST" : "-0600", "CDT": "-0500",
@@ -44,12 +51,12 @@ class Date is Comparable {
                    "GMT": "+0000", "WET" : "+0000", "WEST": "+0100", "BST" : "+0100", "IST": "+0100",
                    "CET": "+0100", "CEST": "+0200", "EET" : "+0200", "EEST": "+0300", "MSK": "+0300" }
     }
- 
+
     // Constants.
     static zero      { Date.new(1, 1, 1) }
     static maximum   { Date.new(99999, 12, 31, 23, 59, 59, 999) }
     static unixEpoch { Date.new(1970, 1, 1) }
- 
+
     // Predefined formats.
     static standard { "yyyy|-|mm|-|dd| |hh|:|MM|:|ss|.|ttt" }       // readable & sortable format
     static isoFull  { "yyyy|-|mm|-|dd|T|hh|:|MM|:|ss|.|ttt|zzzzz" } // includes UTC offset
@@ -58,36 +65,36 @@ class Date is Comparable {
     static usDate   { "mm|/|dd|/|yyyy" }
     static ukDate   { "dd|/|mm|/|yyyy" }
     static isoTime  { "hh|:|MM|:|ss"   }
- 
+
     // Gets or sets the default format to be used by toString.
     static default { __default }
     static default=(fmt) { __default = (fmt is List || fmt is String) ? fmt : standard }
- 
+
     // Gets or sets the local time zone.
     static localZone { __localZone }
     static localZone=(tz) { __localZone = (tz = isValidTz_(tz) && tz != "J") ? tz  :__localZone }
- 
+
     // Determines whether a particular year is a leap year.
     static isLeapYear(y) {
         return y%4 == 0 && (y%100 != 0 || y%400 == 0)
     }
- 
+
     // Returns the year length for a given date.
     static yearLength(y) { isLeapYear(y) ? 366 : 365 }
- 
+
     // Returns the month length for a given date.
     static monthLength(y, m) { isLeapYear(y) ? __diy2[m] - __diy2[m-1] : __diy[m] - __diy[m-1] }
- 
+
     // Returns the year day for a given date.
     static yearDay(y, m, d) { d + (isLeapYear(y) ? __diy2[m-1]  : __diy[m-1]) }
- 
+
     // private helper method for isoWeek method
     static isoWeekOne_(y) {
         var dt = Date.new(y, 1, 4)
         var dow = dt.dayOfWeek
         return dt.addDays(1 - dow) // first Monday <= 4 January
     }
- 
+
     // Returns the year and week number therein for a given date as per ISO 8601.
     // See https://secondboyet.com/Articles/PublishedArticles/CalculatingtheISOweeknumb.html
     static isoWeek(y, m, d) {
@@ -109,7 +116,7 @@ class Date is Comparable {
         }
         return [y, ((dt - week1).days / 7).truncate + 1]
     }
- 
+
     // Private helper method to check a string is all digits and convert it to an integer.
     static int_(str) {
         for (c in str) { // make sure string only contains digits
@@ -117,7 +124,7 @@ class Date is Comparable {
         }
         return Num.fromString(str)
     }
- 
+
    // Private helper method to get the longest integer, up to maxLen, from the start of a string.
     static sint_(str, maxLen) {
         if (str == "" || maxLen < 1) return null
@@ -130,13 +137,13 @@ class Date is Comparable {
         }
         return n
     }
- 
+
     // Private helper method which fills an integer with leading zeros up to a given length.
     static zeroFill_(length, n) {
         n = "%(n)"
         return (n.count < length) ? "0" * (length - n.count) + n : n
     }
- 
+
     // Private helper method to convert a single letter time zone designator to a UTC offset.
     static militaryToUtc_(letter) {
         if (letter == "J") return fmtTz_(__localZone, 4)
@@ -145,7 +152,7 @@ class Date is Comparable {
         if (ix >= 0) return "-" + zeroFill_(2, ix + 1) + "00"
         return "+" + zeroFill_(2, letter.bytes[0] - 77) + "00"
     }
- 
+
     // Private helper method to convert any time zone designator to a single letter zone.
     static zoneToMilitary_(tz) {
         var c = tz.count
@@ -158,7 +165,7 @@ class Date is Comparable {
         if (n == 0) return "Z"
         return (offset[0] == "-") ? __caps12[n-1] : __caps[12 + n]
     }
- 
+
     // Private helper method to check if a time zone is valid or potentially valid.
     // To be valid it must either be a name of between 1 and 5 consecutive capital letters
     // or be a UTC offset of the form ±hh:mm, ±hhmm or just ±hh. If it's an offset it will be
@@ -183,7 +190,7 @@ class Date is Comparable {
         }
         return tz
     }
- 
+
     // Private helper method to format a time zone. Codes (number of 'z's) are:
     // 1 : Military (single capital letter)
     // 2 : Abbreviated name of a zone (2 to 5 capital letters)
@@ -200,7 +207,7 @@ class Date is Comparable {
         if (code == 4) return iso
         return iso[0..2] + ":" + iso[3..4]
     }
- 
+
     // Private helper method to parse a UTC offset into hours and minutes.
     static parseOffset_(offset) {
         var sign = offset[0]
@@ -213,7 +220,7 @@ class Date is Comparable {
         }
        return [hrs, mins]
     }
- 
+     
     // Parses a 'full' IS0 8601 string into a Date object, provided that ANY single character
     // separator may be used in place of dash, space, colon or dot and the following parts
     // may be omitted: the UTC part, the UTC and time parts, the UTC and secs/msecs part or just 
@@ -236,7 +243,7 @@ class Date is Comparable {
         var tz = str[23..28]
         return Date.new(y, mo, d, h, mi, s, ms, tz)
     }
- 
+
     // Parses a date string into a Date object using the supplied format, provided that literal
     // text is only matched by length (not content) and trailing literal text is ignored altogether.
     // A default value is used for any missing constructor parameters. See 'format' for mask meanings.
@@ -412,14 +419,14 @@ class Date is Comparable {
         }
         return Date.new(y, mo, d, h, mi, s, ms, tz)
     }
- 
+
     // Private helper method to get the number of days from Date.zero up to the start of a year.
     static soyDays_(y) {
         if (y == 0) return 0
         y =  y - 1
         return y*365 + (y/4).floor - (y/100).floor + (y/400).floor
     }
- 
+
     // Private helper method which adds an ordinal suffix to a day number.
     static ord_(n) {
         var suffix = "th"
@@ -432,7 +439,7 @@ class Date is Comparable {
         }
         return "%(n)" + suffix
     }
- 
+
     // Constructs a new Date object by passing it: the year, month, day, hour, minute, second
     // and millisecond of an instance in time plus a time zone designator. It is a runtime error
     // to pass invalid values though, for convenience, if the number of days is more than the
@@ -465,7 +472,7 @@ class Date is Comparable {
         _num = days * 86400000 + h * 3600000 + mi * 60000 + s * 1000 + ms
         _tz = tz
     }
- 
+
     // Constructor for creating a Date object directly from a number of milliseconds.
     construct fromNumber(num, tz) {
         if (num < 0 || num > Date.maximum.number) Fiber.abort("Number is out of range.")
@@ -473,16 +480,16 @@ class Date is Comparable {
         _num = num
         _tz = tz
     }
- 
+
     // Convenience methods to construct a Date object from a subset of its parameters.
     static new(y, mo, d, h, mi, s, ms) { Date.new(y, mo, d, h, mi, s, ms, "UTC") } 
     static new(y, mo, d, h, mi, s)     { Date.new(y, mo, d, h, mi, s,  0, "UTC") } 
     static new(y, mo, d, h, mi)        { Date.new(y, mo, d, h, mi, 0,  0, "UTC") } 
     static new(y, mo, d)               { Date.new(y, mo, d, 0,  0, 0,  0, "UTC") }
     static new(y)                      { Date.new(y,  1, 1, 0,  0, 0,  0, "UTC") }
- 
+
     static fromNumber(num)             { Date.fromNumber(num, "UTC") }
- 
+
     // Gets the component parts of this date, as a list, from its number
     // and in the same order as the constructor parameters above.
     parts {
@@ -526,7 +533,7 @@ class Date is Comparable {
             y = y - 1
         }
     }
- 
+
     // Methods to get this date's basic properties.
     year     { parts[0] }
     month    { parts[1] }
@@ -535,10 +542,10 @@ class Date is Comparable {
     minute   { parts[4] }
     second   { parts[5] }
     millisec { parts[6] }
- 
+
     // Return a new Date object after adding positive (or negative) increments.
     addYears(y) { Date.new(year + y, month, day, hour, minute, second, millisec, _tz) }
- 
+
     addMonths(mo) {
         var y = (mo/12).truncate
         if ((mo = mo%12) == 0) return addYears(y)
@@ -552,36 +559,36 @@ class Date is Comparable {
         if ((m + mo) >= 1) return Date.new(year + y, m + mo, day, hour, minute, second, millisec, _tz)
         return Date.new(year + y - 1, m + mo + 12, day, hour, minute, second, millisec, _tz)
     }
- 
+
     addWeeks(w)      { Date.fromNumber(_num + w * 86400000 * 7, _tz) }
     addDays(d)       { Date.fromNumber(_num + d * 86400000, _tz)     }
     addHours(h)      { Date.fromNumber(_num + h * 3600000, _tz)      }
     addMinutes(mi)   { Date.fromNumber(_num + mi * 60000, _tz)       }
     addSeconds(s)    { Date.fromNumber(_num + s * 1000, _tz)         }
     addMillisecs(ms) { Date.fromNumber(_num + ms, _tz)               }
- 
+
     // Returns the day of the year in which this date falls.
     dayOfYear { day + (Date.isLeapYear(year) ? __diy2[month-1] : __diy[month-1]) }
- 
+
     dayOfWeek { (_num/86400000).floor % 7 + 1 } // as an integer (1 to 7), Monday = 1
- 
+
     weekDay  { __days[dayOfWeek-1] } // as a string
- 
+
     monthName { __mths[month-1] }    // ditto
- 
+
     number { _num } // gets the number of miiliseconds since Date.zero
- 
+
     unixTime { ((_num - Date.unixEpoch.number)/1000).truncate } // can be negative
- 
+
     // Returns the ISO year and week in which this date falls.
     weekOfYear { Date.isoWeek(year, month, day) }
- 
+
     // Returns the time zone designator for this date.
     zone { _tz }
- 
+
     // Returns a new date object with the new time zone. Doesn't adjust the time.
     changeZone(newZone) { Date.fromNumber(_num, newZone) }
- 
+
     // Attempts to adjust the time to a new time zone. If successful, returns a 
     // new Date object otherwise returns null.
     adjustTime(newZone) {
@@ -599,14 +606,14 @@ class Date is Comparable {
         var d = Date.fromNumber(_num, newZone).addHours(nhm[0]).addMinutes(nhm[1])
         return d.addHours(-ohm[0]).addMinutes(-ohm[1])
     }
- 
+
     // The inherited 'clone' method just returns 'this' as Date objects are immutable.
     // If you need an actual copy use this method instead.
     copy() { Date.fromNumber(_num, _tz) }
  
     // Compares this date with another one to enable comparison operators via Comparable trait.
     compare(other) { (_num - other.number).sign }
- 
+
     // Constructs the string representation of this date from a 'fmt' list or string.
     // To treat a part of the format literally (and avoid a clash with a standard mask)
     // insert a '\f' within it which will otherwise be ignored.
@@ -684,14 +691,14 @@ class Date is Comparable {
         }
         return str
     }
- 
+
     // Returns the string representation of this date using the default format.
     toString { format(Date.default) }
- 
+
     // Returns the duration (positive or negative milliseconds) from this to another date.
     -(other) { Duration.new(_num - other.number) }
 }
- 
+
 /* 
     Duration represents a time interval (positive or negative) measured in milliseconds.
     It is immutable and any of its properties can therefore be used as a map key.
@@ -699,7 +706,7 @@ class Date is Comparable {
 class Duration is Comparable {
     // Maximum safe integer (2^53 - 1) and hence duration
     static maximum { 9007199254740991 }
- 
+
     // Blocks the current fiber for a given number of milliseconds.
     static wait(ms) {
         if (ms.type != Num || ms < 0) {
@@ -708,7 +715,7 @@ class Duration is Comparable {
         var finish = System.clock + ms/1000
         while (System.clock <= finish) {}
     }
- 
+
     // Constructs a new Duration object by passing it a number (positive or negative) of:
     // days, hours, minutes, seconds and milliseconds.
     construct new(d, h, mi, s, ms) {
@@ -716,32 +723,32 @@ class Duration is Comparable {
         if (ms.abs > Duration.maximum) Fiber.abort("Duration is out of safe range.")
         _ms = ms
     }
- 
+
     // Convenience method to construct a Duration object from just a number of milliseconds.
     static new(ms) { Duration.new(0, 0, 0, 0, ms) }
- 
+
     // Gets the duration in various time intervals (as a floating point number).
     millisecs { _ms }
     seconds   { _ms/1000 }
     minutes   { _ms/60000 }
     hours     { _ms/3600000 }
     days      { _ms/86400000 }
- 
+
     // The inherited 'clone' method just returns 'this' as Duration objects are immutable.
     // If you need an actual copy use this method instead.
     copy() { Duration.new(_ms) }
- 
+
     // Compares this duration with another one to enable comparison operators via Comparable trait.
     compare(other) { (_ms - other.millisecs).sign }
- 
+
     // Duration arithmetic.
     +(other)  { Duration.new(_ms + other.millisecs) }
     -(other)  { Duration.new(_ms - other.millisecs) }
- 
+
     // Returns the string representation of this duration.
     toString  { _ms.toString }
 }
- 
+
 /* Stopwatch enables one to easily time events. */
 class Stopwatch {
     // Times the execution of a fumction returning the duration it took to execute.
@@ -752,25 +759,25 @@ class Stopwatch {
         sw.stop()
         return dur
     }
- 
+
     // Creates a new Stopwatch object and starts it, recording the time.
     construct new() { _start = System.clock }
- 
+
     // Returns the duration since 'start'.
     duration { Duration.new(((System.clock - _start)*1000).round) }
- 
+
     // Returns the elapsed time since 'start' in milliseconds.
     elapsed  { duration.millisecs }
- 
+
     // Prevents this Stopwatch object from being used again.
     stop() { _start = null }
 }
- 
+
 // Type aliases for classes in case of any name clashes with other modules.
 var Date_Date = Date
 var Date_Duration = Duration
 var Date_Stopwatch = Stopwatch
 var Date_Comparable = Comparable // in case imported indirectly
- 
+
 // Initialize Date tables.
 Date.init_()

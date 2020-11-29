@@ -1,6 +1,13 @@
+// url: https://rosettacode.org/wiki/Category:Wren-sort#Wren
+// source: https://rosettacode.org/mw/index.php?title=Category_talk:Wren-sort&action=edit&section=1
+// file: sort.wren
+// name: Wren-sort
+// author: PureFox
+// license: MIT
+
 /* Module "sort.wren" */
 import "/trait" for Comparable
- 
+
 /*
    Cmp provides standard comparison methods for use with the Sort and Find classes.
    All comparison methods return a function, which take two parameters p1 & p2 say and
@@ -9,14 +16,14 @@ import "/trait" for Comparable
 class Cmp {
     static bool     { Fn.new { |b1, b2| (b1 == b2) ? 0 : (b1) ? 1 : -1 } }  // false < true
     static boolDesc { Fn.new { |b1, b2| (b1 == b2) ? 0 : (b1) ? -1 : 1 } }  // false > true
- 
+
     static num      { Fn.new { |n1, n2| (n1-n2).sign } } // numerical order
     static numDesc  { Fn.new { |n1, n2| (n2-n1).sign } } // reverse numerical order
- 
+
     // For other objects which define the comparison operators.
     static comparable     { Fn.new { |c1, c2| (c1 == c2) ? 0 : (c1 < c2) ? -1 :  1 } }
     static comparableDesc { Fn.new { |c1, c2| (c1 == c2) ? 0 : (c1 < c2) ?  1 : -1 } }
- 
+
     // Lexicographical order of codepoints.
     static string {
         return Fn.new { |s1, s2|
@@ -31,10 +38,10 @@ class Cmp {
             return (cp1.count < cp2.count) ? -1 : 1
         }
     }
- 
+
     // Reverse lexicographical order of codepoints.
     static stringDesc { Fn.new { |s1, s2| -string.call(s1, s2) } }
- 
+
     // Private helper function to enable case insensitivity.
     static lower_(s) {
         if (s == "") return s
@@ -45,15 +52,15 @@ class Cmp {
         }
         return cps.reduce("") { |acc, c| acc + String.fromCodePoint(c) }
     }
- 
+
     // As 'string' or 'stringDesc' but ignoring case.
     static insensitive     { Fn.new { |s1, s2| string.call(lower_(s1), lower_(s2))     } }
     static insensitiveDesc { Fn.new { |s1, s2| stringDesc.call(lower_(s1), lower_(s2)) } }
- 
+
     // As 'string' or 'stringDesc' using the object's string representation.
     static general     { Fn.new { |g1, g2| string.call(g1.toString, g2.toString)       } }
     static generalDesc { Fn.new { |g1, g2| stringDesc.call(g1.toString, g2.toString)   } }
- 
+
     // Provides a default comparison function depending on the type of 'v'.
     static default(v) {
         return (v is Num)        ? Cmp.num        :
@@ -61,7 +68,7 @@ class Cmp {
                (v is Bool)       ? Cmp.bool       :
                (v is Comparable) ? Cmp.comparable : Cmp.general
     }
- 
+
     // Provides a default descending comparison function depending on the type of 'v'.
     static defaultDesc(v) {
         return (v is Num)        ? Cmp.numDesc        :
@@ -70,7 +77,7 @@ class Cmp {
                (v is Comparable) ? Cmp.comparableDesc : Cmp.generalDesc
     }
 }   
- 
+
 /*
     Sort contains various sorting methods which may be useful in different scenarios.
     As it would be too expensive to check that all elements of a large list are of the
@@ -79,7 +86,7 @@ class Cmp {
 class Sort {
     // Private helper function to check that 'a' is a list and throw an error otherwise.
     static isList_(a) { (a is List) ? true : Fiber.abort("Argument must be a list.") }
- 
+
     // In place quicksort. Unstable.
     static quick(a, s, e, cmp) {
         isList_(a)
@@ -90,7 +97,7 @@ class Sort {
         if (!cmp) cmp = Cmp.default(a[0])
         quick_(a, s, e, cmp)
     }
- 
+
     // Private worker method for quicksort.
     static quick_(a, s, e, cmp) {
         if (e <= s) return
@@ -111,7 +118,7 @@ class Sort {
         quick_(a, s, r, cmp)
         quick_(a, l, e, cmp)
     }
- 
+
     // Out of place merge sort. Stable.
     static merge(m, cmp) {
         isList_(m)
@@ -121,7 +128,7 @@ class Sort {
         if (!cmp) cmp = Cmp.default(m[0])
         return merge_(m, cmp)
     }
- 
+
     // Private worker function for merge sort.
     static merge_(m, cmp) {
         var len = m.count
@@ -149,7 +156,7 @@ class Sort {
         if (right.count > 0) result.addAll(right)
         return result
     }
- 
+
     // In place heap sort. Unstable.
     static heap(a, cmp) {
         isList_(a)
@@ -171,7 +178,7 @@ class Sort {
             siftDown_(a, 0, end, cmp)
         }
     }
- 
+
     // Private helper function for heap sort.
     static siftDown_(a, start, end, cmp) {
         var root = start
@@ -188,7 +195,7 @@ class Sort {
             }
         }
     }
- 
+
     // In place insertion sort. Stable.
     static insertion(a, cmp) {
         isList_(a)
@@ -206,7 +213,7 @@ class Sort {
             a[j+1] = v
         }
     }
- 
+
     // In place selection sort. Unstable.
     static selection(a, cmp) {
         isList_(a)
@@ -227,7 +234,7 @@ class Sort {
             }
         }
     }
- 
+
     // In place shell sort. Unstable.
     static shell(a, cmp) {
         isList_(a)
@@ -250,7 +257,7 @@ class Sort {
             }
         }
     }
- 
+
     // Convenience methods which sort the whole of a list using a particular sorting
     // method with default parameters. 'false' indicates a default ascending sort.
     static quick(a)     { quick(a, 0, a.count-1, false) }
@@ -259,7 +266,7 @@ class Sort {
     static insertion(a) { insertion(a, false)           }
     static selection(a) { selection(a, false)           }
     static shell(a)     { shell(a, false)               }
- 
+
     // As above but sort in descending order.
     static quickDesc(a)     { quick(a, 0, a.count-1, true) }
     static mergeDesc(a)     { merge(a, true)               }
@@ -267,12 +274,12 @@ class Sort {
     static insertionDesc(a) { insertion(a, true)           }
     static selectionDesc(a) { selection(a, true)           }
     static shellDesc(a)     { shell(a, true)               }
- 
+
     // Convenience methods which sort the whole of a list of strings ignoring case
     // using quicksort with the appropriate comparison function.
     static insensitive(a)     { quick(a, 0, a.count-1, Cmp.insensitive)     }
     static insensitiveDesc(a) { quick(a, 0, a.count-1, Cmp.insensitiveDesc) }
- 
+
     // Checks whether a list is already sorted.
     static isSorted(a, cmp) {
         isList_(a)
@@ -285,11 +292,11 @@ class Sort {
         }
         return true
     }
- 
+
     // Convenience versions of the above.
     static isSorted(a)     { isSorted(a, false) }
     static isSortedDesc(a) { isSorted(a, true)  }
- 
+
     // Reverses a list in place.
     static reverse(a) {
         var c = a.count
@@ -305,7 +312,7 @@ class Sort {
         }
     }
 }
- 
+
 /*
     Find contains methods to search for values in lists where a comparison function is needed.
     As it would be too expensive to check that all elements of a large list are of the same
@@ -346,21 +353,21 @@ class Find {
         }
         return [true, last-low, low..last-1]
     }
- 
+
     // Works similarly to 'all' but only returns the index of the first match
     // or -1 if there were no matches at all.
     static first(a, value, cmp) {
         var t = all(a, value, cmp)
         return (t[1] > 0) ? t[2].from : -1
     }
- 
+
     // Works similarly to 'all' but only returns the index of the last match
     // or -1 if there were no matches at all.
     static last(a, value, cmp) {
         var t = all(a, value, cmp)
         return (t[1] > 0) ? t[2].to : -1
     }
- 
+
     // Finds the lowest value in an unsorted list according to 'cmp' but without sorting.
     // Returns a list of three items:
     // The first item is the lowest value.
@@ -386,7 +393,7 @@ class Find {
         }
         return [min, iMin.count, iMin]
     }
- 
+
     // As 'lowest' but finds the highest value of the list according to 'cmp'
     static highest(a, cmp) {
         Sort.isList_(a)
@@ -408,7 +415,7 @@ class Find {
         }
         return [max, iMax.count, iMax]
     }
- 
+
     // Private helper function for 'quick' method.
     static partition_(a, left, right, pivotIndex, cmp) {
         var pivotValue = a[pivotIndex]
@@ -430,7 +437,7 @@ class Find {
         a[storeIndex] = temp
         return storeIndex
     }
- 
+
     // Finds the 'k'th smallest element of an unsorted list according to 'cmp' 
     // using the 'quickselect' algorithm. 'k' is zero based.
     static quick(a, k, cmp) {
@@ -458,7 +465,7 @@ class Find {
             }
         }
     }
- 
+
     // Convenience versions of the above which use default values for the 'cmp' parameter.
     static all(a, value)   { all(a, value, false)   }
     static first(a, value) { first(a, value, false) }
@@ -466,7 +473,7 @@ class Find {
     static lowest(a)       { lowest(a, false)       }
     static highest(a)      { highest(a, false)      }
     static quick(a, k)     { quick(a, k, false)     }
- 
+
     // Finds the median element(s) of a sorted list.
     // Returns a list of three items:
     // The first item is a list of the median element(s).
@@ -480,7 +487,7 @@ class Find {
         return (c%2 == 1) ? [[a[hc]], 1, hc..hc] : [[a[hc-1], a[hc]], 2, hc-1..hc]
     }
 }
- 
+
 // Type aliases for classes in case of any name clashes with other modules.
 var Cmp_Cmp  = Cmp
 var Cmp_Sort = Sort

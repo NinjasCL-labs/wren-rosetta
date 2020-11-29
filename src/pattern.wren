@@ -1,5 +1,12 @@
+// url: https://rosettacode.org/wiki/Category:Wren-pattern#Wren
+// source: https://rosettacode.org/mw/index.php?title=Category_talk:Wren-pattern&action=edit&section=2
+// file: pattern.wren
+// name: Wren-pattern
+// author: PureFox
+// license: MIT
+
 /* Module "pattern.wren" */
- 
+
 /* Match represents a single successful match made by methods in the Pattern class.
    Match objects are immutable.
 */
@@ -18,7 +25,7 @@ class Match {
         _index = index
         _captures = captures
     }
- 
+
     // Properties.
     text     { _text }                                // the text of the match
     index    { _index }                               // its starting index (codepoints)
@@ -26,11 +33,11 @@ class Match {
     span     { [_index, index + length - 1] }         // a list of its starting and ending indices
     captures { _captures.toList }                     // the Capture objects associated with the match
     capsText { _captures.map { |c| c.text }.toList }  // a list of each capture's text property
- 
+
     // String representation (excluding captures)
     toString { "{ text = %(_text), index = %(_index), length = %(length) }" }
 }
- 
+
 /* Capture represents a single successful capture made by methods in the Pattern class.
    Capture objects are immutable.
 */
@@ -47,17 +54,17 @@ class Capture {
         _text = text
         _index = index
     }
- 
+
     // Properties.
     text     { _text }                        //  the text of the capture
     index    { _index }                       //  its starting index (codepoints)
     length   { _text.count }                  //  its length
     span     { [_index, index + length - 1] } //  a list of its starting and ending indices
- 
+
     // String representation.
     toString { "{ text = %(_text), index = %(_index), length = %(length) }" }
 }
- 
+
 /* Pattern represents a pattern to be used for matching characters within a string.
    A Pattern object is immutable.
 */
@@ -67,16 +74,16 @@ class Pattern {
     static start  { 1 }   // matches only at the start of a string
     static end    { 2 }   // matches only at the end of a string
     static whole  { 3 }   // matches the whole of a string
- 
+
     static types { ["within", "start", "end", "whole"] }
- 
+
     // Constants to help construct user-defined patterns.
     static lower  { "abcdefghijklmnopqrstuvwxyz" }
     static upper  { "ABCDEFGHIJKLMNOPQRSTUVWXYZ" }
     static letter { lower + upper }
     static digit  { "0123456789" }
     static alpha  { letter + digit }
- 
+
     // Private method to initialize function tables and back-reference symbols.
     static init_() {
         // character classes
@@ -108,7 +115,7 @@ class Pattern {
             Fn.new { |c|  __fns[22].call(c) || c == 95 || c == 39 || c == 45 },                   // y
             Fn.new { |c|  true }                                                                  // z
         ]
- 
+                                                          
         // extended classes
         __fns2 = [
             Fn.new { |c|  __fns2[11].call(c) || __fns2[20].call(c) },                               // a
@@ -138,14 +145,14 @@ class Pattern {
             Fn.new { |c|  __fns2[22].call(c) || c == 95 || c == 39 || c == 45 || c == 173 },        // y
             Fn.new { |c|  true }                                                                    // z
         ]
- 
+
         // back reference symbols
         __backRefs = ["$1", "$2", "$3", "$4", "$5", "$6", "$7", "$8", "$9"]
     }
- 
+
     // Returns a list of the text properties of each match in matches.
     static matchesText(matches) { matches.map { |m| m.text }.toList }
- 
+
     // Returns whether a pattern string is valid or not.
     static validate(pattern) {
         if (!((pattern is String) && pattern != "")) return false
@@ -153,7 +160,7 @@ class Pattern {
             validate_(pattern)
         }.try()
     }
- 
+
     // Private worker method to validate and tokenize a pattern and get its minimum matching length.
     static validate_(pattern) {
         var min = 0                        // minimum length
@@ -166,7 +173,7 @@ class Pattern {
         var capMin = 0                     // minimum length of current capture
         var c = 0                          // current codepoint
         var tokens = []                    // tokenize pattern to make subsequent matching easier
- 
+
         // Increments min or curMin.
         var increment = Fn.new { |imin|
             if (!cap) {
@@ -175,7 +182,7 @@ class Pattern {
                 curMin = curMin + imin
             }
         }
- 
+
         // Handles the slash or ampersand metacharacters.
         var slashOrAmp = Fn.new { |reps|
             i = i + 1
@@ -192,7 +199,7 @@ class Pattern {
                 tokens.add(d)
             }
         }
- 
+
         // Handles the caret or at sign metacharacters.
         var caretOrAt = Fn.new { |reps|
             i = i + 1
@@ -216,7 +223,7 @@ class Pattern {
                 }
             }
         }
- 
+
         while (i < lpc) {
             c = pc[i]                          // current codepoint
             if (c == 47 || c == 38) {          // slash = character class, ampersand = extended class
@@ -322,7 +329,7 @@ class Pattern {
         if (cap) Fiber.abort("Invalid pattern - capture unfinished at %(i).")
         return [min, tokens]
     }
- 
+
     // Private worker method.
     // Looks for a pattern match for the string 's' starting from codepoint index 'start'.
     // Returns a Match object if a match is found or null otherwise.
@@ -341,9 +348,9 @@ class Pattern {
         var wm = ""                     // matched so far in string as a whole
         var cm = ""                     // matched so far in current capture
         var ci = 0                      // string index at which capture started
- 
+
         if (si < sc) c = codes[si]
- 
+
         // Consume current character.
         var consume = Fn.new {
             if (!cap) {
@@ -353,7 +360,7 @@ class Pattern {
             }
             consumed = true
         }
- 
+
         // Moves token index, where necessary, to next metacharacter
         var moveTokenIndex = Fn.new { |z|
              if (z == -47 || z == -38 || z == -94) {
@@ -362,7 +369,7 @@ class Pattern {
                 ti = ti + 2
              }
         }
- 
+
         // Checks if there's another mini-pattern in the current capture and if so prepares to match it.
         var nextMiniPattern = Fn.new {
             while (true) {
@@ -378,7 +385,7 @@ class Pattern {
             }
             return true
         }
- 
+
         // Checks that there are no more options to consider before declaring a non-match.
         var noMore = Fn.new { !cap || !nextMiniPattern.call() }
  
@@ -398,7 +405,7 @@ class Pattern {
             consume.call()
             return true
         }
- 
+
         // Checks if extended class matches and if so consumes character.
         var ampersand = Fn.new { |inc|
             if (inc) ti = ti + 1
@@ -415,7 +422,7 @@ class Pattern {
             consume.call()
             return true
         }
- 
+
         // Checks if complement matches and if so consumes character.
         var caret = Fn.new { |inc|
             if (inc) ti = ti + 1
@@ -424,7 +431,7 @@ class Pattern {
             consume.call()
             return true
         }
- 
+
         // Checks if either-case matches and if so consumes character.
         var at = Fn.new { |inc|
             var u
@@ -445,14 +452,14 @@ class Pattern {
             consume.call()
             return true
         }
- 
+
         // Checks if ordinary character matches and if so consumes character.
         var character = Fn.new { |z|
             if (c != z) return false
             consume.call()
             return true
         }
- 
+         
         while (true) {
             for (i in 1..1) { // dummy loop so break can emulate goto
                 if (t == -47) {  // slash = character class
@@ -607,10 +614,10 @@ class Pattern {
                 }
             }
         }
- 
+
         return Match.new_(wm, start, captures)
     }
- 
+
     // Constructs a Pattern object from a pattern, its type and its user defined character
     // classes. If an empty string is passed for the latter, they use their defaults.      
     construct new(pattern, type, i, j, k) {
@@ -632,13 +639,13 @@ class Pattern {
         _j = (j != "") ? j : "0123"
         _k = (k != "") ? k : "01234"
     }
- 
+
     // Convenience methods which call the constructor with default values for some arguments.
     static new(pattern, type, i, j) { new(pattern, type,  i,  j, "") }
     static new(pattern, type, i)    { new(pattern, type,  i, "", "") }
     static new(pattern, type)       { new(pattern, type, "", "", "") }
     static new(pattern)             { new(pattern,    0, "", "", "") }
- 
+
     // Properties.
     pattern  { _pattern }   // the pattern string
     type     { _type    }   // its type
@@ -646,10 +653,10 @@ class Pattern {
     i        { _i }         // the user defined character class represented by /i
     j        { _j }         // the user defined character class represented by /j
     k        { _k }         // the user defined character class represented by /k
- 
+
     // Checks whether the pattern matches a string or not.
     isMatch(s) { find(s) != null }
- 
+
     // Finds and returns the first match (as a Match object) or null if there are no matches.
     find(s) {
         if (!(s is String)) Fiber.abort("Argument must be a string.")
@@ -678,7 +685,7 @@ class Pattern {
             return m
         }
     }
- 
+
     // Finds and returns all successive non-overlapping matches, if there are any,
     // as a list of Match objects. The list will be empty if there are no matches.
     // To prevent infinite recursion, it stops at (but includes) the first empty match.
@@ -705,7 +712,7 @@ class Pattern {
         }
         return matches
     }
- 
+
     // Replaces up to 'n' successive matches in 's', optionally skipping some of those 'n', by the     
     // replacement string 'repl'. If there are no (or not enough) matches, returns 's' itself.
     // If n <= 1, uses all matches as separators.
@@ -740,10 +747,10 @@ class Pattern {
         }
         return cps.map { |cp| String.fromCodePoint(cp) }.join()
     }
- 
+
     // Convenience version of the above method which replaces all matches.
     replaceAll(s, repl) { replace(s, repl, 0, 0) }
- 
+
     // Splits the string into a list of up to 'n+1' substrings using pattern matches as the separators
     // optionally skipping some of those 'n' separators.
     // If there are no matches returns a list with a single element, 's' itself.
@@ -772,17 +779,17 @@ class Pattern {
         splits.add(cps[prev..-1].map { |cp| String.fromCodePoint(cp) }.join())
         return splits
     }
- 
+
     // Convenience version of the above method which uses all the matches as separators.
     splitAll(s) { split(s, 0, 0) }
- 
+
     // String representation (excluding user defined character classes).
     toString { "{ pattern = %(_pattern), type = %(Pattern.types[_type]), min length = %(_minLen) }" }
 }
- 
+
 // Type aliases for classes in case of any name clashes with other modules.
 var Pattern_Match   = Match
 var Pattern_Capture = Capture
 var Pattern_Pattern = Pattern
- 
+
 Pattern.init_()
