@@ -4,7 +4,7 @@
 
 The following code was extracted from the https://rosettacode.org/wiki/Category:Wren[Rosetta Code's Wren page].
 
-These modules were mainly programmed by https://rosettacode.org/wiki/User:PureFox[@PureFox48]. See link:AUTHORS{AUTHORS}[Authors] for all the contributors.
+These modules were mainly programmed by https://rosettacode.org/wiki/User:PureFox[@PureFox48]. See link:AUTHORS{ext-relative}[Authors] for all the contributors.
 
 This repository will maintain an updated version of such modules without modifications (except for some comments and import paths), for the benefit of the _Wren_ community.
 
