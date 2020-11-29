@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var magicSquareOdd = Fn.new { |n|
     if (n < 3 || n%2 == 0) Fiber.abort("Base must be odd and > 2")

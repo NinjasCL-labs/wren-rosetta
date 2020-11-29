@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 import "random" for Random
 
 // translation of pseudo-code
@@ -62,7 +62,7 @@ var cocktailSort = Fn.new { |a|
                     swapped = true
                 }
             }
-        } 
+        }
         if (!swapped) return
     }
 }

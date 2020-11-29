@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 class Sandpile {
     // 'a' is a list of integers in row order

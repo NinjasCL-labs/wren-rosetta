@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/big" for BigInt, BigInts
+import "/modules/big" for BigInt, BigInts
 
 var primes = [2, 3, 5].map { |p| BigInt.new(p) }.toList
 

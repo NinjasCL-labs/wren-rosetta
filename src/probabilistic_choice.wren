@@ -6,7 +6,7 @@
 // license: MIT
 
 import "random" for Random
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var letters  = ["aleph", "beth", "gimel", "daleth", "he", "waw", "zayin", "heth"]
 var actual   = [0] * 8

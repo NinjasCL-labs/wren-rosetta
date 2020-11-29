@@ -5,10 +5,10 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Conv, Fmt
-import "/math" for Int, Nums
-import "/seq" for Lst
- 
+import "/modules/fmt" for Conv, Fmt
+import "/modules/math" for Int, Nums
+import "/modules/seq" for Lst
+
 class Classification {
     construct new(seq, aliquot) {
         _seq = seq
@@ -19,7 +19,7 @@ class Classification {
 }
 
 var THRESHOLD = 2.pow(47)
-  
+
 var classifySequence = Fn.new { |k|
     if (k <= 0) Fiber.abort("K must be positive")
     var last = k
@@ -39,20 +39,20 @@ var classifySequence = Fn.new { |k|
         if (aliquot != "") return Classification.new(seq, aliquot)
     }
 }
- 
+
 System.print("Aliquot classifications - periods for Sociable/Cyclic in square brackets:\n")
 for (k in 1..10) {
     var c = classifySequence.call(k)
     System.print("%(Fmt.d(2, k)): %(Fmt.s(-15, c.aliquot)) %(c.seq)")
 }
- 
+
 System.print()
 var a = [11, 12, 28, 496, 220, 1184, 12496, 1264460, 790, 909, 562, 1064, 1488]
 for (k in a) {
     var c = classifySequence.call(k)
     System.print("%(Fmt.d(7, k)): %(Fmt.s(-15, c.aliquot)) %(c.seq)")
 }
- 
+
 System.print()
 var k = 15355717786080
 var c = classifySequence.call(k)

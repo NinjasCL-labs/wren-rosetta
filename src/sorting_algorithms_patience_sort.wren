@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/sort" for Cmp
+import "/modules/sort" for Cmp
 
 var patienceSort = Fn.new { |a|
     var size = a.count

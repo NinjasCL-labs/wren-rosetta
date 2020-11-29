@@ -5,10 +5,10 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Int
- 
+import "/modules/math" for Int
+
 var circs = []
- 
+
 var isCircular = Fn.new { |n|
     var nn = n
     var pow = 1 // will eventually contain 10 ^ d where d is number of digits in n
@@ -27,7 +27,7 @@ var isCircular = Fn.new { |n|
     }
     return true
 }
- 
+
 System.print("The first 19 circular primes are:")
 var digits = [1, 3, 7, 9]
 var q = [1, 2, 3, 5, 7, 9]  // queue the numbers to be examined

@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/date" for Date
+import "/modules/fmt" for Fmt
+import "/modules/date" for Date
 
 var isPalDate = Fn.new { |date|
     date = date.format(Date.rawDate)

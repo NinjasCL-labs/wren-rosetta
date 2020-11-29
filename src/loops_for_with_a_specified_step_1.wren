@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/trait" for Stepped
+import "/modules/trait" for Stepped
 
 // Print odd numbers under 20.
 for (i in Stepped.new(1..20, 2)) System.write("%(i) ")

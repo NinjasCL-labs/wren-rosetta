@@ -6,7 +6,7 @@
 // license: MIT
 
 import "io" for Stdin, Stdout
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var getNum = Fn.new { |prompt|
     while (true) {

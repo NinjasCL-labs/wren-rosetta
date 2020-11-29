@@ -6,8 +6,8 @@
 // license: MIT
 
 import "random" for Random
-import "/math" for Nums
-import "/fmt" for Fmt
+import "/modules/math" for Nums
+import "/modules/fmt" for Fmt
 
 var rand = Random.new()
 var minDelta = 1

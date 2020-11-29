@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/str" for Char
-import "/fmt" for Fmt
+import "/modules/str" for Char
+import "/modules/fmt" for Fmt
 
 var getCode = Fn.new { |c|
     return "BFPV".contains(c)     ? "1" :

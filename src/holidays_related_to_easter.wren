@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/date" for Date
-import "/fmt" for Fmt
-import "/trait" for Stepped
+import "/modules/date" for Date
+import "/modules/fmt" for Fmt
+import "/modules/trait" for Stepped
 
 var holidayOffsets = [
     ["Easter", 0],
@@ -52,7 +52,7 @@ var outputHolidays = Fn.new { |year|
 }
 
 System.print("Year  Easter  Ascension  Pentecost  Trinity  C/Christi")
-System.print(" CE   Sunday  Thursday    Sunday    Sunday   Thursday ") 
+System.print(" CE   Sunday  Thursday    Sunday    Sunday   Thursday ")
 System.print("----  ------  ---------  ---------  -------  ---------")
 for (year in Stepped.new(400..2100, 100)) outputHolidays.call(year)
 System.print()

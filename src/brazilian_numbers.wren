@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Int
+import "/modules/math" for Int
 
 var sameDigits = Fn.new { |n, b|
     var f = n % b
@@ -16,7 +16,7 @@ var sameDigits = Fn.new { |n, b|
     }
     return true
 }
- 
+
 var isBrazilian = Fn.new { |n|
     if (n < 7) return false
     if (n%2 == 0 && n >= 8) return true
@@ -25,7 +25,7 @@ var isBrazilian = Fn.new { |n|
     }
     return false
 }
- 
+
 for (kind in [" ", " odd ", " prime "]) {
     System.print("First 20%(kind)Brazilian numbers:")
     var c = 0
@@ -51,11 +51,11 @@ for (kind in [" ", " odd ", " prime "]) {
         }
     }
 }
- 
+
 var c = 0
 var n = 7
 while (c < 1e5) {
     if (isBrazilian.call(n)) c = c + 1
     n = n + 1
-} 
+}
 System.print("The 100,000th Brazilian number: %(n-1)")

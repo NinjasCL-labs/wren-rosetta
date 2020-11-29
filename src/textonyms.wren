@@ -6,9 +6,9 @@
 // license: MIT
 
 import "io" for File
-import "/str" for Char, Str
-import "/sort" for Sort
-import "/fmt" for Fmt
+import "/modules/str" for Char, Str
+import "/modules/sort" for Sort
+import "/modules/fmt" for Fmt
 
 var wordList = "unixdict.txt"
 var DIGITS = "22233344455566677778889999"

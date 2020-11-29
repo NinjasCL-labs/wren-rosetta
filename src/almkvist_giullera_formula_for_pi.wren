@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/big" for BigInt, BigRat
-import "/fmt" for Fmt
+import "/modules/big" for BigInt, BigRat
+import "/modules/fmt" for Fmt
 
 var factorial = Fn.new { |n|
     if (n < 2) return BigInt.one

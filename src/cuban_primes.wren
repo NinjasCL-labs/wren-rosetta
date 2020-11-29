@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var start = System.clock
 var primes = [3, 5]
@@ -18,7 +18,7 @@ var showEach = true
 var u = 0
 var v = 1
 
-for (i in 1...(1<<20)) { 
+for (i in 1...(1<<20)) {
     var found = false
     u = u + 6
     v = v + u

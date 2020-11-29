@@ -6,8 +6,8 @@
 // license: MIT
 
 import "os" for Process
-import "/trait" for Stepped
-import "/str" for Str
+import "/modules/trait" for Stepped
+import "/modules/str" for Str
 
 var luckyOdd  = List.filled(1e5, 0)
 var luckyEven = List.filled(1e5, 0)

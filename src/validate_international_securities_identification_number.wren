@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/str" for Char
-import "/trait" for Stepped
-import "/fmt" for Conv, Fmt
+import "/modules/str" for Char
+import "/modules/trait" for Stepped
+import "/modules/fmt" for Conv, Fmt
 
 var luhn = Fn.new { |s|
     s = s[-1..0]

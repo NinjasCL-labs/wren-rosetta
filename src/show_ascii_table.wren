@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 for (i in 0...16) {
     var j = 32 + i

@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Int
-import "/big" for BigInt
+import "/modules/math" for Int
+import "/modules/big" for BigInt
 
 var MAX = 14
 System.print("The first %(MAX) Mersenne primes are:")

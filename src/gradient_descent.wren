@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Math
-import "/fmt" for Fmt
+import "/modules/math" for Math
+import "/modules/fmt" for Fmt
 
 // Function for which minimum is to be found.
 var g = Fn.new { |x|

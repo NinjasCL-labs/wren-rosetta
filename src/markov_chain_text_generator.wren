@@ -7,7 +7,7 @@
 
 import "io" for File
 import "random" for Random
-import "/str" for Strs
+import "/modules/str" for Strs
 
 var markov = Fn.new { |filePath, keySize, outputSize|
     if (keySize < 1) Fiber.abort("Key size can't be less than 1")

@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/math" for Int
-import "/sort" for Sort
+import "/modules/fmt" for Fmt
+import "/modules/math" for Int
+import "/modules/sort" for Sort
 
 var reportTransitions = Fn.new { |transMap, num|
     var keys = transMap.keys.toList

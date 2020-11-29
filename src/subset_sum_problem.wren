@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 class Item {
     construct new(word, weight) {
@@ -19,7 +19,7 @@ class Item {
     toString {Fmt.swrite("$-11s $4d", _word, _weight) }
 }
 
-var items = [ 
+var items = [
     Item.new("alliance",   -624),
     Item.new("archbishop", -915),
     Item.new("balm",        397),

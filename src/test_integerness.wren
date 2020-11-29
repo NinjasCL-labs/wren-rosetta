@@ -5,10 +5,10 @@
 // author: PureFox
 // license: MIT
 
-import "/big" for BigRat
-import "/complex" for Complex
-import "/rat" for Rat
-import "/fmt" for Fmt
+import "/modules/big" for BigRat
+import "/modules/complex" for Complex
+import "/modules/rat" for Rat
+import "/modules/fmt" for Fmt
 
 var tests1 = [25.000000, 24.999999, 25.000100]
 var tests2 = ["-2.1e120"]

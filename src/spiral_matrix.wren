@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Conv, Fmt
+import "/modules/fmt" for Conv, Fmt
 
 var n = 5
 var top = 0

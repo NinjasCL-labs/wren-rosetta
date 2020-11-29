@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/sort" for Sort
-import "/math" for Int
-import "/fmt" for Fmt
+import "/modules/sort" for Sort
+import "/modules/math" for Int
+import "/modules/fmt" for Fmt
 
 var areSame = Fn.new { |s, t|
     var le = s.count
@@ -49,4 +49,4 @@ for (i in 2...limit) {
         return
     }
 }
-System.print("\nEKG5(5) and EKG(7) do not converge within %(limit) terms.") 
+System.print("\nEKG5(5) and EKG(7) do not converge within %(limit) terms.")

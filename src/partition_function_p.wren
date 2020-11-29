@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/big" for BigInt
+import "/modules/big" for BigInt
 
 var p = []
 var pd = []

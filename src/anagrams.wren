@@ -6,7 +6,7 @@
 // license: MIT
 
 import "io" for File
-import "/sort" for Sort
+import "/modules/sort" for Sort
 
 var words = File.read("unixdict.txt").split("\n").map { |w| w.trim() }
 var wordMap = {}

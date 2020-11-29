@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/math" for Int 
- 
+import "/modules/fmt" for Fmt
+import "/modules/math" for Int
+
 var max = 120
 System.print("The attractive numbers up to and including %(max) are:")
 var count = 0

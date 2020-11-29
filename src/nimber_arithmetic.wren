@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 // Highest power of two that divides a given number.
 var hpo2 = Fn.new { |n| n & (-n) }

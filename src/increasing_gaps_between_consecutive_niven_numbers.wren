@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var newSum // recursive
 newSum = Fn.new {
@@ -39,7 +39,7 @@ var newHarshard = Fn.new {
 
 System.print("Gap    Index of gap   Starting Niven")
 System.print("===   =============   ==============")
-var h = newHarshard.call() 
+var h = newHarshard.call()
 var pg = 0        // previous highest gap
 var pn = h.call() // previous Niven number
 var i = 1

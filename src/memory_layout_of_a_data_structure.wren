@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/seq" for Lst
-import "/fmt" for Fmt
+import "/modules/seq" for Lst
+import "/modules/fmt" for Fmt
 
 var ON  = true
 var OFF = false

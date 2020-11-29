@@ -6,7 +6,7 @@
 // license: MIT
 
 import "random" for Random
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var rand = Random.new()
 

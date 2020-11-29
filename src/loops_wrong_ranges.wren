@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var loop = Fn.new { |start, stop, inc|
     System.write("%(Fmt.v("dm", 3, [start, stop, inc], 0, " ", "[]")) -> ")

@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/pattern" for Pattern
-import "/fmt" for Fmt
+import "/modules/pattern" for Pattern
+import "/modules/fmt" for Fmt
 
 var countSubstring = Fn.new { |str, sub|
     var p = Pattern.new(sub)

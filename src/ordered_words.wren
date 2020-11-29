@@ -6,10 +6,10 @@
 // license: MIT
 
 import "io" for File
-import "/sort" for Sort
+import "/modules/sort" for Sort
 
 var words = File.read("unixdict.txt").split("\n")
-var longestLen = 0 
+var longestLen = 0
 var longest = []
 for (word in words) {
     if (word.count > longestLen) {

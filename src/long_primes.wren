@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/math" for Int
- 
+import "/modules/fmt" for Fmt
+import "/modules/math" for Int
+
 // finds the period of the reciprocal of n
 var findPeriod = Fn.new { |n|
     var r = 1
@@ -19,10 +19,10 @@ var findPeriod = Fn.new { |n|
         r = (10*r) % n
         period = period + 1
         ok = (r != rr)
-    } 
+    }
     return period
 }
- 
+
 var primes = Int.primeSieve(64000).skip(1)
 var longPrimes = []
 for (prime in primes) {
@@ -42,7 +42,7 @@ for (longPrime in longPrimes) {
 totals[-1] = count
 System.print("The long primes up to %(numbers[0]) are: ")
 System.print(longPrimes[0...totals[0]].join(" "))
- 
+
 System.print("\nThe number of long primes up to: ")
 var i = 0
 for (total in totals) {

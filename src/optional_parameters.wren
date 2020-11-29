@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/sort" for Cmp, Sort
+import "/modules/sort" for Cmp, Sort
 
 class TableSorter {
    // uses 'merge' sort to avoid mutating original table
@@ -17,7 +17,7 @@ class TableSorter {
        return sorted
    }
 
-   // overloads to simulate optional parameters 
+   // overloads to simulate optional parameters
    static sort(table)                   { sort(table, null, 0, false) }
    static sort(table, ordering)         { sort(table, ordering, 0, false) }
    static sort(table, ordering, column) { sort(table, ordering, column, false) }

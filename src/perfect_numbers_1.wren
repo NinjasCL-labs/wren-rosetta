@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Int
+import "/modules/math" for Int
 
 var isPerfect = Fn.new { |n|
     if (n <= 2) return false

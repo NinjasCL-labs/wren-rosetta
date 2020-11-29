@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/matrix" for Matrix
+import "/modules/fmt" for Fmt
+import "/modules/matrix" for Matrix
 
 // matrix-matrix element wise ops
 class MM {
@@ -83,7 +83,7 @@ Fmt.mprint(MM.sub(m, m), 2, 0)
 System.print("\nm * m:")
 Fmt.mprint(MM.mul(m, m), 2, 0)
 System.print("\nm / m:")
-Fmt.mprint(MM.div(m, m), 2, 0)     
+Fmt.mprint(MM.div(m, m), 2, 0)
 System.print("\nm ^ m:")
 Fmt.mprint(MM.pow(m, m), 6, 0)
 
@@ -96,7 +96,7 @@ Fmt.mprint(MS.sub(m, s), 2, 0)
 System.print("\nm * s:")
 Fmt.mprint(MS.mul(m, s), 2, 0)
 System.print("\nm / s:")
-Fmt.mprint(MS.div(m, s), 3, 1)     
+Fmt.mprint(MS.div(m, s), 3, 1)
 System.print("\nm ^ s:")
 Fmt.mprint(MS.pow(m, s), 2, 0)
 

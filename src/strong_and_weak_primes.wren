@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Int
-import "/fmt" for Fmt
+import "/modules/math" for Int
+import "/modules/fmt" for Fmt
 
 var primes = Int.primeSieve(1e7 + 19) // next prime above 10 million
 var strong = []

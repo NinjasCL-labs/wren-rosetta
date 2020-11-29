@@ -6,7 +6,7 @@
 // license: MIT
 
 import "io" for File
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var levenshtein = Fn.new { |s, t|
     var ls = s.count
@@ -49,4 +49,4 @@ for (i in 1..3) {
     Fmt.print("Words which are $4.1f\% similar:", similarity)
     System.print(lev[i])
     System.print()
-} 
+}

@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/str" for Str
-import "/pattern" for Pattern
-import "/fmt" for Fmt
+import "/modules/str" for Str
+import "/modules/pattern" for Pattern
+import "/modules/fmt" for Fmt
 
 var fStrs = [["MAC", "MCC"], ["KN", "N"], ["K", "C"], ["PH", "FF"], ["PF", "FF"], ["SCH", "SSS"]]
 var lStrs = [["EE", "Y"], ["IE", "Y"], ["DT", "D"], ["RT", "D"], ["RD", "D"], ["NT", "D"], ["ND", "D"]]

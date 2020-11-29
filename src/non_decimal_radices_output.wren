@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Conv, Fmt
+import "/modules/fmt" for Conv, Fmt
 
 System.print("     2    7    8   10   12   16   32")
 System.print("------ ---- ---- ---- ---- ---- ----")

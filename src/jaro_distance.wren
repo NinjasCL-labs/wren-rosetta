@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var jaro = Fn.new { |s1, s2|
     var le1 = s1.count
@@ -32,7 +32,7 @@ var jaro = Fn.new { |s1, s2|
                 break
             }
             k = k + 1
-        }        
+        }
     }
     if (matches == 0) return 0
     var k = 0

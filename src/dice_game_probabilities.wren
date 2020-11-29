@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Math
+import "/modules/math" for Math
 
 var throwDie // recursive
 throwDie = Fn.new { |nSides, nDice, s, counts|

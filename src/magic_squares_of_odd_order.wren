@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var ms = Fn.new { |n|
     var M = Fn.new { |x| (x + n - 1) % n }

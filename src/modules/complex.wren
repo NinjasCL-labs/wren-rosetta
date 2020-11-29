@@ -7,7 +7,7 @@
 
 /* Module "complex.wren" */
 
-import "/trait" for Cloneable
+import "/modules/trait" for Cloneable
 
 /* Complex represents a complex number of the form 'a + bi' where 'a' and 'b'
    are both Nums. Complex objects are immutable.
@@ -31,13 +31,13 @@ class Complex is Cloneable {
     static zero         { Complex.new_( 0,  0) }
     static one          { Complex.new_( 1,  0) }
     static two          { Complex.new_( 2,  0) }
-    static ten          { Complex.new_(10,  0) } 
+    static ten          { Complex.new_(10,  0) }
     static imagMinusOne { Complex.new_( 0, -1) }
     static imagOne      { Complex.new_( 0,  1) }
     static imagTwo      { Complex.new_( 0,  2) }
     static imagTen      { Complex.new_( 0, 10) }
     static i            { Complex.new_( 0,  1) } // same as imagOne
- 
+
     static pi           { Complex.new_(Num.pi, 0) }
     static e            { Complex.new_(2.71828182845904523536, 0) }
     static phi          { Complex.new_(1.6180339887498948482,  0) } // golden ratio
@@ -138,7 +138,7 @@ class Complex is Cloneable {
     // Constructs a Complex object from polar coordinates (r, theta).
     static fromPolar(r, theta)  {
         if (r.type != Num || theta.type != Num) {
-            Fiber.abort("Arguments must be numbers.")      
+            Fiber.abort("Arguments must be numbers.")
         }
         return Complex.new_(r * theta.cos, r * theta.sin)
     }
@@ -188,7 +188,7 @@ class Complex is Cloneable {
         )
     }
 
-    /(o) { 
+    /(o) {
         o = Complex.check_(o)
         var i = o.inverse
         return Complex.new_(
@@ -306,9 +306,9 @@ class Complex is Cloneable {
     copy() { Complex.new_(_real, _imag ) }
 
     // Equality operators.
-    ==(o) { 
+    ==(o) {
         o = Complex.check_(o)
-        return _real == o.real && _imag == o.imag 
+        return _real == o.real && _imag == o.imag
     }
     !=(o) { !(this == o) }
 
@@ -522,7 +522,7 @@ class CMatrix {
         for (i in 0..._nr) d[i] = _a[i][i]
         return d
     }
- 
+
     // Returns a copy of this instance's 'i'th row (synonym for row(i)).
     [i] { row(i) }
 

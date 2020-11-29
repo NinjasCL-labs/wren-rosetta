@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/trait" for Stepped
+import "/modules/fmt" for Fmt
+import "/modules/trait" for Stepped
 
 var luhn = Fn.new { |s|
     // reverse digits

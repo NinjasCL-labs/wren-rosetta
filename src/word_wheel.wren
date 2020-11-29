@@ -6,8 +6,8 @@
 // license: MIT
 
 import "io" for File
-import "/sort" for Sort, Find
-import "/seq" for Lst
+import "/modules/sort" for Sort, Find
+import "/modules/seq" for Lst
 
 var letters = ["d", "e", "e", "g", "k", "l", "n", "o","w"]
 

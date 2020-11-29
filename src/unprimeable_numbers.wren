@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/math" for Int
+import "/modules/fmt" for Fmt
+import "/modules/math" for Int
 
 System.print("The first 35 unprimeable numbers are:")
 var count = 0                     // counts all unprimeable numbers
@@ -19,7 +19,7 @@ while (countFirst < 10) {
         var le = s.count
         var b = s.bytes.toList
         var outer = false
-        for (j in 0...le) {       
+        for (j in 0...le) {
             for (k in 48..57) {
                 if (s[j].bytes[0] != k) {
                     b[j] = k
@@ -32,7 +32,7 @@ while (countFirst < 10) {
                 }
             }
             if (outer) break
-            b[j] = s[j].bytes[0] // restore j'th digit to what it was originally 
+            b[j] = s[j].bytes[0] // restore j'th digit to what it was originally
         }
         if (!outer) {
             var lastDigit = s[-1].bytes[0] - 48
@@ -48,6 +48,6 @@ while (countFirst < 10) {
     }
     i = i + 1
 }
- 
+
 System.print("The first unprimeable number that ends in:")
 for (i in 0...10) System.print("  %(i) is:  %(Fmt.dc(9, firstNum[i]))")

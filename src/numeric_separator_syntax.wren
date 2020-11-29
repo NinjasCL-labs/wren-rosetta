@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var nums = [1e6, 1e9, 123456789, -123456789012]
 var seps = [",", ".", " ", "*"]

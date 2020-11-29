@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/big" for BigInt
-import "/fmt" for Fmt
+import "/modules/big" for BigInt
+import "/modules/fmt" for Fmt
 
 var branches = 4
 var nMax = 250

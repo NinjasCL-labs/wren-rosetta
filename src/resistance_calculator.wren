@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 class Resistor {
     construct new(symbol, resistance, voltage, a, b) {
@@ -27,10 +27,10 @@ class Resistor {
     }
 
     current { _voltage / res }
-    
+
     effect { current * _voltage }
 
-    voltage=(v) {        
+    voltage=(v) {
         if (_symbol == "+") {
             var ra = _a.res
             var rb = _b.res
@@ -40,8 +40,8 @@ class Resistor {
             _a.voltage = v
             _b.voltage = v
         }
-        _voltage = v 
-    }  
+        _voltage = v
+    }
 
     report(level) {
         Fmt.lprint("$8.3f $8.3f $8.3f $8.3f  $s$s", [res, _voltage, current, effect, level, symbol])

@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/math" for Int, Nums
+import "/modules/fmt" for Fmt
+import "/modules/math" for Int, Nums
 
 var a = List.filled(20000, 0)
 for (i in 1...20000) a[i] = Nums.sum(Int.properDivisors(i))

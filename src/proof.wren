@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 // Represents a natural number.
 class Number {
@@ -30,7 +30,7 @@ class Number {
     // Decrements a natural number.
     static sub1(x) {
         if (x.type != Number) Fiber.abort("Argument must be a Number.")
-        return x.pred 
+        return x.pred
     }
 
     // Counts a natural number i.e returns its integer representation.
@@ -47,7 +47,7 @@ class Number {
     pred { _pred }
     pred=(p) {
         if (p.type != Number) Fiber.abort("Argument must be a Number.")
-        _pred = p 
+        _pred = p
     }
 
     // Tests whether the current instance is zero.

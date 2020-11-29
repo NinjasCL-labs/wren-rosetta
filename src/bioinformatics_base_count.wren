@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/sort" for Sort
-import "/trait" for Stepped
+import "/modules/fmt" for Fmt
+import "/modules/sort" for Sort
+import "/modules/trait" for Stepped
 
 var dna = "CGTAAAAAATTACAACGTCCTTTGGCTATCTCTTAAACTCCTGCTAAATG" +
           "CTCGTGCTTTCCAATTATGTAAGCGTTCCGAGACGGGGTGGTCGATTCTG" +

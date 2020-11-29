@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Math
-import "/fmt" for Fmt
+import "/modules/math" for Math
+import "/modules/fmt" for Fmt
 
 var ndigits = Fn.new { |x|
     var n = 0

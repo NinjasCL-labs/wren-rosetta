@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/sort" for Sort, Find
-import "/math" for Nums
-import "/queue" for PriorityQueue
+import "/modules/sort" for Sort, Find
+import "/modules/math" for Nums
+import "/modules/queue" for PriorityQueue
 
 var lists = [
     [5, 3, 4],

@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/sort" for Find
+import "/modules/sort" for Find
 
 class Pancake {
     construct new(a) {

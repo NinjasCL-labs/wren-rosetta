@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Conv, Fmt
-import "/math" for Int
-  
+import "/modules/fmt" for Conv, Fmt
+import "/modules/math" for Int
+
 var isMagnanimous = Fn.new { |n|
     if (n < 10) return true
     var p = 10
@@ -20,7 +20,7 @@ var isMagnanimous = Fn.new { |n|
     }
     return true
 }
- 
+
 var listMags = Fn.new { |from, thru, digs, perLine|
     if (from < 2) {
         System.print("\nFirst %(thru) magnanimous numbers:")
@@ -40,7 +40,7 @@ var listMags = Fn.new { |from, thru, digs, perLine|
         i = i + 1
     }
 }
- 
+
 listMags.call(1, 45, 3, 15)
 listMags.call(241, 250, 1, 10)
 listMags.call(391, 400, 1, 10)

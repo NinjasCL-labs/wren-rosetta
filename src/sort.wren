@@ -6,7 +6,7 @@
 // license: MIT
 
 /* Module "sort.wren" */
-import "/trait" for Comparable
+import "/modules/trait" for Comparable
 
 /*
    Cmp provides standard comparison methods for use with the Sort and Find classes.
@@ -76,7 +76,7 @@ class Cmp {
                (v is Bool)       ? Cmp.boolDesc       :
                (v is Comparable) ? Cmp.comparableDesc : Cmp.generalDesc
     }
-}   
+}
 
 /*
     Sort contains various sorting methods which may be useful in different scenarios.
@@ -438,7 +438,7 @@ class Find {
         return storeIndex
     }
 
-    // Finds the 'k'th smallest element of an unsorted list according to 'cmp' 
+    // Finds the 'k'th smallest element of an unsorted list according to 'cmp'
     // using the 'quickselect' algorithm. 'k' is zero based.
     static quick(a, k, cmp) {
         Sort.isList_(a)

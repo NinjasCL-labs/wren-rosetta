@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Int
+import "/modules/math" for Int
 
 var yellowstone = Fn.new { |n|
     var m = {}

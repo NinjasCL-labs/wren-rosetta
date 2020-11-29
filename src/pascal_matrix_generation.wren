@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/math" for Int
-import "/matrix" for Matrix
+import "/modules/fmt" for Fmt
+import "/modules/math" for Int
+import "/modules/matrix" for Matrix
 
 var binomial = Fn.new { |n, k|
     if (n == k) return 1

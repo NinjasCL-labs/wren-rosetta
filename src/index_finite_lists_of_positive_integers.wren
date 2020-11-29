@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/big" for BigInt
+import "/modules/big" for BigInt
 
 // Separates each integer in the list with an 'a' then encodes in base 11.
 // Empty list mapped to '-1'.

@@ -5,10 +5,10 @@
 // author: PureFox
 // license: MIT
 
-import "/big" for BigInt
+import "/modules/big" for BigInt
 
-var Const1 = BigInt.fromBaseString("9e3779b97f4a7c15", 16) 
-var Const2 = BigInt.fromBaseString("bf58476d1ce4e5b9", 16) 
+var Const1 = BigInt.fromBaseString("9e3779b97f4a7c15", 16)
+var Const2 = BigInt.fromBaseString("bf58476d1ce4e5b9", 16)
 var Const3 = BigInt.fromBaseString("94d049bb133111eb", 16)
 var Mask64 = (BigInt.one << 64) - BigInt.one
 

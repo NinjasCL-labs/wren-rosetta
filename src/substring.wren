@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/str" for Str
- 
+import "/modules/str" for Str
+
 var s  = "αβγδεζηθ"
 var n = 2
 var m = 3

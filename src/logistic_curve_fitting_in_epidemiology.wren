@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Math
+import "/modules/math" for Math
 
 var K = 7800000000 // approx world population
 var n0 = 27        // number of cases at day 0

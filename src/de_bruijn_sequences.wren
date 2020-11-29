@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/str" for Str
- 
+import "/modules/fmt" for Fmt
+import "/modules/str" for Str
+
 var deBruijn = ""
 for (n in 0..99) {
     var a = Fmt.rjust(2, n, "0")
@@ -23,12 +23,12 @@ for (n in 0..99) {
         }
     }
 }
- 
+
 deBruijn = deBruijn + "000"
 System.print("de Bruijn sequence length: %(deBruijn.count)\n")
 System.print("First 130 characters:\n%(deBruijn[0...130])\n")
 System.print("Last 130 characters:\n%(deBruijn[-130..-1])\n")
-  
+
 var check = Fn.new { |text|
     var res = []
     var found = List.filled(10000, 0)
@@ -57,10 +57,10 @@ var check = Fn.new { |text|
     }
     return res
 }
- 
+
 System.print("Missing 4 digit PINs in this sequence: %(check.call(deBruijn))")
 System.print("Missing 4 digit PINs in the reversed sequence: %(check.call(deBruijn[-1..0]))")
- 
+
 System.print("\n4,444th digit in the sequence: '%(deBruijn[4443])' (setting it to '.')")
 deBruijn = deBruijn[0..4442] + "." + deBruijn[4444..-1]
 System.print("Re-running checks: %(check.call(deBruijn))")

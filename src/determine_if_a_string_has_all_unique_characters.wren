@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Conv, Fmt
+import "/modules/fmt" for Conv, Fmt
 
 var analyze = Fn.new { |s|
     var chars = s.codePoints.toList

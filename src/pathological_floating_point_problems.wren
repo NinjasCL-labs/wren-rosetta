@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/big" for BigRat
-import "/fmt" for Fmt
+import "/modules/big" for BigRat
+import "/modules/fmt" for Fmt
 
 var LIMIT = 100
 var bigE = BigRat.fromDecimal("2.71828182845904523536028747135266249775724709369995")

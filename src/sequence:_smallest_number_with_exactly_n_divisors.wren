@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Int
+import "/modules/math" for Int
 
 var limit = 22
 var numbers = List.filled(limit, 0)

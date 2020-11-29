@@ -6,8 +6,8 @@
 // license: MIT
 
 import "io" for Stdin, Stdout
-import "/fmt" for Fmt
-import "/str" for Str
+import "/modules/fmt" for Fmt
+import "/modules/str" for Str
 
 var units = [
     "tochka", "liniya", "dyuim", "vershok", "piad", "fut",

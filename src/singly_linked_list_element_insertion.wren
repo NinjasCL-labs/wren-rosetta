@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/llist" for LinkedList
+import "/modules/llist" for LinkedList
 
 var ll = LinkedList.new(["A", "B"])
 ll.insertAfter("A", "C")

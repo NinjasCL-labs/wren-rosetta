@@ -6,8 +6,8 @@
 // license: MIT
 
 import "io" for File
-import "/fmt" for Fmt
-import "/sort" for Sort
+import "/modules/fmt" for Fmt
+import "/modules/sort" for Sort
 
 var jaroSim = Fn.new { |s1, s2|
     var le1 = s1.count

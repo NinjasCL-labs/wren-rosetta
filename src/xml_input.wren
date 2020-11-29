@@ -5,10 +5,10 @@
 // author: PureFox
 // license: MIT
 
-import "/pattern" for Pattern
-import "/fmt" for Conv
+import "/modules/pattern" for Pattern
+import "/modules/fmt" for Conv
 
-var xml = 
+var xml =
 "<students>
   <student name="\&quot;April\&quot;" gender="\&quot;F\&quot;" dateofbirth="\&quot;1989-01-02\&quot;"/>
   <student name="\&quot;Bob\&quot;" gender="\&quot;M\&quot;" dateofbirth="\&quot;1990-03-04\&quot;"/>

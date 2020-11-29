@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 // Converts a string of the form "[1, 2]" into a list: [1, 2]
 var asList = Fn.new { |s|
@@ -23,7 +23,7 @@ var mergeMaps = Fn.new { |m1, m2|
 }
 
 // Finds the maximum value in 'dict' and returns the first key
-// it finds (iteration order is undefined) with that value. 
+// it finds (iteration order is undefined) with that value.
 var findMax = Fn.new { |dict|
     var max = -1
     var maxKey = null
@@ -35,7 +35,7 @@ var findMax = Fn.new { |dict|
     }
     return maxKey
 }
-   
+
 var pancake = Fn.new { |len|
     var numStacks = 1
     var goalStack = (1..len).toList.toString

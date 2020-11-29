@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var risesEqualsFalls = Fn.new { |n|
     if (n < 10) return true

@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 Fmt.print("  x | $4d", nums)

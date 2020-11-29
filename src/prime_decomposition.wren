@@ -5,11 +5,11 @@
 // author: PureFox
 // license: MIT
 
-import "/big" for BigInt
-import "/fmt" for Fmt
+import "/modules/big" for BigInt
+import "/modules/fmt" for Fmt
 
 // gets a BigInteger's prime factors
-var primeFactors = Fn.new { |n|    
+var primeFactors = Fn.new { |n|
     if (n.type != BigInt || n < 2) return []
     if (n.isProbablePrime(5)) return [n]
     var inc = [4, 2, 4, 2, 4, 6, 2, 6]

@@ -6,7 +6,7 @@
 // license: MIT
 
 import "os" for Process
-import "/date" for Date
+import "/modules/date" for Date
 
 var args = Process.arguments
 if (args.count != 1) {

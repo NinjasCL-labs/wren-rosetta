@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/pattern" for Pattern
-import "/str" for Str
-import "/upc" for Graphemes
+import "/modules/pattern" for Pattern
+import "/modules/str" for Str
+import "/modules/upc" for Graphemes
 
 var join = Fn.new { |words, seps|
     var lw = words.count
@@ -61,7 +61,7 @@ var printResults = Fn.new { |text, allOpts, allWords|
     }
     System.print()
 }
- 
+
 var text = "Tom? Toms bottom tomato is in his stomach while playing the \"Tom-tom\" brand tom-toms. That's so tom.
 'Tis very tomish, don't you think?"
 var allOpts = ["[w|s|n]", "[w|i|n]", "[p|s|n]", "[p|i|n]", "[p|s|o]", "[p|i|o]"]

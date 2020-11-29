@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var rescale = Fn.new { |v|
     return (v < 0.06) ? 0.10 :

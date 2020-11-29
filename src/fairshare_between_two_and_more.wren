@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/sort" for Sort
+import "/modules/fmt" for Fmt
+import "/modules/sort" for Sort
 
 var fairshare = Fn.new { |n, base|
     var res = List.filled(n, 0)

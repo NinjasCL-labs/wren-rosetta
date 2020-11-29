@@ -6,8 +6,8 @@
 // license: MIT
 
 import "io" for File
-import "/str" for Str
-import "/sort" for Find
+import "/modules/str" for Str
+import "/modules/sort" for Find
 
 var readWords = Fn.new { |fileName|
     var dict = File.read(fileName).split("\n")

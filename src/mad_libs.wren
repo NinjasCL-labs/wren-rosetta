@@ -6,8 +6,8 @@
 // license: MIT
 
 import "io" for Stdin, Stdout
-import "/pattern" for Pattern
-import "/seq" for Lst
+import "/modules/pattern" for Pattern
+import "/modules/seq" for Lst
 
 System.print("Please enter a multi-line story template terminated by a blank line:\n")
 Stdout.flush()

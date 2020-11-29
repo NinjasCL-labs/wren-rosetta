@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/sort" for Sort
-import "/math" for Int
-import "/fmt" for Fmt
+import "/modules/sort" for Sort
+import "/modules/math" for Int
+import "/modules/fmt" for Fmt
 
 // generate derangements of first n numbers, with 'start' in first place.
 var dList = Fn.new { |n, start|

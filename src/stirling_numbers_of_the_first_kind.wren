@@ -5,12 +5,12 @@
 // author: PureFox
 // license: MIT
 
-import "/big" for BigInt
-import "/fmt" for Fmt
+import "/modules/big" for BigInt
+import "/modules/fmt" for Fmt
 
 var computed = {}
 
-var stirling1 // recursive 
+var stirling1 // recursive
 stirling1 = Fn.new { |n, k|
     var key = "%(n),%(k)"
     if (computed.containsKey(key)) return computed[key]

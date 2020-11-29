@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt, Conv
+import "/modules/fmt" for Fmt, Conv
 
 var sumDigits = Fn.new { |n, b|
     var sum = 0

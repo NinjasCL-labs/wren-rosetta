@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Conv, Fmt
-import "/sort" for Sort
+import "/modules/fmt" for Conv, Fmt
+import "/modules/sort" for Sort
 
 var games = ["12", "13", "14", "23", "24", "34"]
 var results = "000000"

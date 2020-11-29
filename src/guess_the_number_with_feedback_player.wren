@@ -6,7 +6,7 @@
 // license: MIT
 
 import "io" for Stdin, Stdout
-import "/str" for Char
+import "/modules/str" for Char
 
 var hle
 var lowest = 1
@@ -21,7 +21,7 @@ while (true) {
         Stdout.flush()
         hle = Char.lower(Stdin.readLine())
         if (hle == "l" && guess == highest) {
-            System.print("It can't be more than %(highest), try again") 
+            System.print("It can't be more than %(highest), try again")
             hle = "i" // signifies invalid
         } else if (hle == "h" && guess == lowest) {
             System.print("It can't be less than %(lowest), try again")

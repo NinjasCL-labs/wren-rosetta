@@ -5,22 +5,22 @@
 // author: PureFox
 // license: MIT
 
-import "/matrix" for Matrix
-import "/fmt" for Fmt
+import "/modules/matrix" for Matrix
+import "/modules/fmt" for Fmt
 
 var arrays = [
     [ [1, 2],
       [3, 4] ],
- 
+
     [ [-2, 2, -3],
       [-1, 1,  3],
       [ 2, 0, -1] ],
- 
+
     [ [ 1,  2,  3,  4],
       [ 4,  5,  6,  7],
       [ 7,  8,  9, 10],
       [10, 11, 12, 13] ],
- 
+
     [ [ 0,  1,  2,  3,  4],
       [ 5,  6,  7,  8,  9],
       [10, 11, 12, 13, 14],
@@ -32,5 +32,5 @@ for (array in arrays) {
     var m = Matrix.new(array)
     Fmt.mprint(m, 2, 0)
     System.print("\nDeterminant: %(m.det)")
-    System.print("Permanent  : %(m.perm)\n") 
+    System.print("Permanent  : %(m.perm)\n")
 }

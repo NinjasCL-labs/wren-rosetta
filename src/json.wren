@@ -4,7 +4,7 @@
 // name: JSON
 // author: PureFox
 // license: MIT
-
+// use https://github.com/brandly/wren-json
 import "/json" for JSON
 
 var s = "{ \"foo\": 1, \"bar\": [ \"10\", \"apples\"] }"

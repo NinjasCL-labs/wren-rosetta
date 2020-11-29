@@ -6,7 +6,7 @@
 // license: MIT
 
 import "random" for Random
-import "/sort" for Sort
+import "/modules/sort" for Sort
 
 var rand = Random.new()
 var vals = List.filled(6, 0)

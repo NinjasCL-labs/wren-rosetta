@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Math
+import "/modules/math" for Math
 
 var EPS = 0.001
 var EPS_SQUARE = EPS * EPS

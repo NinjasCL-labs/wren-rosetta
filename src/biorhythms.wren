@@ -5,12 +5,12 @@
 // author: PureFox
 // license: MIT
 
-import "/date" for Date
-import "/fmt" for Fmt
+import "/modules/date" for Date
+import "/modules/fmt" for Fmt
 
 var cycles = ["Physical day ", "Emotional day", "Mental day   "]
 var lengths = [23, 28, 33]
-var quadrants = [ 
+var quadrants = [
     ["up and rising",    "peak"],
     ["up but falling",   "transition"],
     ["down and falling", "valley"],

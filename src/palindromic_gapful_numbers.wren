@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Conv, Fmt
+import "/modules/fmt" for Conv, Fmt
 
 var reverse = Fn.new { |s|
     var e = 0
@@ -51,12 +51,12 @@ for (d in 1..9) {
         }
         if (next_d) break
         if (nd%2 == 1) pow = pow * 10
-    }    
+    }
 }
 
 for (d in data) {
     var s1 = Fmt.ordinalize(d[0])
-    var s2 = Fmt.ordinalize(d[1]) 
+    var s2 = Fmt.ordinalize(d[1])
     System.print("%(s1) to %(s2) palindromic gapful numbers (> 100) ending with:")
     for (i in 1..9) {
         System.write("%(i): ")

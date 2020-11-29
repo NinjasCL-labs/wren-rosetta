@@ -6,12 +6,12 @@
 // license: MIT
 
 import "random" for Random
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var Rand = Random.new()
 
 class Revolver {
-    construct new() { 
+    construct new() {
         _cylinder = List.filled(6, false)
     }
 

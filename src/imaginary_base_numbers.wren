@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/complex" for Complex
-import "/fmt" for Fmt
+import "/modules/complex" for Complex
+import "/modules/fmt" for Fmt
 
 class QuaterImaginary {
     construct new(b2i) {

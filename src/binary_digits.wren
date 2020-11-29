@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 System.print("Converting to binary:")
 for (i in [5, 50, 9000]) {

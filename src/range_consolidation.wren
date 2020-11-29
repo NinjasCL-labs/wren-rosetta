@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Math
+import "/modules/math" for Math
 
 class Span {
     construct new(r) {
@@ -61,5 +61,5 @@ for (spanList in spanLists) {
             first = first + 1
         }
         System.print(spanList.toString[1..-2])
-    } 
+    }
 }

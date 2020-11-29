@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/str" for Str
-import "/pattern" for Pattern
-import "/fmt" for Fmt
+import "/modules/str" for Str
+import "/modules/pattern" for Pattern
+import "/modules/fmt" for Fmt
 var names = {
     "one": 1,
     "two": 2,

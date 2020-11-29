@@ -5,10 +5,10 @@
 // author: PureFox
 // license: MIT
 
-import "/pattern" for Pattern
+import "/modules/pattern" for Pattern
 
 var elementStr =
-    "hydrogen     helium        lithium     beryllium   boron        carbon "     + 
+    "hydrogen     helium        lithium     beryllium   boron        carbon "     +
     "nitrogen     oxygen        fluorine    neon        sodium       magnesium "  +
     "aluminum     silicon       phosphorous sulfur      chlorine     argon "      +
     "potassium    calcium       scandium    titanium    vanadium     chromium "   +

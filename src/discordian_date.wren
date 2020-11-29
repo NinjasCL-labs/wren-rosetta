@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/date" for Date
-import "/fmt" for Fmt
+import "/modules/date" for Date
+import "/modules/fmt" for Fmt
 
 var seasons  = ["Chaos", "Discord", "Confusion", "Bureaucracy", "The Aftermath"]
 var weekdays = ["Sweetmorn", "Boomtime", "Pungenday", "Prickle-Prickle", "Setting Orange"]

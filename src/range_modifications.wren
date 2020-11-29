@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var rangesAdd = Fn.new { |ranges, n|
     if (ranges.count == 0) {
@@ -87,5 +87,5 @@ for (op in ops) fns[op[0]].call(ranges, op[1])
 ranges = [1..5, 10..25, 27..30]
 ops = [ [add, 26], [add, 9], [add, 7], [remove, 26], [remove, 9], [remove, 7] ]
 Fmt.print("\nStart: $q", standard.call(ranges))
-for (op in ops) fns[op[0]].call(ranges, op[1])  
+for (op in ops) fns[op[0]].call(ranges, op[1])
 

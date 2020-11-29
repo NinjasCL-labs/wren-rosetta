@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var cubLine = Fn.new { |n, dx, dy, cde|
     Fmt.write("$*s", n + 1, cde[0])

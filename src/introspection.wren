@@ -8,8 +8,8 @@
 import "os" for Platform, Process
 import "io" for File
 import "meta" for Meta
-import "/pattern" for Pattern
-import "/math" for Nums
+import "/modules/pattern" for Pattern
+import "/modules/math" for Nums
 
 var a = 4    /* 1st integer variable */
 var b = 0xA  /* 2nd integer variable */

@@ -5,6 +5,6 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt   // imports the Fmt module and makes the 'Fmt' class available
-import "/math" for Int  // imports the Math module and makes the 'Int' class available
+import "/modules/fmt" for Fmt   // imports the Fmt module and makes the 'Fmt' class available
+import "/modules/math" for Int  // imports the Math module and makes the 'Int' class available
 System.print("The maximum safe integer in Wren is %(Fmt.dc(0, Int.maxSafe)).")

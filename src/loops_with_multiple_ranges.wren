@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var prod = 1
 var sum = 0
@@ -22,7 +22,7 @@ var process = Fn.new {
     sum = sum + j.abs
     if (prod.abs < (1 << 27) && j != 0) prod = prod * j
 }
-    
+
 j = -three
 while (j <= 3.pow(3)) {
     process.call()

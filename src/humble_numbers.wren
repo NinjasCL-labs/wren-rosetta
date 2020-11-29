@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/math" for Int, Nums
-import "/sort" for Find
+import "/modules/fmt" for Fmt
+import "/modules/math" for Int, Nums
+import "/modules/sort" for Find
 
 var humble = Fn.new { |n|
     var h = List.filled(n, 0)

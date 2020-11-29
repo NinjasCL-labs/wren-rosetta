@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var showType = Fn.new { |obj|
     System.print("%(Fmt.s(10, obj)) has type %(Fmt.q(obj.type))")

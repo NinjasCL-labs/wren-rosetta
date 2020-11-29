@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/math" for Int
- 
+import "/modules/fmt" for Fmt
+import "/modules/math" for Int
+
 var printHelper = Fn.new { |cat, le, lim, max|
     var cle = Fmt.commatize(le)
     var clim = Fmt.commatize(lim)
@@ -17,7 +17,7 @@ var printHelper = Fn.new { |cat, le, lim, max|
     var verb = (last == 1) ? "is" : "are"
     return [le, last, verb]
 }
- 
+
 var lim = 1000035
 var sv = Int.primeSieve(lim-1, false)
 var pairs = []
@@ -53,18 +53,18 @@ var unwrap = Fn.new { |t|
     n = t[1]
     verb = t[2]
 }
- 
+
 unwrap.call(printHelper.call("pairs", pairs.count, lim, 5))
-System.print("The last %(n) %(verb):\n  %(pairs[le-n..-1])\n")         
- 
+System.print("The last %(n) %(verb):\n  %(pairs[le-n..-1])\n")
+
 unwrap.call(printHelper.call("triplets", trips.count, lim, 5))
 System.print("The last %(n) %(verb):\n  %(trips[le-n..-1])\n")
- 
+
 unwrap.call(printHelper.call("quadruplets", quads.count, lim, 5))
 System.print("The last %(n) %(verb):\n  %(quads[le-n..-1])\n")
- 
+
 unwrap.call(printHelper.call("quintuplets", quins.count, lim, 5))
 System.print("The last %(n) %(verb):\n  %(quins[le-n..-1])\n")
- 
+
 unwrap.call(printHelper.call("unsexy primes", unsexy.count, lim, 10))
 System.print("The last %(n) %(verb):\n  %(unsexy[le-n..-1])\n")

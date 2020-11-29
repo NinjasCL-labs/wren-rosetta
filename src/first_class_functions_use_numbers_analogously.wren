@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var multiplier = Fn.new { |n1, n2| Fn.new { |m| n1 * n2 * m } }
 

@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Conv, Fmt
+import "/modules/fmt" for Conv, Fmt
 
 var isEsthetic = Fn.new { |n, b|
     if (n == 0) return false

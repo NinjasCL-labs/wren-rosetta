@@ -6,7 +6,7 @@
 // license: MIT
 
 import "io" for Stdin, Stdout
-import "/pattern" for Pattern
+import "/modules/pattern" for Pattern
 
 var p = Pattern.new("[,+1/s|+1/s,|+1/s|,]")
 

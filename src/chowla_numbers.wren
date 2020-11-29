@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/math" for Int, Nums
+import "/modules/fmt" for Fmt
+import "/modules/math" for Int, Nums
 
 var chowla = Fn.new { |n| (n > 1) ? Nums.sum(Int.properDivisors(n)) - 1 : 0 }
 

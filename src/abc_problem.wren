@@ -5,14 +5,14 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var r // recursive
 r = Fn.new { |word, bl|
     if (word == "") return true
     var c = word.bytes[0] | 32
     for (i in 0...bl.count) {
-        var b = bl[i] 
+        var b = bl[i]
         if (c == b.bytes[0] | 32 || c == b.bytes[1] | 32) {
             bl[i] = bl[0]
             bl[0] = b

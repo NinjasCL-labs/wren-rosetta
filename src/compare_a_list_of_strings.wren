@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/sort" for Sort
+import "/modules/sort" for Sort
 
 var areEqual = Fn.new { |strings|
     if (strings.count < 2) return true
@@ -13,7 +13,7 @@ var areEqual = Fn.new { |strings|
 }
 
 var areAscending = Fn.new { |strings| Sort.isSorted(strings) }
-    
+
 var a = ["a", "a", "a"]
 var b = ["a", "b", "c"]
 var c = ["a", "a", "b"]

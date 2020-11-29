@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/llist" for LinkedList
+import "/modules/llist" for LinkedList
 
 var ll = LinkedList.new(["dog", "cat", "bear"])
 System.print("Before removals: %(ll)")

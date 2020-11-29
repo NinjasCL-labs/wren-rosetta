@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var mapRange = Fn.new { |x, min, max, minTo, maxTo| (x - min)/(max - min)*(maxTo - minTo) + minTo }
 

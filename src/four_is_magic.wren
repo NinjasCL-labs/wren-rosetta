@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/str" for Str
+import "/modules/str" for Str
 
 var small = ["zero", "one", "two", "three", "four", "five", "six",  "seven", "eight", "nine", "ten", "eleven",
              "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]

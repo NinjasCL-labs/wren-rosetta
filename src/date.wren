@@ -7,13 +7,13 @@
 
 /* Module "date.wren" */
 
-import "/trait" for Comparable
+import "/modules/trait" for Comparable
 
 /*
     Date represents a date (and the time within that date) as the number of milliseconds
-    which have elapsed according to the Gregorian Proleptic calendar since midnight on 
+    which have elapsed according to the Gregorian Proleptic calendar since midnight on
     1st January, 0001. Dates before then or after the year 99,999 are not supported and leap
-    seconds are ignored. It is also possible to store a time zone designator in a Date object even 
+    seconds are ignored. It is also possible to store a time zone designator in a Date object even
     though Wren currently has no direct way of detecting its locale or the current local time.
     A Date object is immutable and its 'number' property can be used as a map key.
 */
@@ -44,9 +44,9 @@ class Date is Comparable {
         __localZone = "UTC"
 
         // Just North America and Europe.
-        __tzs  = { "HST": "-1000", "HDT" : "-0900", "AKST": "-0900", "AKDT": "-0800", "PST": "-0800", 
+        __tzs  = { "HST": "-1000", "HDT" : "-0900", "AKST": "-0900", "AKDT": "-0800", "PST": "-0800",
                    "PDT": "-0700", "MST" : "-0700", "MDT" : "-0600", "CST" : "-0600", "CDT": "-0500",
-                   "EST": "-0500", "EDT" : "-0400", "AST" : "-0400", "ADT" : "-0300", "NST": "-0330", 
+                   "EST": "-0500", "EDT" : "-0400", "AST" : "-0400", "ADT" : "-0300", "NST": "-0330",
                    "NDT": "-0230", "PMST": "-0300", "PMDT": "-0200", "CVT" : "-0100", "UTC": "+0000",
                    "GMT": "+0000", "WET" : "+0000", "WEST": "+0100", "BST" : "+0100", "IST": "+0100",
                    "CET": "+0100", "CEST": "+0200", "EET" : "+0200", "EEST": "+0300", "MSK": "+0300" }
@@ -220,10 +220,10 @@ class Date is Comparable {
         }
        return [hrs, mins]
     }
-     
+
     // Parses a 'full' IS0 8601 string into a Date object, provided that ANY single character
     // separator may be used in place of dash, space, colon or dot and the following parts
-    // may be omitted: the UTC part, the UTC and time parts, the UTC and secs/msecs part or just 
+    // may be omitted: the UTC part, the UTC and time parts, the UTC and secs/msecs part or just
     // the msecs part of the time. Any trailing literal or unparseable text is ignored.
     static parse(str) {
         str = str.trim()
@@ -352,7 +352,7 @@ class Date is Comparable {
                         break
                     }
                 }
-                if (!found) Fiber.abort("Unable to parse day ordinal name.")      
+                if (!found) Fiber.abort("Unable to parse day ordinal name.")
             } else if (f == "h") {
                 if (c < 1 || !(h = sint_(str, 2))) Fiber.abort("Unable to parse hour.")
                 used = "%(h)".count
@@ -413,7 +413,7 @@ class Date is Comparable {
             } else {
                 f = f.replace("\f", "").replace("\v", "|")
                 if (c < f.count) Fiber.abort("Unable to parse literal text.")
-                used = f.count      
+                used = f.count
             }
             str = str[used..-1]
         }
@@ -482,9 +482,9 @@ class Date is Comparable {
     }
 
     // Convenience methods to construct a Date object from a subset of its parameters.
-    static new(y, mo, d, h, mi, s, ms) { Date.new(y, mo, d, h, mi, s, ms, "UTC") } 
-    static new(y, mo, d, h, mi, s)     { Date.new(y, mo, d, h, mi, s,  0, "UTC") } 
-    static new(y, mo, d, h, mi)        { Date.new(y, mo, d, h, mi, 0,  0, "UTC") } 
+    static new(y, mo, d, h, mi, s, ms) { Date.new(y, mo, d, h, mi, s, ms, "UTC") }
+    static new(y, mo, d, h, mi, s)     { Date.new(y, mo, d, h, mi, s,  0, "UTC") }
+    static new(y, mo, d, h, mi)        { Date.new(y, mo, d, h, mi, 0,  0, "UTC") }
     static new(y, mo, d)               { Date.new(y, mo, d, 0,  0, 0,  0, "UTC") }
     static new(y)                      { Date.new(y,  1, 1, 0,  0, 0,  0, "UTC") }
 
@@ -589,7 +589,7 @@ class Date is Comparable {
     // Returns a new date object with the new time zone. Doesn't adjust the time.
     changeZone(newZone) { Date.fromNumber(_num, newZone) }
 
-    // Attempts to adjust the time to a new time zone. If successful, returns a 
+    // Attempts to adjust the time to a new time zone. If successful, returns a
     // new Date object otherwise returns null.
     adjustTime(newZone) {
         if (newZone == _tz) return this // no adjustment needed
@@ -610,7 +610,7 @@ class Date is Comparable {
     // The inherited 'clone' method just returns 'this' as Date objects are immutable.
     // If you need an actual copy use this method instead.
     copy() { Date.fromNumber(_num, _tz) }
- 
+
     // Compares this date with another one to enable comparison operators via Comparable trait.
     compare(other) { (_num - other.number).sign }
 
@@ -699,7 +699,7 @@ class Date is Comparable {
     -(other) { Duration.new(_num - other.number) }
 }
 
-/* 
+/*
     Duration represents a time interval (positive or negative) measured in milliseconds.
     It is immutable and any of its properties can therefore be used as a map key.
 */

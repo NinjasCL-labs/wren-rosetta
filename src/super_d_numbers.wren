@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/big" for BigInt
-import "/fmt" for Fmt
+import "/modules/big" for BigInt
+import "/modules/fmt" for Fmt
 
 var start = System.clock
 var rd = ["22", "333", "4444", "55555", "666666", "7777777", "88888888"]

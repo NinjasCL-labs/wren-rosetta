@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/sort" for Sort
+import "/modules/sort" for Sort
 
 var cmp = Fn.new { |x, y|
     var xy = Num.fromString(x.toString + y.toString)

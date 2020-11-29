@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/str" for Str
+import "/modules/fmt" for Fmt
+import "/modules/str" for Str
 
 var table =
     "add 1  alter 3  backup 2  bottom 1  Cappend 2  change 1  Schange  Cinsert 2  Clast 3 " +
@@ -17,7 +17,7 @@ var table =
     "msg  next 1 overlay 1 parse preserve 4 purge 3 put putD query 1 quit  read recover 3 " +
     "refresh renum 3 repeat 3 replace 1 Creplace 2 reset 3 restore 4 rgtLEFT right 2 left " +
     "2  save  set  shift 2  si  sort  sos  stack 3 status 4 top  transfer 3  type 1  up 1"
- 
+
 var validate = Fn.new { |commands, words, minLens|
     var results = []
     if (words.count == 0) return results

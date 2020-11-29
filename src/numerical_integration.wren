@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var integrate = Fn.new { |a, b, n, f|
     var h = (b - a) / n

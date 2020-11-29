@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Int
+import "/modules/math" for Int
 
 var successivePrimes = Fn.new { |primes, diffs|
     var results = []
@@ -18,7 +18,7 @@ var successivePrimes = Fn.new { |primes, diffs|
             var cont = false
             if (primes[j+1] - primes[j] != diffs[j-i]) {
                 outer = true
-                break             
+                break
             }
             group[j-i+1] = primes[j+1]
         }

@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Conv
+import "/modules/fmt" for Conv
 
 class CRC32 {
     static init() {

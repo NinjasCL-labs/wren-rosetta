@@ -6,7 +6,7 @@
 // license: MIT
 
 import "random" for Random
-import "/math" for Nums
+import "/modules/math" for Nums
 
 var r = Random.new()
 for (i in [100, 1000, 10000]) {

@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var table = [
     [0, 3, 1, 7, 5, 9, 8, 6, 4, 2],

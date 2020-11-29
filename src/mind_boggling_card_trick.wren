@@ -6,7 +6,7 @@
 // license: MIT
 
 import "random" for Random
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var R = 82 // ASCII 'R'
 var B = 66 // ASCII 'B'

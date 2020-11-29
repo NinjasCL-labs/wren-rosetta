@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/set" for Set
+import "/modules/set" for Set
 
 var symmetricDifference = Fn.new { |a, b| a.except(b).union(b.except(a)) }
 

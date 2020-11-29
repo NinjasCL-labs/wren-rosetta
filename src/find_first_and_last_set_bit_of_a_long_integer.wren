@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/big" for BigInt
-import "/fmt" for Fmt
-import "/math" for Math
+import "/modules/big" for BigInt
+import "/modules/fmt" for Fmt
+import "/modules/math" for Math
 
 var rupb = Fn.new { |x| (x is BigInt) ? x.bitLength - 1 : Math.log2(x).floor }
 var rlwb = Fn.new { |x| rupb.call(x & -x) }

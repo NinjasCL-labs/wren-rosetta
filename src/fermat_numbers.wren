@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Int
+import "/modules/math" for Int
 
 var fermat = Fn.new { |n| 2.pow(2.pow(n)) + 1 }
 

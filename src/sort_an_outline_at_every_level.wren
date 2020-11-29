@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/sort" for Sort
-import "/fmt" for Fmt
+import "/modules/sort" for Sort
+import "/modules/fmt" for Fmt
 
 var sortedOutline = Fn.new { |originalOutline, ascending|
     var outline = originalOutline.toList // make copy in case we mutate it

@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 // 'cpx' returns integer index from 0 to 31 corresponding to compass point.
 // Input heading h is in degrees.  Note this index is a zero-based index
@@ -13,7 +13,7 @@ import "/fmt" for Fmt
 // and is not the same as the index specified to be printed in the output.
 var cpx = Fn.new { |h|
     var x = (h/11.25+0.5).floor % 32
-    if (x < 0) x = x + 32 
+    if (x < 0) x = x + 32
     return x
 }
 

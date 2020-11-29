@@ -7,10 +7,10 @@
 
 /* Module "rat.wren" */
 
-import "/trait" for Comparable
+import "/modules/trait" for Comparable
 
 /* Rat represents a rational number as an integral numerator and (non-zero) denominator
-   expressed in their lowest terms. Rat objects are immutable. 
+   expressed in their lowest terms. Rat objects are immutable.
 */
 class Rat is Comparable {
     // Maximum safe rational number = 2^53 - 1.
@@ -139,7 +139,7 @@ class Rat is Comparable {
     // Basic properties.
     num        { _n }                // numerator
     den        { _d }                // denominator
-    ratio      { [_n, _d] }          // a two element list of the above    
+    ratio      { [_n, _d] }          // a two element list of the above
     isInteger  { toFloat.isInteger } // checks if integral or not
     isPositive { _n > 0 }            // checks if positive
     isNegative { _n < 0 }            // checks if negative
@@ -190,7 +190,7 @@ class Rat is Comparable {
     // The inherited 'clone' method just returns 'this' as Rat objects are immutable.
     // If you need an actual copy use this method instead.
     copy() { Rat.new(_n, _d) }
- 
+
     // Compares this Rat with another one to enable comparison operators via Comparable trait.
     compare(other) {
         if ((other is Num) && other.isInfinity) return -other.sign

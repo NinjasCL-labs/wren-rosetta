@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/sort" for Sort
-import "/trait" for Comparable, Stepped
+import "/modules/sort" for Sort
+import "/modules/trait" for Comparable, Stepped
 
 class Point is Comparable {
     construct new(x, y) {

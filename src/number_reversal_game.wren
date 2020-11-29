@@ -6,7 +6,7 @@
 // license: MIT
 
 
-import "/sort" for Sort
+import "/modules/sort" for Sort
 import "random" for Random
 import "io" for Stdin, Stdout
 

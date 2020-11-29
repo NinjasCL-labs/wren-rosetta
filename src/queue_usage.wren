@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/queue" for Queue
+import "/modules/queue" for Queue
 
 var q = Queue.new()
 q.push(1)

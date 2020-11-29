@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/queue" for PriorityQueue
+import "/modules/queue" for PriorityQueue
 
 var tasks = PriorityQueue.new()
 tasks.push("Clear drains", 3)

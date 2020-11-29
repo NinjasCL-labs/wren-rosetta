@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/seq" for Stack
+import "/modules/seq" for Stack
 
 var s = Stack.new()
 s.push(1)

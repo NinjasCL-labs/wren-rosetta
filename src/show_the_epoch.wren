@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/date" for Date
+import "/modules/date" for Date
 
 Date.default = Date.isoFull
 var dt = Date.fromNumber(0)

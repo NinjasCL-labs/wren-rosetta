@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/math" for Int
- 
+import "/modules/fmt" for Fmt
+import "/modules/math" for Int
+
 var catalan = Fn.new { |n|
     if (n < 0) Fiber.abort("Argument must be a non-negative integer")
     var prod = 1

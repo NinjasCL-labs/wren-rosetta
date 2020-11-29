@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt, Conv
-import "/str" for Str
+import "/modules/fmt" for Fmt, Conv
+import "/modules/str" for Str
 
 var toOctets = Fn.new { |n|
     var s = Conv.itoa(n, 2)

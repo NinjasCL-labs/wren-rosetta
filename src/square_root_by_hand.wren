@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/big" for BigInt
+import "/modules/big" for BigInt
 
 var sqrt = Fn.new { |n, limit|
     if (n < 0) Fiber.abort("Number cannot be negative.")
@@ -52,10 +52,10 @@ var sqrt = Fn.new { |n, limit|
 
 var numbers = [2, 0.2, 10.89, 625, 0.0001]
 var digits = [500, 80, 8, 8, 8]
-var i = 0 
+var i = 0
 for (n in numbers) {
     System.print("First %(digits[i]) significant digits (at most) of the square root of %(n):")
-    sqrt.call(n, digits[i]) 
+    sqrt.call(n, digits[i])
     System.print()
     i = i + 1
 }

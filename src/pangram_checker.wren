@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/str" for Str
+import "/modules/str" for Str
 
 var isPangram = Fn.new { |s|
     s = Str.lower(s)

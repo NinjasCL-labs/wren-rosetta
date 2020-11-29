@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Int
-import "/fmt" for Fmt
-import "/big" for BigInt
+import "/modules/math" for Int
+import "/modules/fmt" for Fmt
+import "/modules/big" for BigInt
 
 var hickerson = Fn.new { |n|
     var fact = BigInt.new(Int.factorial(n)) // accurate up to n == 18

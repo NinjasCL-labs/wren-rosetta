@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/big" for BigInt, BigRat
-import "/fmt" for Fmt
+import "/modules/big" for BigInt, BigRat
+import "/modules/fmt" for Fmt
 
 var names = ["Platinum", "Golden", "Silver", "Bronze", "Copper","Nickel", "Aluminium", "Iron", "Tin", "Lead"]
 

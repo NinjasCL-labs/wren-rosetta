@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/sort" for Sort
-import "/fmt" for Fmt
+import "/modules/sort" for Sort
+import "/modules/fmt" for Fmt
 
 class Term {
     construct new(coeff, ix1, ix2) {

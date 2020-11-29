@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/complex" for Complex, CMatrix
-import "/fmt" for Fmt
+import "/modules/complex" for Complex, CMatrix
+import "/modules/fmt" for Fmt
 
 var cm1 = CMatrix.new(
     [

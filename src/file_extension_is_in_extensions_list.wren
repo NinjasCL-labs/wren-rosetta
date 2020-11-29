@@ -5,14 +5,14 @@
 // author: PureFox
 // license: MIT
 
-import "/str" for Str
-import "/fmt" for Fmt
+import "/modules/str" for Str
+import "/modules/fmt" for Fmt
 
 var exts = ["zip", "rar", "7z", "gz", "archive", "A##", "tar.bz2"]
 
 var tests = [
     "MyData.a##", "MyData.tar.Gz", "MyData.gzip" , "MyData.7z.backup",
-    "MyData...", "MyData", "MyData_v1.0.tar.bz2", "MyData_v1.0.bz2" 
+    "MyData...", "MyData", "MyData_v1.0.tar.bz2", "MyData_v1.0.bz2"
 ]
 
 var ucExts = exts.map { |e| "." + Str.upper(e) }

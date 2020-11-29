@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/big" for BigInt
+import "/modules/big" for BigInt
 
 var Const  = BigInt.fromBaseString("2545F4914F6CDD1D", 16)
 var Mask64 = (BigInt.one << 64) - BigInt.one
@@ -19,7 +19,7 @@ class XorshiftStar {
     seed(num) { _state = num & Mask64}
 
     nextInt {
-        var x = _state 
+        var x = _state
         x = (x ^ (x >> 12)) & Mask64
         x = (x ^ (x << 25)) & Mask64
         x = (x ^ (x >> 27)) & Mask64

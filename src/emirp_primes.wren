@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Int
+import "/modules/math" for Int
 
 var isEmirp = Fn.new{ |n|
     if (!Int.isPrime(n)) return false

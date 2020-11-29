@@ -6,9 +6,9 @@
 // license: MIT
 
 import "io" for File
-import "/pattern" for Pattern
-import "/seq" for Lst
-import "/fmt" for Fmt
+import "/modules/pattern" for Pattern
+import "/modules/seq" for Lst
+import "/modules/fmt" for Fmt
 
 var p = Pattern.new("+1/s")
 var lines = File.read("days_of_week.txt").split("\n").map { |l| l.trim() }

@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/str" for Str
+import "/modules/str" for Str
 
 var compareStrings = Fn.new { |a, b, sens|
     System.write("Comparing '%(a)' and '%(b)', ")

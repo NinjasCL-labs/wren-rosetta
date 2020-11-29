@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/math" for Math
+import "/modules/fmt" for Fmt
+import "/modules/math" for Math
 
 var stirling = Fn.new { |x| (2 * Num.pi / x).sqrt * (x / Math.e).pow(x) }
 

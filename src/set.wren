@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/set" for Set
+import "/modules/set" for Set
 
 var fruits = Set.new(["apple", "pear", "orange", "banana"])
 System.print("fruits  : %(fruits)")

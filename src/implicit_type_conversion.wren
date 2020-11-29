@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/big" for BigInt
+import "/modules/big" for BigInt
 
 var b1 = BigInt.new(32)
 var b2 = BigInt.new ("64")

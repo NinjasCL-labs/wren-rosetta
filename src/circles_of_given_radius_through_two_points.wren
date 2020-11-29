@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Math
+import "/modules/math" for Math
 
 var Two  = "Two circles."
 var R0   = "R == 0 does not describe circles."

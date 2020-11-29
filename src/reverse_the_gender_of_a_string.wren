@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/str" for Char
+import "/modules/str" for Char
 
 var swaps = {
     "She": "He", "she": "he", "Her": "His", "her": "his", "hers": "his", "He": "She",

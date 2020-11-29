@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var utf8_encode = Fn.new { |cp| String.fromCodePoint(cp).bytes.toList }
 

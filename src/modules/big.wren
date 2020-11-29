@@ -7,7 +7,7 @@
 
 /* Module "big.wren" */
 
-import "/trait" for Comparable
+import "/modules/trait" for Comparable
 import "random" for Random
 
 /*
@@ -89,7 +89,7 @@ class BigInt is Comparable {
         }
         return [one, 0]
     }
- 
+
     // Private method to determine whether a number is a small integer or not.
     static isSmall_(n) { (n is Num) && n.isInteger && n.abs <= __maxSmall }
 
@@ -408,7 +408,7 @@ class BigInt is Comparable {
                 }
                 borrow = borrow + carry
             }
-            result[shift] = quotDigit            
+            result[shift] = quotDigit
             shift = shift - 1
         }
         // denormalization
@@ -797,7 +797,7 @@ class BigInt is Comparable {
          if (value is String) {
              var res = BigInt.parseString_(value)
              _value  = res[0]
-             _signed = res[1]                 
+             _signed = res[1]
          } else {
              _value = value
              _signed = value < 0
@@ -808,7 +808,7 @@ class BigInt is Comparable {
     static fromBaseString(s, base) {
         if (!(s is String)) Fiber.abort("Value must be a numeric string in the given base.")
         if (!((base is Num) && base.isInteger && base >= 2 && base <= 36)) {
-            Fiber.abort("Base must be an integer between 2 and 36.")            
+            Fiber.abort("Base must be an integer between 2 and 36.")
         }
         if (base == 10) return BigInt.new(s)
         return parseBase_(s, base)
@@ -998,7 +998,7 @@ class BigInt is Comparable {
         }
         return r
     }
- 
+
     // Returns a list containing the quotient and the remainder after dividing the current instance
     // by a BigInt. The sign of the remainder will match the sign of the dividend.
     divMod(n) {
@@ -1116,7 +1116,7 @@ class BigInt is Comparable {
         return BigInt.subtractSmall_(value, 1, _signed)
     }
 
-    // Bitwise operators. The operands are treated as if they were represented 
+    // Bitwise operators. The operands are treated as if they were represented
     // using two's complement representation.
     ~     { (-this).dec }
     &(n)  { BigInt.bitwise_(this, n, Fn.new { |a, b| a & b }) }
@@ -1198,7 +1198,7 @@ class BigInt is Comparable {
         return BigInt.new(BigInt.integerLogarithm_(n, BigInt.two)[1]) + BigInt.one
     }
 
-     // Returns true if the 'n'th bit of the current instance is set or false otherwise. 
+     // Returns true if the 'n'th bit of the current instance is set or false otherwise.
     testBit(n) {
         if (n.type != Num || !n.isInteger || n < 0) Fiber.abort("Argument must be a non-negative integer.")
         return (this >> n) & BigInt.one != BigInt.zero
@@ -1475,7 +1475,7 @@ class BigRat is Comparable {
         var sqtd = (powd.square * _n / _d).isqrt
         return BigRat.new(sqtd, powd)
     }
-   
+
     // Convenience version of the above method which uses 14 decimal places.
     sqrt { sqrt(14) }
 
@@ -1488,7 +1488,7 @@ class BigRat is Comparable {
     // The inherited 'clone' method just returns 'this' as BigRat objects are immutable.
     // If you need an actual copy use this method instead.
     copy() { BigRat.new(_n, _d) }
- 
+
     // Compares this BigRat with another one to enable comparison operators via Comparable trait.
     compare(other) {
         if ((other is Num) && other.isInfinity) return -other.sign
@@ -1512,7 +1512,7 @@ class BigRat is Comparable {
     toInt { this.toFloat.truncate }
 
     // Returns the decimal representation of this BigRat object to 'digits' decimal places.
-    // If 'rounded' is true, the value is rounded to that number of places with halves 
+    // If 'rounded' is true, the value is rounded to that number of places with halves
     // being rounded away from zero. Otherwise the value is truncated to that number of places.
     // If 'zfill' is true, any unfilled decimal places are filled with zeros.
     toDecimal(digits, rounded, zfill) {
@@ -1520,7 +1520,7 @@ class BigRat is Comparable {
             Fiber.abort("Digits must be a non-negative integer")
         }
         if (rounded.type != Bool) Fiber.abort("Rounded must be true or false.")
-        if (zfill.type != Bool) Fiber.abort("Zfill must be true or false.")        
+        if (zfill.type != Bool) Fiber.abort("Zfill must be true or false.")
         var qr = _n.divMod(_d)
         var intPart = qr[0].toString
         if (this.isNegative && qr[0] == 0) intPart = "-" + intPart
@@ -1543,7 +1543,7 @@ class BigRat is Comparable {
             decPart = decPart.trimEnd("0")
         }
         if (digits < 1) decPart = ""
-        if (decPart == "") return intPart + (zfill ? "." + ("0" * digits) : "") 
+        if (decPart == "") return intPart + (zfill ? "." + ("0" * digits) : "")
         return intPart + "." + decPart + (zfill ? ("0" * (digits - decPart.count)) : "")
     }
 

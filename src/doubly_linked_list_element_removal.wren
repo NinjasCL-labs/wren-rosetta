@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/llist" for DLinkedList
+import "/modules/llist" for DLinkedList
 
 var dll = DLinkedList.new(["dog", "cat", "bear"])
 System.print("Before removals: %(dll)")

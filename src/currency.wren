@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/big" for BigRat
+import "/modules/big" for BigRat
 
 var hamburgers     = BigRat.new("4000000000000000")
 var milkshakes     = BigRat.two

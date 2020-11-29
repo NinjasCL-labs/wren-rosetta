@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/str" for Str
+import "/modules/str" for Str
 
 for (word in ["asdf", "josé", "møøse", "was it a car or a cat I saw", "😀🚂🦊"]) {
     System.print(Str.reverse(word))

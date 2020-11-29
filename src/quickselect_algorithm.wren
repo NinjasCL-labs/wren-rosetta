@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/sort" for Find
+import "/modules/sort" for Find
 
 var a = [9, 8, 7, 6, 5, 0, 1, 2, 3, 4]
 for (k in 0..9) {

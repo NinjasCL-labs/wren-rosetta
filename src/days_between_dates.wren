@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/date" for Date
+import "/modules/date" for Date
 
 var datePairs = [
     ["1995-11-21", "1995-11-21"],

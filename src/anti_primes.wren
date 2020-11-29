@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Int
+import "/modules/math" for Int
 
 System.print("The first 20 anti-primes are:")
 var maxDiv = 0

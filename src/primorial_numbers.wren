@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/big" for BigInt
-import "/math" for Int
-import "/fmt" for Fmt
+import "/modules/big" for BigInt
+import "/modules/math" for Int
+import "/modules/fmt" for Fmt
 
 var vecprod = Fn.new { |primes|
     var le = primes.count

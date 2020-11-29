@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var jacobi = Fn.new { |a, n|
     if (!n.isInteger || n <= 0 || n%2 == 0) {

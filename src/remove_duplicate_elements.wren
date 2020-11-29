@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/sort" for Sort
+import "/modules/sort" for Sort
 
 // Using a map - order of distinct items is undefined.
 var removeDuplicates1 = Fn.new { |a|
@@ -35,7 +35,7 @@ var removeDuplicates3 = Fn.new { |a|
         while(j < a.count) {
             if (a[i] == a[j]) {
                 a.removeAt(j)
-            } else { 
+            } else {
                 j = j + 1
             }
         }

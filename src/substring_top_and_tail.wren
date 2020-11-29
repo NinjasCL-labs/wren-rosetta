@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/str" for Str
+import "/modules/str" for Str
 
 var a = "Beyoncé"
 var b = Str.delete(a, 0)

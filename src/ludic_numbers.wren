@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var ludic = Fn.new { |n, max|
     var maxInt32 = 2.pow(31) - 1
@@ -54,7 +54,7 @@ var has = Fn.new { |x, v|
     return false
 }
 
-System.print("First 25: %(ludic.call(25, -1))") 
+System.print("First 25: %(ludic.call(25, -1))")
 System.print("Number of Ludics below 1000: %(ludic.call(-1, 1000).count)")
 System.print("Ludics 2000 to 2005: %(ludic.call(2005, -1)[1999..-1])")
 System.print("Triplets below 250:")

@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/sort" for Sort
+import "/modules/sort" for Sort
 
 var as = [
     [4, 65, 2, -31, 0, 99, 2, 83, 782, 1],

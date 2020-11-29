@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/matrix" for Matrix
-import "/fmt" for Fmt
+import "/modules/matrix" for Matrix
+import "/modules/fmt" for Fmt
 
 var m = Matrix.new([
     [ 1,  2,  3],

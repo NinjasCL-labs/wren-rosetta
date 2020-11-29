@@ -6,7 +6,7 @@
 // license: MIT
 
 import "io" for Stdin, Stdout
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var f = Fn.new { |x| x.abs.sqrt + 5*x*x*x }
 

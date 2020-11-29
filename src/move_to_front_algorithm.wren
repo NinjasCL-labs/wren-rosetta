@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt 
-import "/seq" for Lst
+import "/modules/fmt" for Fmt
+import "/modules/seq" for Lst
 
 var encode = Fn.new { |s|
     if (s.isEmpty) return []

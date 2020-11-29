@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Int
-import "/big" for BigInt, BigInts
+import "/modules/math" for Int
+import "/modules/big" for BigInt, BigInts
 
 // cache all primes up to 521
 var smallPrimes = Int.primeSieve(521)

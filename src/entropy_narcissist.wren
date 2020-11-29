@@ -7,7 +7,7 @@
 
 import "os" for Process
 import "io" for File
-import "/math" for Math
+import "/modules/math" for Math
 
 var args = Process.allArguments
 var s = File.read(args[1]).trim()

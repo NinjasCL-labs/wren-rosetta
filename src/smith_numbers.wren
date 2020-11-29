@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Int
-import "/fmt" for Fmt
-import "/seq" for Lst
+import "/modules/math" for Int
+import "/modules/fmt" for Fmt
+import "/modules/seq" for Lst
 
 var sumDigits = Fn.new { |n|
     var sum = 0

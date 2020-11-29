@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var bellTriangle = Fn.new { |n|
     var tri = List.filled(n, [])

@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var starts = [1e2, 1e6, 1e7, 1e9, 7123]
 var counts = [30, 15, 15, 10, 25]

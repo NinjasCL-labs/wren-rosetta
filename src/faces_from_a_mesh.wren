@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/sort" for Sort
-import "/fmt" for Fmt
+import "/modules/sort" for Sort
+import "/modules/fmt" for Fmt
 
 // Assumes s1, s2 are of same length.
 var sliceEqual = Fn.new { |s1, s2|
@@ -75,7 +75,7 @@ var faceToPerim = Fn.new { |face|
                 found = true
             } else if (e[1] == last) {
                 perim.add(e[0])
-                last = e[0]  
+                last = e[0]
                 found = true
             }
             if (found) {

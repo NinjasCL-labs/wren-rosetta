@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/date" for Date
-import "/seq" for Lst
+import "/modules/date" for Date
+import "/modules/seq" for Lst
 
 var dates = []
 var years = []

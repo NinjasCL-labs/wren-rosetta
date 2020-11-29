@@ -6,7 +6,7 @@
 // license: MIT
 
 import "io" for File
-import "/sort" for Sort
+import "/modules/sort" for Sort
 
 // assumes w1 and w2 are anagrams of each other
 var isDeranged = Fn.new { |w1, w2|

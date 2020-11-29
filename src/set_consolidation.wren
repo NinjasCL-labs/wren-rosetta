@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/set" for Set
+import "/modules/set" for Set
 
 var consolidateSets = Fn.new { |sets|
     var size = sets.count

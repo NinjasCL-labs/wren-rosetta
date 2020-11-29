@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Int
-import "/fmt" for Fmt
-import "/big" for BigRat
+import "/modules/math" for Int
+import "/modules/fmt" for Fmt
+import "/modules/big" for BigRat
 
 var hickerson = Fn.new { |n|
     var fact = BigRat.new(Int.factorial(n))

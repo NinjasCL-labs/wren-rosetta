@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/pattern" for Pattern
+import "/modules/pattern" for Pattern
 
 var t =
     "     Sample Text\n\n" +

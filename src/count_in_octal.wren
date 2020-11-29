@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Conv
+import "/modules/fmt" for Conv
 
 var i = 0
 while (true) {

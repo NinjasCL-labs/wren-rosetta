@@ -5,10 +5,10 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Int
-import "/trait" for Stepped
-import "/fmt" for Fmt
-import "/rat" for Rat
+import "/modules/math" for Int
+import "/modules/trait" for Stepped
+import "/modules/fmt" for Fmt
+import "/modules/rat" for Rat
 
 var f //recursive
 f = Fn.new { |l, r, n|

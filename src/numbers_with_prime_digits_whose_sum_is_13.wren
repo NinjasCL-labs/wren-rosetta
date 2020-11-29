@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Nums
-import "/seq" for Lst
-import "/sort" for Sort
+import "/modules/math" for Nums
+import "/modules/seq" for Lst
+import "/modules/sort" for Sort
 
 var combrep // recursive
 combrep = Fn.new { |n, lst|

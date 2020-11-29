@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/sort" for Sort
+import "/modules/sort" for Sort
 
 // sorts values in place, leaves indices unsorted
 var sortDisjoint = Fn.new { |values, indices|

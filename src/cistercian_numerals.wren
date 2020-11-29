@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
-var n  
+var n
 
 var init = Fn.new {
     n = List.filled(15, null)

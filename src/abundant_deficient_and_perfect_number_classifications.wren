@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Int, Nums
+import "/modules/math" for Int, Nums
 
 var d = 0
 var a = 0

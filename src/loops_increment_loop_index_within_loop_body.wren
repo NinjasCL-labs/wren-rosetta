@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var isPrime = Fn.new { |n|
     if (n < 2 || !n.isInteger) return false
@@ -27,7 +27,7 @@ while (count < 42) {
     if (isPrime.call(i)) {
         count = count + 1
         System.print("%(Fmt.d(2, count)): %(Fmt.dc(18, i))")
-        i = 2 * i - 1        
+        i = 2 * i - 1
     }
     i = i + 1
 }

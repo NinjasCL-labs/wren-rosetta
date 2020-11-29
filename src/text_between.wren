@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var textBetween = Fn.new { |str, start, end|
     if (!((start is String) && start != "") && !((end is String) && end != "")) {

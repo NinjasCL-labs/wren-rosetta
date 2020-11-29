@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/sort" for Sort
-import "/fmt" for Fmt
-import "/date" for Date
+import "/modules/sort" for Sort
+import "/modules/fmt" for Fmt
+import "/modules/date" for Date
 
 class Z2 {
     construct new(value, hasValue) {

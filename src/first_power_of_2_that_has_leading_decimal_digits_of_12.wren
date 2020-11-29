@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/math" for Math
+import "/modules/fmt" for Fmt
+import "/modules/math" for Math
 
 var ld10 = Math.ln2 / Math.ln10
 

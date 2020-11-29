@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Math
-import "/fmt" for Fmt
+import "/modules/math" for Math
+import "/modules/fmt" for Fmt
 
 var i = 1
 var sqnc = []  // squares not cubes

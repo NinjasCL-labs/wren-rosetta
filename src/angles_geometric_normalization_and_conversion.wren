@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var d2d = Fn.new { |d| d % 360 }
 var g2g = Fn.new { |g| g % 400 }

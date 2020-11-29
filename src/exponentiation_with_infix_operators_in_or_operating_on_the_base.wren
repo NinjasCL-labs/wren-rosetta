@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 class Num2 {
     construct new(n) { _n = n }
@@ -22,7 +22,7 @@ class Num2 {
     toString { _n.toString }
 }
 
-var ops = ["-x^p", "-(x)^p", "(-x)^p", "-(x^p)"]  
+var ops = ["-x^p", "-(x)^p", "(-x)^p", "-(x^p)"]
 for (x in [Num2.new(-5), Num2.new(5)]) {
     for (p in [Num2.new(2), Num2.new(3)]) {
         Fmt.write("x = $2s p = $s | ", x, p)

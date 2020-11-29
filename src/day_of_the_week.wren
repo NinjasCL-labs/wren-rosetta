@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/date" for Date
+import "/modules/date" for Date
 
 System.print("Years between 2008 and 2121 when 25th December falls on Sunday:")
 for (year in 2008..2121) {

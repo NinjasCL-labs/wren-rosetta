@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/math" for Int
+import "/modules/fmt" for Fmt
+import "/modules/math" for Int
 
 var limit = 999999
 var c = Int.primeSieve(limit, false)

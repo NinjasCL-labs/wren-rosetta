@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/math" for Nums
+import "/modules/fmt" for Fmt
+import "/modules/math" for Nums
 
 var cumStdDev = Fiber.new { |a|
     for (i in 0...a.count) {

@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/sort" for Sort
+import "/modules/sort" for Sort
 
 var fourFaceCombs = Fn.new {
     var res = []
@@ -33,7 +33,7 @@ var cmp = Fn.new { |x, y|
     var yw = 0
     for (i in 0..3) {
         for (j in 0..3) {
-            if (x[i] > y[j]) { 
+            if (x[i] > y[j]) {
                 xw = xw + 1
             } else if (y[j] > x[i]) {
                 yw = yw + 1

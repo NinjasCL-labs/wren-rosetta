@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/big" for BigInt
+import "/modules/fmt" for Fmt
+import "/modules/big" for BigInt
 
 var b10 = Fn.new { |n|
     if (n == 1) {

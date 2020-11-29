@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/big" for BigInt
-import "/math" for Math
-import "/fmt" for Fmt
+import "/modules/big" for BigInt
+import "/modules/math" for Math
+import "/modules/fmt" for Fmt
 
 var pierpont = Fn.new { |n, first|
     var p = [ List.filled(n, null), List.filled(n, null) ]

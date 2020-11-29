@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/trait" for Stepped
-import "/math" for Math
+import "/modules/fmt" for Fmt
+import "/modules/trait" for Stepped
+import "/modules/math" for Math
 
 var euler = Fn.new { |f, y, step, end|
     Fmt.write(" Step $2d: ", step)

@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Int, Nums
-import "/trait" for Stepped
+import "/modules/math" for Int, Nums
+import "/modules/trait" for Stepped
 
 var semiperfect // recursive
 semiperfect = Fn.new { |n, divs|

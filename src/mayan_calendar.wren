@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/date" for Date
-import "/fmt" for Fmt
+import "/modules/date" for Date
+import "/modules/fmt" for Fmt
 
 var sacred = "Imix’ Ik’ Ak’bal K’an Chikchan Kimi Manik’ Lamat Muluk Ok Chuwen Eb Ben Hix Men K’ib’ Kaban Etz’nab’ Kawak Ajaw".split(" ")
 

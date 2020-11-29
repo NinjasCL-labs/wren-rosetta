@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/str" for Char, Str
+import "/modules/fmt" for Fmt
+import "/modules/str" for Char, Str
 
 var atomicMass = {
     "H":   1.008,

@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 // create a 4 dimensional list of the required size and initialize successive elements to the values 1 to 120
 var m = 1

@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
-import "/big" for BigInt
+import "/modules/fmt" for Fmt
+import "/modules/big" for BigInt
 
 // functions to convert to and from the word format 'W00000'
 var toWord   = Fn.new { |w| Fmt.swrite("W$05d", w) }

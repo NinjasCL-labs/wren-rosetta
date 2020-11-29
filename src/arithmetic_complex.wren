@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/complex" for Complex
+import "/modules/complex" for Complex
 
 var x = Complex.new(1, 3)
 var y = Complex.new(5, 2)

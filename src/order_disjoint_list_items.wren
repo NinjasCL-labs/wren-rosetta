@@ -5,13 +5,13 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var NULL = "\0"
 
 var orderDisjointList = Fn.new { |m, n|
     var nList = n.split(" ")
-    // first replace the first occurrence of items of 'n' in 'm' with the NULL character 
+    // first replace the first occurrence of items of 'n' in 'm' with the NULL character
     // which we can safely assume won't occur in 'm' naturally
     for (item in nList) {
         var ix = m.indexOf(item)

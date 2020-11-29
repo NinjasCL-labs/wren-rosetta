@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/str" for Char
-import "/fmt" for Conv
+import "/modules/str" for Char
+import "/modules/fmt" for Conv
 
 var sedol = Fn.new { |s|
     if (!(s is String && s.count == 6)) return false

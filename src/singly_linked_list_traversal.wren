@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/llist" for LinkedList
-import "/fmt" for Fmt
+import "/modules/llist" for LinkedList
+import "/modules/fmt" for Fmt
 
 //create a new linked list and add the first 50 positive integers to it
 var ll = LinkedList.new(1..50)

@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var ops = [ "5**3**2", "(5**3)**2", "5**(3**2)" ]
 var results = [ 5.pow(3).pow(2), (5.pow(3)).pow(2), 5.pow(3.pow(2)) ]

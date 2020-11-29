@@ -6,7 +6,7 @@
 // license: MIT
 
 import "io" for File
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 var LEFT = 0
 var RIGHT = 1

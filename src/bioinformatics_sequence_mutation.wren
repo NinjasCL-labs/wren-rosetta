@@ -6,8 +6,8 @@
 // license: MIT
 
 import "random" for Random
-import "/fmt" for Fmt
-import "/sort" for Sort
+import "/modules/fmt" for Fmt
+import "/modules/sort" for Sort
 
 var rand = Random.new()
 var bases = "ACGT"
@@ -15,7 +15,7 @@ var bases = "ACGT"
 // 'w' contains the weights out of 300 for each
 // of swap, delete or insert in that order.
 var mutate = Fn.new { |dna, w|
-    var le = dna.count 
+    var le = dna.count
     // get a random position in the dna to mutate
     var p = rand.int(le)
     // get a random number between 0 and 299 inclusive
@@ -39,7 +39,7 @@ var mutate = Fn.new { |dna, w|
 // Generate a random dna sequence of given length.
 var generate = Fn.new { |le|
     var chars = [""] * le
-    for (i in 0...le) chars[i] = bases[rand.int(4)] 
+    for (i in 0...le) chars[i] = bases[rand.int(4)]
     return chars.join()
 }
 

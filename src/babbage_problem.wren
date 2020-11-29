@@ -5,12 +5,12 @@
 // author: PureFox
 // license: MIT
 
-/* 
+/*
     The answer must be an even number and it can't be less than the square root of 269,696.
     So, if we start from that, keep on adding 2 and squaring it we'll eventually find the answer.
 */
 
-import "/fmt" for Fmt                // this enables us to format numbers with thousand separators
+import "/modules/fmt" for Fmt                // this enables us to format numbers with thousand separators
 
 var start = 269696.sqrt.ceil         // get the next integer higher than (or equal to) the square root
 start = (start/2).ceil * 2           // if it's odd, use the next even integer

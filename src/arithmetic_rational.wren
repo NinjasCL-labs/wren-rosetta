@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Int
-import "/rat" for Rat
+import "/modules/math" for Int
+import "/modules/rat" for Rat
 
 System.print("The following numbers (less than 2^19) are perfect:")
 for (i in 2...(1<<19)) {

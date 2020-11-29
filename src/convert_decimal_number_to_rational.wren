@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/rat" for Rat
-import "/fmt" for Fmt
+import "/modules/rat" for Rat
+import "/modules/fmt" for Fmt
 
 var tests = [0.9054054, 0.518518, 0.75]
 for (test in tests) {

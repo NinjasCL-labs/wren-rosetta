@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/big" for BigInt
-import "/math" for Int
+import "/modules/big" for BigInt
+import "/modules/math" for Int
 import "io" for Stdout
 
 var primes = Int.primeSieve(4000) // more than enough for this task

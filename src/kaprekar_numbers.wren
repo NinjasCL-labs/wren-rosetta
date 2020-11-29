@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt, Conv
+import "/modules/fmt" for Fmt, Conv
 
 var kaprekar = Fn.new { |n, base|
     var order = 0

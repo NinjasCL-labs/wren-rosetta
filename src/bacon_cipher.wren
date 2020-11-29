@@ -5,8 +5,8 @@
 // author: PureFox
 // license: MIT
 
-import "/str" for Str, Char
-import "/trait" for Stepped
+import "/modules/str" for Str, Char
+import "/modules/trait" for Stepped
 
 class Bacon {
     static init() {

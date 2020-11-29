@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/big" for BigRat
+import "/modules/big" for BigRat
 
 var digits = 500
 var an = BigRat.one

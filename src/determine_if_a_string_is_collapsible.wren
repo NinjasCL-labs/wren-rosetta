@@ -5,7 +5,7 @@
 // author: PureFox
 // license: MIT
 
-import "/fmt" for Fmt
+import "/modules/fmt" for Fmt
 
 // Returns collapsed string, original and new lengths in
 // unicode code points (not normalized).

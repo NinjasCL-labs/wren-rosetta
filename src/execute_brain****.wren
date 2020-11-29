@@ -24,7 +24,7 @@ class Brainf__k {
             _ip = _ip + 1
             if (cmd == ">") {
                 _dp = _dp + 1
-            } else if (cmd == "= 0) {
+            } else if (cmd == "= 0") {
             _ip = _ip - 1
             var cmd = _prog[_ip]
             if (cmd == "]") {

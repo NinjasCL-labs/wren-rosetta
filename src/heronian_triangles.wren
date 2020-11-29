@@ -5,9 +5,9 @@
 // author: PureFox
 // license: MIT
 
-import "/math" for Int, Nums
-import "/sort" for Sort
-import "/fmt" for Fmt
+import "/modules/math" for Int, Nums
+import "/modules/sort" for Sort
+import "/modules/fmt" for Fmt
 
 var isInteger = Fn.new { |n| n is Num && n.isInteger }
 
@@ -40,7 +40,7 @@ var cmp = Fn.new { |e1, e2|
     if (e1[2] != e2[2]) return (e1[2] - e2[2]).sign
     return (e1[3] - e2[3]).sign
 }
-        
+
 Sort.quick(ph, 0, ph.count-1, cmp)
 System.print("\nThe first 10 such triangles in sorted order are:")
 System.print("   Sides       Area   Perimeter  Max Side")

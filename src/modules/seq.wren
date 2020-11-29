@@ -7,7 +7,7 @@
 
 /* Module "seq.wren" */
 
-import "/trait" for Cloneable, CloneableSeq
+import "/modules/trait" for Cloneable, CloneableSeq
 
 /* Seq supplements the Sequence class with some other operations on sequences. */
 class Seq {
@@ -71,7 +71,7 @@ class Lst {
         checkStart_(a, start)
         var count = a.count
         var indices = []
-        if (count == 0) return [false, 0, indices] 
+        if (count == 0) return [false, 0, indices]
         if (start < 0) start = count + start
         for (i in start...count) {
             if (a[i] == value) indices.add(i)
@@ -106,7 +106,7 @@ class Lst {
             if (a[i] == value) return i
         }
         return -1
-    }   
+    }
 
     // Works similarly to 'indexOf' but returns the index of the first match
     // of ANY of a sequence of values or -1 if none of them matched.
@@ -208,7 +208,7 @@ class Lst {
         return g
     }
 
-    // Splits a list into two partitions depending on whether an element 
+    // Splits a list into two partitions depending on whether an element
     // satisfies a predicate function or not and preserving order.
     // Returns a two element list of these partitions, the 'true' partition first.
     static partitions(a, pf) {
@@ -382,7 +382,7 @@ class FrozenList is CloneableSeq {
     toString { _a.toString }
 }
 
-/* Stack represents a LIFO list of values. */ 
+/* Stack represents a LIFO list of values. */
 class Stack is CloneableSeq {
     // Constructs a new empty stack.
     construct new() { _stack = [] }

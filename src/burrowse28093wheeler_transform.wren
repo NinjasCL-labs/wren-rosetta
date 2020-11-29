@@ -5,11 +5,11 @@
 // author: PureFox
 // license: MIT
 
-import "/sort" for Sort
+import "/modules/sort" for Sort
 
 var stx = "\x02"
 var etx = "\x03"
- 
+
 var bwt = Fn.new { |s|
     if (s.indexOf(stx) >= 0 || s.indexOf(etx) >= 0) return null
     s = stx + s + etx
@@ -22,11 +22,11 @@ var bwt = Fn.new { |s|
     for (i in 0...len) lastChars[i] = table[i][len-1]
     return lastChars.join()
 }
- 
+
 var ibwt = Fn.new { |r|
     var len = r.count
     var table = [""] * len
-    for (i in 0...len) { 
+    for (i in 0...len) {
         for (j in 0...len) table[j] = r[j] + table[j]
         Sort.quick(table)
     }
@@ -35,13 +35,13 @@ var ibwt = Fn.new { |r|
     }
     return ""
 }
- 
-var makePrintable = Fn.new { |s|   
+
+var makePrintable = Fn.new { |s|
     // substitute ^ for STX and | for ETX to print results
     s = s.replace(stx, "^")
     return s.replace(etx, "|")
 }
- 
+
 var tests = [
     "banana",
     "appellee",
