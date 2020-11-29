@@ -2,7 +2,7 @@
 // source: https://rosettacode.org/mw/index.php?title=Hello_world/Text&action=edit&section=476
 // file: hello_world_text
 // name: Hello world/Text
-// author: PureFox
-// license: MIT
+// author: Edsrzf
+// license: GNU FDL 1.2
 
 System.print("Hello world!")

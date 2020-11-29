@@ -3,8 +3,16 @@ import requests
 import sys
 
 def write(name, content):
+
+  directory = "/"
+  try:
+    if sys.argv[5]:
+      directory = "/" + sys.argv[5] + "/"
+  except Exception:
+    pass
+
   name = name = name.replace(",", "").replace("(", "").replace(")", "").replace(".","").replace("/", "_").replace("%2", "").replace("%27", "").replace(" ", "_").replace("-", "_").replace("%", "").replace("'", "").replace("\"", "").lower()
-  with open(f"files/{name}.wren", "w") as f:
+  with open(f"files{directory}{name}.wren", "w") as f:
     f.write(content)
     f.close()
 

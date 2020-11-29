@@ -2,8 +2,8 @@
 // source: https://rosettacode.org/mw/index.php?title=100_doors&action=edit&section=376
 // file: 100_doors
 // name: 100 doors
-// author: PureFox
-// license: MIT
+// author: Fusta, PureFox
+// license: GNU FDL 1.2
 
 var doors = [true] * 100
 for (i in 1..100) {

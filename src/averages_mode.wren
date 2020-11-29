@@ -2,8 +2,8 @@
 // source: https://rosettacode.org/mw/index.php?title=Averages/Mode&action=edit&section=90
 // file: averages_mode
 // name: Averages/Mode
-// author: PureFox
-// license: MIT
+// author: Fusta
+// license: GNU FDL 1.2
 
 class Arithmetic {
     static mode(arr) {

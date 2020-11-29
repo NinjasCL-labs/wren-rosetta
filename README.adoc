@@ -1,8 +1,12 @@
+:ext-relative:
+
 # Wren Rosetta Modules
 
 The following code was extracted from the https://rosettacode.org/wiki/Category:Wren[Rosetta Code's Wren page].
 
-These modules were programmed by https://rosettacode.org/wiki/User:PureFox[@PureFox48].
+These modules were mainly programmed by https://rosettacode.org/wiki/User:PureFox[@PureFox48]. See link:AUTHORS{AUTHORS}[Authors] for all the contributors.
+
 This repository will maintain an updated version of such modules without modifications (except for some comments and import paths), for the benefit of the _Wren_ community.
 
-All code is under the _MIT_ license and its author is properly informed about this repository and gave proper authorization.
+Each file is licensed separately. Please see the file headers
+for its proper license.

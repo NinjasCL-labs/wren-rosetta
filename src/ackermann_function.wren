@@ -2,11 +2,11 @@
 // source: https://rosettacode.org/mw/index.php?title=Ackermann_function&action=edit&section=247
 // file: ackermann_function
 // name: Ackermann function
-// author: PureFox
-// license: MIT
+// author: Fusta, PureFox
+// license: GNU FDL 1.2
 
 // To use recursion definition and declaration must be on separate lines
-var Ackermann 
+var Ackermann
 Ackermann = Fn.new {|m, n|
     if (m == 0) return n + 1
     if (n == 0) return Ackermann.call(m - 1, 1)

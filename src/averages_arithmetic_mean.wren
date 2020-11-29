@@ -2,8 +2,8 @@
 // source: https://rosettacode.org/mw/index.php?title=Averages/Arithmetic_mean&action=edit&section=190
 // file: averages_arithmetic_mean
 // name: Averages/Arithmetic mean
-// author: PureFox
-// license: MIT
+// author: Fusta
+// license: GNU FDL 1.2
 
 class Arithmetic {
     static mean(arr) {

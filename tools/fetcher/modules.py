@@ -64,6 +64,6 @@ with open("modules.makefile", "w") as f:
   for module in modules:
     url, name, uid, page = module
     f.write(f"\n{name}:\n")
-    f.write(f"""\tpython3 fetch.py "{url}" "{name}" "{uid}" "{page}"\n""")
+    f.write(f"""\tpython3 fetch.py "{url}" "{name}" "{uid}" "{page}" "modules"\n""")
 
   f.close()

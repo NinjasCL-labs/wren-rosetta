@@ -2,8 +2,8 @@
 // source: https://rosettacode.org/mw/index.php?title=Collections&action=edit&section=245
 // file: collections
 // name: Collections
-// author: PureFox
-// license: MIT
+// author: Fusta
+// license: GNU FDL 1.2
 
 var list = [] // Empty Array
 list = [1, 2, 3, 4]
