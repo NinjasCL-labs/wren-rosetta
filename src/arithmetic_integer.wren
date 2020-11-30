@@ -2,8 +2,8 @@
 // source: https://rosettacode.org/mw/index.php?title=Arithmetic/Integer&action=edit&section=202
 // file: arithmetic_integer
 // name: Arithmetic/Integer
-// author: PureFox
-// license: MIT
+// author: Fusta, PureFox
+// license: GNU FDL 1.2
 
 import "io" for Stdin, Stdout
 System.write("first number:     ")

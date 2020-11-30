@@ -2,8 +2,8 @@
 // source: https://rosettacode.org/mw/index.php?title=Anonymous_recursion&action=edit&section=113
 // file: anonymous_recursion
 // name: Anonymous recursion
-// author: PureFox
-// license: MIT
+// author: Fusta, PureFox
+// license: GNU FDL 1.2
 
 class Fibonacci {
     static compute(n) {

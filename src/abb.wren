@@ -2,8 +2,8 @@
 // source: https://rosettacode.org/mw/index.php?title=A%2BB&action=edit&section=290
 // file: abb
 // name: A+B
-// author: PureFox
-// license: MIT
+// author: Fusta, PureFox
+// license: GNU FDL 1.2
 
 import "io" for Stdin, Stdout
 

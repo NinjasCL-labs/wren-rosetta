@@ -2,8 +2,8 @@
 // source: https://rosettacode.org/mw/index.php?title=Apply_a_callback_to_an_array&action=edit&section=168
 // file: apply_a_callback_to_an_array
 // name: Apply a callback to an array
-// author: PureFox
-// license: MIT
+// author: Fusta
+// license: GNU FDL 1.2
 
 var arr = [1, 2, 3, 4, 5]
 arr = arr.map { |x| x * 2 }.toList
