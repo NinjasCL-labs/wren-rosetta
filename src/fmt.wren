@@ -819,4 +819,4 @@ class Fmt {
 
 // Type aliases for classes in case of any name clashes with other modules.
 var Fmt_Conv = Conv
-var Fmt_Fmt = Fmt</f.count>
+var Fmt_Fmt = Fmt
